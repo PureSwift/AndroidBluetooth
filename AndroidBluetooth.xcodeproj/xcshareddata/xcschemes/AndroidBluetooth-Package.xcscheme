@@ -14,51 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AndroidBluetooth::AndroidBluetooth"
-               BuildableName = "AndroidBluetooth.framework"
-               BlueprintName = "AndroidBluetooth"
-               ReferencedContainer = "container:AndroidBluetooth.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "JNI::JNI"
-               BuildableName = "JNI.framework"
-               BlueprintName = "JNI"
-               ReferencedContainer = "container:AndroidBluetooth.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "java_util::java_util"
                BuildableName = "java_util.framework"
                BlueprintName = "java_util"
-               ReferencedContainer = "container:AndroidBluetooth.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "java_lang::java_lang"
-               BuildableName = "java_lang.framework"
-               BlueprintName = "java_lang"
                ReferencedContainer = "container:AndroidBluetooth.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -84,9 +42,51 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Android::Android"
-               BuildableName = "Android.framework"
-               BlueprintName = "Android"
+               BlueprintIdentifier = "JNI::JNI"
+               BuildableName = "JNI.framework"
+               BlueprintName = "JNI"
+               ReferencedContainer = "container:AndroidBluetooth.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Bluetooth::Bluetooth"
+               BuildableName = "Bluetooth.framework"
+               BlueprintName = "Bluetooth"
+               ReferencedContainer = "container:AndroidBluetooth.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "java_lang::java_lang"
+               BuildableName = "java_lang.framework"
+               BlueprintName = "java_lang"
+               ReferencedContainer = "container:AndroidBluetooth.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AndroidBluetooth::AndroidBluetooth"
+               BuildableName = "AndroidBluetooth.framework"
+               BlueprintName = "AndroidBluetooth"
                ReferencedContainer = "container:AndroidBluetooth.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -112,9 +112,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Bluetooth::Bluetooth"
-               BuildableName = "Bluetooth.framework"
-               BlueprintName = "Bluetooth"
+               BlueprintIdentifier = "Android::Android"
+               BuildableName = "Android.framework"
+               BlueprintName = "Android"
                ReferencedContainer = "container:AndroidBluetooth.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -153,9 +153,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AndroidBluetooth::AndroidBluetooth"
-            BuildableName = "AndroidBluetooth.framework"
-            BlueprintName = "AndroidBluetooth"
+            BlueprintIdentifier = "java_util::java_util"
+            BuildableName = "java_util.framework"
+            BlueprintName = "java_util"
             ReferencedContainer = "container:AndroidBluetooth.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
