@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/PureSwift/Android.git",
         "state": {
           "branch": "master",
-          "revision": "52f5de452537f685391d9062d36512f1faa20cb5",
+          "revision": "6ba1288a060555f3323c03eea793784a805b3dec",
           "version": null
         }
       },
@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/PureSwift/Bluetooth.git",
         "state": {
           "branch": "master",
-          "revision": "d836f386179e3d113715b72cc5455c7823d7d119",
+          "revision": "45a390c0353eb77f8647bd39bbbb33a8e44353d9",
           "version": null
         }
       },
@@ -33,7 +33,7 @@
         "repositoryURL": "https://github.com/PureSwift/GATT.git",
         "state": {
           "branch": "master",
-          "revision": "9c804419cff1aee9b5e98333ec94a8938d5120c2",
+          "revision": "9205cd5541952cd0a79e5d3e6047ad87e72a5040",
           "version": null
         }
       },
