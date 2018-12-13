@@ -44,9 +44,12 @@ public final class AndroidBluetoothDevice: JavaObject {
         super.init(javaObject: javaObject)
     }
     
-    public var address: Bluetooth.Address {
+    public var address: BluetoothAddress {
         
-        get { return Address(rawValue: getAddress())! }
+        let string = getAddress()
+        guard let address = BluetoothAddress(rawValue: string)
+            else { fatalError("Invalid Bluetooth Address string: \(string)") }
+        return address
     }
     
     public var type: Android.Bluetooth.Device.DeviceType {
