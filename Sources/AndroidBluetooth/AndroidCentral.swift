@@ -31,7 +31,9 @@ public enum AndroidCentralError: Error {
 }
 
 public final class AndroidCentral: CentralProtocol {
-
+    
+    public var isScanning: Bool = false
+    
     // MARK: - Properties
     
     public var log: ((String) -> ())?
@@ -39,6 +41,8 @@ public final class AndroidCentral: CentralProtocol {
     public let hostController: Android.Bluetooth.Adapter
     
     public let context: Android.Content.Context
+    
+    private var scanCallBack: ScanCallback?
     
     public let options: Options
     
@@ -49,7 +53,6 @@ public final class AndroidCentral: CentralProtocol {
     // MARK: - Intialization
     
     deinit {
-        
         
     }
     
@@ -64,9 +67,8 @@ public final class AndroidCentral: CentralProtocol {
     
     // MARK: - Methods
     
-    public func scan(filterDuplicates: Bool = true,
-              shouldContinueScanning: () -> (Bool),
-              foundDevice: @escaping (ScanData<Peripheral, AndroidLowEnergyAdvertisementData>) -> ()) throws {
+    public func scan(filterDuplicates: Bool,
+                     foundDevice: @escaping (ScanData<Peripheral, AndroidLowEnergyAdvertisementData>) -> ()) throws {
         
         log?("\(type(of: self)) \(#function)")
         
@@ -81,15 +83,28 @@ public final class AndroidCentral: CentralProtocol {
             self.internalState.scan.foundDevice = foundDevice
         }
         
-        let scanCallback = ScanCallback()
-        scanCallback.central = self
+        scanCallBack = ScanCallback()
+        guard let scanCallBack = scanCallBack
+            else {  return }
         
-        scanner.startScan(callback: scanCallback)
+        scanCallBack.central = self
+        scanner.startScan(callback: scanCallBack)
+        isScanning = true
+    }
+    
+    public func stopScan() {
         
-        // wait until finish scanning
-        while shouldContinueScanning() { sleep(1) }
+        guard hostController.isEnabled()
+            else { return }
         
-        scanner.stopScan(callback: scanCallback)
+        guard let scanner = hostController.lowEnergyScanner
+            else { return }
+        
+        guard let scanCallBack = scanCallBack
+            else {  return }
+        
+        scanner.stopScan(callback: scanCallBack)
+        isScanning = false
     }
     
     public func connect(to peripheral: Peripheral, timeout: TimeInterval = .gattDefaultTimeout) throws {
