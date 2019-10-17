@@ -63,8 +63,7 @@ internal class AndroidBluetoothLowEnergyAdvertiseCallbackListenerLocal: JNILocal
         let clazz = JNI.FindClass( proxyClassName() )
         
         let nativesCount = jint(natives.count)
-        withUnsafePointer(to: &natives[0]) {
-            nativesPtr in
+        withUnsafePointer(to: &natives[0]) { nativesPtr in
             if JNI.api.RegisterNatives( JNI.env, clazz, nativesPtr, nativesCount ) != jint(JNI_OK) {
                 JNI.report( "Unable to register java natives" )
             }
