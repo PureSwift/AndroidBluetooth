@@ -31,9 +31,7 @@ public enum AndroidCentralError: Error {
 }
 
 public final class AndroidCentral: CentralProtocol {
-    
-    public var isScanning: Bool = false
-    
+            
     // MARK: - Properties
     
     public var log: ((String) -> ())?
@@ -41,10 +39,14 @@ public final class AndroidCentral: CentralProtocol {
     public let hostController: Android.Bluetooth.Adapter
     
     public let context: Android.Content.Context
+        
+    public let options: Options
+    
+    public var didDisconnect: ((Peripheral) -> ())?
+    
+    public private(set) var isScanning: Bool = false
     
     private var scanCallBack: ScanCallback?
-    
-    public let options: Options
     
     internal private(set) var internalState = InternalState()
     
@@ -535,12 +537,14 @@ public final class AndroidCentral: CentralProtocol {
         }
         
         public override func onConnectionStateChange(gatt: Android.Bluetooth.Gatt,
-                                            status: AndroidBluetoothGatt.Status,
-                                            newState: AndroidBluetoothDevice.State) {
+                                                     status: AndroidBluetoothGatt.Status,
+                                                     newState: AndroidBluetoothDevice.State) {
             
             central?.log?("\(type(of: self)): \(#function)")
             
             central?.log?("Status: \(status) - newState = \(newState)")
+            
+            let peripheral = Peripheral(gatt)
             
             central?.accessQueue.async { [weak self] in
                 
@@ -551,7 +555,7 @@ public final class AndroidCentral: CentralProtocol {
                     
                 case (.success, .connected):
                     
-                    central.log?("GATT Connected")
+                    central.log?("\(peripheral) Connected")
                     
                     // if we are expecting a new connection
                     if central.internalState.connect.semaphore != nil {
@@ -562,13 +566,13 @@ public final class AndroidCentral: CentralProtocol {
                     
                 case (.success, .disconnected):
                     
-                    central.log?("GATT Disconnected")
+                    central.log?("\(peripheral) Disconnected")
                     
-                    break // nothing for now
+                    central.didDisconnect?(peripheral)
                     
                 default:
                     
-                    central.log?("GATT Status Error")
+                    central.log?("\(peripheral) Status Error")
                     
                     central.internalState.connect.semaphore?.stopWaiting(status) // throw `status` error
                 }
@@ -769,7 +773,7 @@ public final class AndroidCentral: CentralProtocol {
 public extension AndroidCentral {
     
     /// Android GATT Central options
-    public struct Options {
+    struct Options {
         
         public let maximumTransmissionUnit: ATTMaximumTransmissionUnit
         

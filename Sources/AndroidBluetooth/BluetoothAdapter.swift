@@ -467,7 +467,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Return true if Bluetooth is currently enabled and ready for use.
      */
-    public func isEnabled() -> Bool {
+    func isEnabled() -> Bool {
         
         var __locals = [jobject]()
         
@@ -485,7 +485,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Return true if LE 2M PHY feature is supported.
      */
-    public func isLe2MPhySupported() -> Bool {
+    func isLe2MPhySupported() -> Bool {
         
         var __locals = [jobject]()
         
