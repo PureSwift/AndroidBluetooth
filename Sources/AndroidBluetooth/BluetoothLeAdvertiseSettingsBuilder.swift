@@ -11,7 +11,7 @@ import Android
 
 public extension AndroidBluetoothLowEnergyAdvertiseSettings {
     
-    public typealias Builder = AndroidBluetoothLowEnergyAdvertiseSettingsBuilder
+    typealias Builder = AndroidBluetoothLowEnergyAdvertiseSettingsBuilder
 }
 
 /**
@@ -57,7 +57,7 @@ public extension AndroidBluetoothLowEnergyAdvertiseSettings.Builder {
     /**
      * Set advertise mode to control the advertising power and latency.
      */
-    public func setAdvertiseMode(advertiseMode: Android.Bluetooth.LE.AdvertiseSettings.AdvertiseMode) -> AndroidBluetoothLowEnergyAdvertiseSettings.Builder {
+    func setAdvertiseMode(advertiseMode: Android.Bluetooth.LE.AdvertiseSettings.AdvertiseMode) -> AndroidBluetoothLowEnergyAdvertiseSettings.Builder {
         var __locals = [jobject]()
         
         var __args = [jvalue]( repeating: jvalue(), count: 1 )
@@ -87,7 +87,7 @@ public extension AndroidBluetoothLowEnergyAdvertiseSettings.Builder {
     /**
      * Set whether the advertisement type should be connectable or non-connectable.
      */
-    public func setConnectable( connectable: Bool) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
+    func setConnectable( connectable: Bool) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
         
         var __locals = [jobject]()
         
@@ -118,7 +118,7 @@ public extension AndroidBluetoothLowEnergyAdvertiseSettings.Builder {
     /**
      * Limit advertising to a given amount of time.
      */
-    public func setTimeout(timeoutMillis: Int) -> AndroidBluetoothLowEnergyAdvertiseSettings.Builder {
+    func setTimeout(timeoutMillis: Int) -> AndroidBluetoothLowEnergyAdvertiseSettings.Builder {
         var __locals = [jobject]()
         
         var __args = [jvalue]( repeating: jvalue(), count: 1 )
@@ -148,7 +148,7 @@ public extension AndroidBluetoothLowEnergyAdvertiseSettings.Builder {
     /**
      * Set advertise mode to control the advertising power and latency.
      */
-    public func setTxPowerLevel(txPowerLevel: Android.Bluetooth.LE.AdvertiseSettings.TxPowerLevel) -> AndroidBluetoothLowEnergyAdvertiseSettings.Builder {
+    func setTxPowerLevel(txPowerLevel: Android.Bluetooth.LE.AdvertiseSettings.TxPowerLevel) -> AndroidBluetoothLowEnergyAdvertiseSettings.Builder {
         var __locals = [jobject]()
         
         var __args = [jvalue]( repeating: jvalue(), count: 1 )

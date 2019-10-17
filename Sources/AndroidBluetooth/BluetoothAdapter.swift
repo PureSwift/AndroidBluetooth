@@ -449,7 +449,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Return true if the local Bluetooth adapter is currently in the device discovery process.
      */
-    public func isDiscovering() -> Bool {
+    func isDiscovering() -> Bool {
         
         var __locals = [jobject]()
         

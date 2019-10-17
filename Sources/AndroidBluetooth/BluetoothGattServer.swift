@@ -12,16 +12,16 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias GattServer = AndroidBluetoothGattServer
+    typealias GattServer = AndroidBluetoothGattServer
 }
 
 public extension Android.Bluetooth.GattServer {
     
-    public typealias TxPhy = AndroidBluetoothTxPhy
+    typealias TxPhy = AndroidBluetoothTxPhy
     
-    public typealias RxPhy = AndroidBluetoothRxPhy
+    typealias RxPhy = AndroidBluetoothRxPhy
     
-    public typealias PhyOptions = AndroidBluetoothPhyOptions
+    typealias PhyOptions = AndroidBluetoothPhyOptions
 }
 
 /**
@@ -56,7 +56,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Add a service to the list of services to be hosted.
      */
-    public func addService(service: Android.Bluetooth.GattService) -> Bool {
+    func addService(service: Android.Bluetooth.GattService) -> Bool {
         
         var __locals = [jobject]()
         
@@ -76,7 +76,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Disconnects an established connection, or cancels a connection attempt currently in progress.
      */
-    public func cancelConnection(device: Android.Bluetooth.Device) {
+    func cancelConnection(device: Android.Bluetooth.Device) {
         
         var __locals = [jobject]()
         
@@ -95,7 +95,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Remove all services from the list of provided services.
      */
-    public func clearServices() {
+    func clearServices() {
         
         var __locals = [jobject]()
         
@@ -112,7 +112,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Close this GATT server instance.
      */
-    public func close() {
+    func close() {
         
         var __locals = [jobject]()
         
@@ -129,7 +129,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Initiate a connection to a Bluetooth GATT capable device.
      */
-    public func connect(device: Android.Bluetooth.Device, autoConnect: Bool) -> Bool {
+    func connect(device: Android.Bluetooth.Device, autoConnect: Bool) -> Bool {
         
         var __locals = [jobject]()
         
@@ -150,7 +150,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Returns a BluetoothGattService from the list of services offered by this device.
      */
-    public func getService(uuid: java_util.UUID) -> Android.Bluetooth.GattService {
+    func getService(uuid: java_util.UUID) -> Android.Bluetooth.GattService {
         
         var __locals = [jobject]()
         
@@ -173,7 +173,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Returns a list of GATT services offered by this device.
      */
-    public func getServices() -> List? {
+    func getServices() -> List? {
         
         var __locals = [jobject]()
         
@@ -194,7 +194,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Send a notification or indication that a local characteristic has been updated.
      */
-    public func notifyCharacteristicChanged(device: Android.Bluetooth.Device, characteristic: Android.Bluetooth.GattCharacteristic, confirm: Bool) -> Bool {
+    func notifyCharacteristicChanged(device: Android.Bluetooth.Device, characteristic: Android.Bluetooth.GattCharacteristic, confirm: Bool) -> Bool {
         
         var __locals = [jobject]()
         
@@ -216,7 +216,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Read the current transmitter PHY and receiver PHY of the connection.
      */
-    public func readPhy(device: Android.Bluetooth.Device) {
+    func readPhy(device: Android.Bluetooth.Device) {
         
         var __locals = [jobject]()
         
@@ -235,7 +235,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Removes a service from the list of services to be provided.
      */
-    public func removeService(service: Android.Bluetooth.GattService) -> Bool {
+    func removeService(service: Android.Bluetooth.GattService) -> Bool {
         
         var __locals = [jobject]()
         
@@ -255,7 +255,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Send a response to a read or write request to a remote device.
      */
-    public func sendResponse(device: Android.Bluetooth.Device, requestId: Int, status: Int, offset: Int, value: [Int8]) -> Bool {
+    func sendResponse(device: Android.Bluetooth.Device, requestId: Int, status: Int, offset: Int, value: [Int8]) -> Bool {
         
         var __locals = [jobject]()
         
@@ -279,7 +279,7 @@ public extension AndroidBluetoothGattServer {
     /**
      * Set the preferred connection PHY for this app.
      */
-    public func setPreferredPhy(device: Android.Bluetooth.Device, txPhy: TxPhy, rxPhy: RxPhy, phyOptions: PhyOptions) {
+    func setPreferredPhy(device: Android.Bluetooth.Device, txPhy: TxPhy, rxPhy: RxPhy, phyOptions: PhyOptions) {
         
         var __locals = [jobject]()
         
@@ -303,7 +303,7 @@ public extension AndroidBluetoothGattServer {
 
 public extension AndroidBluetoothGattServer {
     
-    public struct AndroidBluetoothConnectionPriority: RawRepresentable {
+    struct AndroidBluetoothConnectionPriority: RawRepresentable {
         
         public let rawValue: Int
         
@@ -328,7 +328,7 @@ public extension AndroidBluetoothGattServer {
         public static let lowPower = Android.Bluetooth.Gatt.ConnectionPriority(rawValue: Android.Bluetooth.Gatt.CONNECTION_PRIORITY_LOW_POWER)
     }
     
-    public struct AndroidBluetoothTxPhy: RawRepresentable {
+    struct AndroidBluetoothTxPhy: RawRepresentable {
         
         public let rawValue: Int
         
@@ -352,7 +352,7 @@ public extension AndroidBluetoothGattServer {
         public static let phyLecodedMask = Android.Bluetooth.Gatt.TxPhy(rawValue: Android.Bluetooth.Device.PHY_LE_CODED_MASK)
     }
     
-    public struct AndroidBluetoothRxPhy: RawRepresentable {
+    struct AndroidBluetoothRxPhy: RawRepresentable {
         
         public let rawValue: Int
         
@@ -376,7 +376,7 @@ public extension AndroidBluetoothGattServer {
         public static let phyLecodedMask = Android.Bluetooth.Gatt.TxPhy(rawValue: Android.Bluetooth.Device.PHY_LE_CODED_MASK)
     }
     
-    public struct AndroidBluetoothPhyOptions: RawRepresentable {
+    struct AndroidBluetoothPhyOptions: RawRepresentable {
         
         public let rawValue: Int
         

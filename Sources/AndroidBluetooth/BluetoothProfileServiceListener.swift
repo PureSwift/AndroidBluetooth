@@ -13,7 +13,7 @@ import Android
 
 public extension Android.Bluetooth.Profile {
     
-    public typealias ServiceListener = AndroidBluetoothProfileServiceListener
+    typealias ServiceListener = AndroidBluetoothProfileServiceListener
 }
 
 /**
@@ -36,7 +36,7 @@ public protocol AndroidBluetoothProfileServiceListener: JavaProtocol {
 
 public extension AndroidBluetoothProfileServiceListener {
     
-    public func localJavaObject( _ locals: UnsafeMutablePointer<[jobject]> ) -> jobject? {
+    func localJavaObject( _ locals: UnsafeMutablePointer<[jobject]> ) -> jobject? {
         
         return AndroidBluetoothProfileServiceListenerLocal( owned: self, proto: self ).localJavaObject( locals )
     }

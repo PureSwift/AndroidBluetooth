@@ -11,7 +11,7 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias AdvertisingSet = AndroidBluetoothLowEnergyAdvertisingSet
+    typealias AdvertisingSet = AndroidBluetoothLowEnergyAdvertisingSet
 }
 
 /**
@@ -49,7 +49,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSet {
      *
      * Requires BLUETOOTH_ADMIN
      */
-    public func enableAdvertising(enable: Bool, duration: Int, maxExtendedAdvertisingEvents: Int) {
+    func enableAdvertising(enable: Bool, duration: Int, maxExtendedAdvertisingEvents: Int) {
         
         var __locals = [jobject]()
         
@@ -69,7 +69,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSet {
     /**
      * Used to enable/disable periodic advertising.
      */
-    public func setPeriodicAdvertisingEnabled(enable: Bool) {
+    func setPeriodicAdvertisingEnabled(enable: Bool) {
         
         var __locals = [jobject]()
         
@@ -87,7 +87,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSet {
     /**
      * Set/update data being Advertised.
      */
-    public func setAdvertisingData(advertiseData: Android.Bluetooth.LE.AdvertiseData) {
+    func setAdvertisingData(advertiseData: Android.Bluetooth.LE.AdvertiseData) {
         
         var __locals = [jobject]()
         
@@ -106,7 +106,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSet {
      * Used to set periodic advertising data, must be called after setPeriodicAdvertisingParameters,
      * or after advertising was started with periodic advertising data set.
      */
-    public func setAdvertisingParameters(parameters: Android.Bluetooth.LE.AdvertisingSetParameters) {
+    func setAdvertisingParameters(parameters: Android.Bluetooth.LE.AdvertisingSetParameters) {
         
         var __locals = [jobject]()
         
@@ -124,7 +124,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSet {
     /**
      * Update periodic advertising parameters associated with this set.
      */
-    public func setPeriodicAdvertisingParameters(parameters: Android.Bluetooth.LE.PeriodicAdvertisingParameters) {
+    func setPeriodicAdvertisingParameters(parameters: Android.Bluetooth.LE.PeriodicAdvertisingParameters) {
         
         var __locals = [jobject]()
         
@@ -142,7 +142,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSet {
     /**
      * Set/update scan response data.
      */
-    public func setScanResponseData(scanResponse: Android.Bluetooth.LE.AdvertiseData) {
+    func setScanResponseData(scanResponse: Android.Bluetooth.LE.AdvertiseData) {
         
         var __locals = [jobject]()
         

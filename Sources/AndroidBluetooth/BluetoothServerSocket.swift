@@ -65,7 +65,7 @@ public extension AndroidBluetoothServerSocket {
      *
      * close() can be used to abort this call from another thread.
      */
-    public func accept() -> Android.Bluetooth.Socket {
+    func accept() -> Android.Bluetooth.Socket {
         
         var __locals = [jobject]()
         
@@ -92,7 +92,7 @@ public extension AndroidBluetoothServerSocket {
      *
      * close() can be used to abort this call from another thread.
      */
-    public func accept(timeout: Int) -> Android.Bluetooth.Socket {
+    func accept(timeout: Int) -> Android.Bluetooth.Socket {
         
         var __locals = [jobject]()
         
@@ -119,7 +119,7 @@ public extension AndroidBluetoothServerSocket {
      *
      * Closing the BluetoothServerSocket will not close any BluetoothSocket received from accept().
      */
-    public func clone() {
+    func clone() {
         var __locals = [jobject]()
         
         var __args = [jvalue](repeating: jvalue(), count: 1)

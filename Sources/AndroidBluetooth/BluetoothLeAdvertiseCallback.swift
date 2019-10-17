@@ -13,12 +13,12 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias AdvertiseCallback = AndroidBluetoothLowEnergyAdvertiseCallback
+    typealias AdvertiseCallback = AndroidBluetoothLowEnergyAdvertiseCallback
 }
 
 public extension Android.Bluetooth.LE.AdvertiseCallback {
     
-    public typealias Error = AndroidBluetoothLowEnergyAdvertiseCallbackError
+    typealias Error = AndroidBluetoothLowEnergyAdvertiseCallbackError
 }
 
 /// Bluetooth LE advertising callbacks, used to deliver advertising operation status.
@@ -62,9 +62,10 @@ internal class AndroidBluetoothLowEnergyAdvertiseCallbackListenerLocal: JNILocal
         
         let clazz = JNI.FindClass( proxyClassName() )
         
+        let nativesCount = jint(natives.count)
         withUnsafePointer(to: &natives[0]) {
             nativesPtr in
-            if JNI.api.RegisterNatives( JNI.env, clazz, nativesPtr, jint(natives.count) ) != jint(JNI_OK) {
+            if JNI.api.RegisterNatives( JNI.env, clazz, nativesPtr, nativesCount ) != jint(JNI_OK) {
                 JNI.report( "Unable to register java natives" )
             }
         }

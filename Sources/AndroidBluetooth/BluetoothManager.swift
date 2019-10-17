@@ -12,7 +12,7 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias Manager = AndroidBluetoothManager
+    typealias Manager = AndroidBluetoothManager
 }
 
 /**
@@ -53,7 +53,7 @@ public extension AndroidBluetoothManager {
     /**
      * Get connected devices for the specified profile.
      */
-    public func getConnectedDevices(profile: Int) -> List? {
+    func getConnectedDevices(profile: Int) -> List? {
         
         var __locals = [jobject]()
         
@@ -73,7 +73,7 @@ public extension AndroidBluetoothManager {
     /**
      * Get connected devices for the specified profile.
      */
-    public func getConnectionState(device: Android.Bluetooth.Device, profile: Int) -> Int {
+    func getConnectionState(device: Android.Bluetooth.Device, profile: Int) -> Int {
         
         var __locals = [jobject]()
         
@@ -94,7 +94,7 @@ public extension AndroidBluetoothManager {
     /**
      * Get a list of devices that match any of the given connection states.
      */
-    public func getDevicesMatchingConnectionStates(profile: Int, states: [Int]) -> List? {
+    func getDevicesMatchingConnectionStates(profile: Int, states: [Int]) -> List? {
         
         var __locals = [jobject]()
         
@@ -115,7 +115,7 @@ public extension AndroidBluetoothManager {
     /**
      * Open a GATT Server The callback is used to deliver results to Caller, such as connection status as well as the results of any other GATT server operations.
      */
-    public func openGattServer(context: Android.Content.Context, callback: JavaObject) -> Android.Bluetooth.GattServer? {
+    func openGattServer(context: Android.Content.Context, callback: JavaObject) -> Android.Bluetooth.GattServer? {
         
         var __locals = [jobject]()
         

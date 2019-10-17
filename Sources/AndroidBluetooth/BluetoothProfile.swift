@@ -18,7 +18,7 @@ public extension Android.Bluetooth {
 
 public extension Android.Bluetooth.Profile {
     
-    public typealias Constants = AndroidBluetoothProfileConstants
+    typealias Constants = AndroidBluetoothProfileConstants
 }
 
 /**
