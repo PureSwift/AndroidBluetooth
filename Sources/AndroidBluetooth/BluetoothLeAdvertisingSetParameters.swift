@@ -11,22 +11,22 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias AdvertisingSetParameters = AndroidBluetoothLowEnergyAdvertisingSetParameters
+    typealias AdvertisingSetParameters = AndroidBluetoothLowEnergyAdvertisingSetParameters
 }
 
 public extension Android.Bluetooth.LE.AdvertisingSetParameters {
     
-    public typealias PrimaryPhy = AndroidBluetoothLowEnergyPrimaryPhy
+    typealias PrimaryPhy = AndroidBluetoothLowEnergyPrimaryPhy
     
-    public typealias SecondaryPhy = AndroidBluetoothLowEnergySecondaryPhy
+    typealias SecondaryPhy = AndroidBluetoothLowEnergySecondaryPhy
     
-    public typealias TxPowerLevel = AndroidBluetoothLowEnergyTxPowerLevel
+    typealias TxPowerLevel = AndroidBluetoothLowEnergyTxPowerLevel
 }
 
 public extension Android.Bluetooth.LE.AdvertisingSetParameters {
     
     /// LE Primary Phy
-    public struct AndroidBluetoothLowEnergyPrimaryPhy: RawRepresentable {
+    struct AndroidBluetoothLowEnergyPrimaryPhy: RawRepresentable {
         
         public let rawValue: Int
         
@@ -46,7 +46,7 @@ public extension Android.Bluetooth.LE.AdvertisingSetParameters {
     }
     
     /// LE Secondary Phy
-    public struct AndroidBluetoothLowEnergySecondaryPhy: RawRepresentable {
+    struct AndroidBluetoothLowEnergySecondaryPhy: RawRepresentable {
         
         public let rawValue: Int
         
@@ -71,7 +71,7 @@ public extension Android.Bluetooth.LE.AdvertisingSetParameters {
     }
     
     /// LE Secondary Phy
-    public struct AndroidBluetoothLowEnergyTxPowerLevel: RawRepresentable {
+    struct AndroidBluetoothLowEnergyTxPowerLevel: RawRepresentable {
         
         public let rawValue: Int
         
@@ -116,7 +116,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
     /**
      * Returns the advertising interval.
      */
-    public var interval: Int {
+    var interval: Int {
         
         get { return getInterval() }
     }
@@ -124,7 +124,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
     /**
      * Returns the primary advertising phy.
      */
-    public var primaryPhy: Android.Bluetooth.LE.AdvertisingSetParameters.PrimaryPhy? {
+    var primaryPhy: Android.Bluetooth.LE.AdvertisingSetParameters.PrimaryPhy? {
         
         get { return getPrimaryPhy() }
     }
@@ -132,7 +132,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
     /**
      * Returns the secondary advertising phy.
      */
-    public var secondaryPhy: Android.Bluetooth.LE.AdvertisingSetParameters.SecondaryPhy? {
+    var secondaryPhy: Android.Bluetooth.LE.AdvertisingSetParameters.SecondaryPhy? {
         
         get { return getSecondaryPhy() }
     }
@@ -140,7 +140,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
     /**
      * Returns the TX power level for advertising.
      */
-    public var txPowerLevel: Android.Bluetooth.LE.AdvertisingSetParameters.TxPowerLevel? {
+    var txPowerLevel: Android.Bluetooth.LE.AdvertisingSetParameters.TxPowerLevel? {
         
         get { return getTxPowerLevel() }
     }
@@ -148,7 +148,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
     /**
      * Returns whether the TX Power will be included.
      */
-    public var includeTxPower: Bool {
+    var includeTxPower: Bool {
         
         get { return getIncludeTxPower() }
     }
@@ -156,7 +156,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
     /**
      * Returns whether the advertisement will be anonymous.
      */
-    public var isAnonymous: Bool {
+    var isAnonymous: Bool {
         
         get { return getIsAnonymous() }
     }
@@ -164,7 +164,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
     /**
      * Returns whether the advertisement will be connectable.
      */
-    public var isConnectable: Bool {
+    var isConnectable: Bool {
         
         get { return getIsConnectable() }
     }
@@ -172,7 +172,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
     /**
      * Returns whether the legacy advertisement will be used.
      */
-    public var isLegacy: Bool {
+    var isLegacy: Bool {
         
         get { return getIsLegacy() }
     }
@@ -180,7 +180,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
     /**
      * Returns whether the advertisement will be scannable.
      */
-    public var isScannable: Bool {
+    var isScannable: Bool {
         
         get { return getIsScannable() }
     }
@@ -190,7 +190,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
 
 internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
     
-    internal static var INTERVAL_HIGH: Int {
+    static var INTERVAL_HIGH: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "INTERVAL_HIGH",
@@ -202,7 +202,7 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         }
     }
     
-    internal static var INTERVAL_LOW: Int {
+    static var INTERVAL_LOW: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "INTERVAL_LOW",
@@ -214,7 +214,7 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         }
     }
     
-    internal static var INTERVAL_MAX: Int {
+    static var INTERVAL_MAX: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "INTERVAL_MAX",
@@ -226,7 +226,7 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         }
     }
     
-    internal static var INTERVAL_MEDIUM: Int {
+    static var INTERVAL_MEDIUM: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "INTERVAL_MEDIUM",
@@ -238,7 +238,7 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         }
     }
     
-    internal static var INTERVAL_MIN: Int {
+    static var INTERVAL_MIN: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "INTERVAL_MIN",
@@ -250,7 +250,7 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         }
     }
     
-    internal static var TX_POWER_HIGH: Int {
+    static var TX_POWER_HIGH: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "TX_POWER_HIGH",
@@ -262,7 +262,7 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         }
     }
     
-    internal static var TX_POWER_LOW: Int {
+    static var TX_POWER_LOW: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "TX_POWER_LOW",
@@ -274,7 +274,7 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         }
     }
     
-    internal static var TX_POWER_MAX: Int {
+    static var TX_POWER_MAX: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "TX_POWER_MAX",
@@ -286,7 +286,7 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         }
     }
     
-    internal static var TX_POWER_MEDIUM: Int {
+    static var TX_POWER_MEDIUM: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "TX_POWER_MEDIUM",
@@ -298,7 +298,7 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         }
     }
     
-    internal static var TX_POWER_MIN: Int {
+    static var TX_POWER_MIN: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "TX_POWER_MIN",
@@ -310,7 +310,7 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         }
     }
     
-    internal static var TX_POWER_ULTRA_LOW: Int {
+    static var TX_POWER_ULTRA_LOW: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "TX_POWER_ULTRA_LOW",
@@ -327,8 +327,8 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
 
 internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
     
-    @_versioned
-    internal func getInterval() -> Int {
+    @usableFromInline
+    func getInterval() -> Int {
         
         var __locals = [jobject]()
         
@@ -343,8 +343,8 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         return Int(__return)
     }
     
-    @_versioned
-    internal func getPrimaryPhy() -> Android.Bluetooth.LE.AdvertisingSetParameters.PrimaryPhy? {
+    @usableFromInline
+    func getPrimaryPhy() -> Android.Bluetooth.LE.AdvertisingSetParameters.PrimaryPhy? {
         
         var __locals = [jobject]()
         
@@ -359,8 +359,8 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         return Android.Bluetooth.LE.AdvertisingSetParameters.PrimaryPhy(rawValue: Int(__return))
     }
     
-    @_versioned
-    internal func getSecondaryPhy() -> Android.Bluetooth.LE.AdvertisingSetParameters.SecondaryPhy? {
+    @usableFromInline
+    func getSecondaryPhy() -> Android.Bluetooth.LE.AdvertisingSetParameters.SecondaryPhy? {
         
         var __locals = [jobject]()
         
@@ -375,8 +375,8 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         return Android.Bluetooth.LE.AdvertisingSetParameters.SecondaryPhy(rawValue: Int(__return))
     }
     
-    @_versioned
-    internal func getTxPowerLevel() -> Android.Bluetooth.LE.AdvertisingSetParameters.TxPowerLevel {
+    @usableFromInline
+    func getTxPowerLevel() -> Android.Bluetooth.LE.AdvertisingSetParameters.TxPowerLevel {
         
         var __locals = [jobject]()
         
@@ -391,8 +391,8 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         return Android.Bluetooth.LE.AdvertisingSetParameters.TxPowerLevel(rawValue: Int(__return))
     }
     
-    @_versioned
-    internal func getIncludeTxPower() -> Bool {
+    @usableFromInline
+    func getIncludeTxPower() -> Bool {
         
         var __locals = [jobject]()
         
@@ -407,8 +407,8 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         return __return != jboolean(JNI_FALSE)
     }
     
-    @_versioned
-    internal func getIsAnonymous() -> Bool {
+    @usableFromInline
+    func getIsAnonymous() -> Bool {
         
         var __locals = [jobject]()
         
@@ -423,8 +423,8 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         return __return != jboolean(JNI_FALSE)
     }
     
-    @_versioned
-    internal func getIsConnectable() -> Bool {
+    @usableFromInline
+    func getIsConnectable() -> Bool {
         
         var __locals = [jobject]()
         
@@ -439,8 +439,8 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         return __return != jboolean(JNI_FALSE)
     }
     
-    @_versioned
-    internal func getIsLegacy() -> Bool {
+    @usableFromInline
+    func getIsLegacy() -> Bool {
         
         var __locals = [jobject]()
         
@@ -455,8 +455,8 @@ internal extension Android.Bluetooth.LE.AdvertisingSetParameters {
         return __return != jboolean(JNI_FALSE)
     }
     
-    @_versioned
-    internal func getIsScannable() -> Bool {
+    @usableFromInline
+    func getIsScannable() -> Bool {
         
         var __locals = [jobject]()
         

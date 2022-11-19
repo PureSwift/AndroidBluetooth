@@ -13,7 +13,7 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias GattCallback = AndroidBluetoothGattCallback
+    typealias GattCallback = AndroidBluetoothGattCallback
 }
 
 /// his abstract class is used to implement BluetoothGatt callbacks.

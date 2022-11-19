@@ -11,7 +11,7 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias ScanFilter = AndroidBluetoothLowEnergyScanFilter
+    typealias ScanFilter = AndroidBluetoothLowEnergyScanFilter
 }
 
 /**
@@ -124,7 +124,7 @@ public final class AndroidBluetoothLowEnergyScanFilter: JavaObject {
 
 public extension Android.Bluetooth.LE.ScanFilter {
     
-    public func matches(scanResult: Android.Bluetooth.LE.ScanResult) -> Bool {
+    func matches(scanResult: Android.Bluetooth.LE.ScanResult) -> Bool {
         
         var __locals = [jobject]()
         
@@ -146,8 +146,8 @@ public extension Android.Bluetooth.LE.ScanFilter {
 
 internal extension Android.Bluetooth.LE.ScanFilter {
     
-    @_versioned
-    internal func getDeviceAddress() -> String {
+    @usableFromInline
+    func getDeviceAddress() -> String {
         
         var __locals = [jobject]()
         
@@ -165,8 +165,8 @@ internal extension Android.Bluetooth.LE.ScanFilter {
         return String(javaObject: __return)
     }
     
-    @_versioned
-    internal func getDeviceName() -> String {
+    @usableFromInline
+    func getDeviceName() -> String {
         
         var __locals = [jobject]()
         
@@ -184,8 +184,8 @@ internal extension Android.Bluetooth.LE.ScanFilter {
         return String(javaObject: __return)
     }
     
-    @_versioned
-    internal func getManufacturerData() -> [Int8]? {
+    @usableFromInline
+    func getManufacturerData() -> [Int8]? {
         
         var __locals = [jobject]()
         
@@ -203,8 +203,8 @@ internal extension Android.Bluetooth.LE.ScanFilter {
         return JNIType.toSwift( type: [Int8].self, from: __return )
     }
     
-    @_versioned
-    internal func getManufacturerDataMask() -> [Int8]? {
+    @usableFromInline
+    func getManufacturerDataMask() -> [Int8]? {
         
         var __locals = [jobject]()
         
@@ -222,8 +222,8 @@ internal extension Android.Bluetooth.LE.ScanFilter {
         return JNIType.toSwift( type: [Int8].self, from: __return )
     }
     
-    @_versioned
-    internal func getManufacturerId() -> Int {
+    @usableFromInline
+    func getManufacturerId() -> Int {
         
         var __locals = [jobject]()
         
@@ -238,8 +238,8 @@ internal extension Android.Bluetooth.LE.ScanFilter {
         return Int(__return)
     }
     
-    @_versioned
-    internal func getServiceData() -> [Int8]? {
+    @usableFromInline
+    func getServiceData() -> [Int8]? {
         
         var __locals = [jobject]()
         
@@ -257,8 +257,8 @@ internal extension Android.Bluetooth.LE.ScanFilter {
         return JNIType.toSwift( type: [Int8].self, from: __return )
     }
     
-    @_versioned
-    internal func getServiceDataMask() -> [Int8]? {
+    @usableFromInline
+    func getServiceDataMask() -> [Int8]? {
         
         var __locals = [jobject]()
         
@@ -276,8 +276,8 @@ internal extension Android.Bluetooth.LE.ScanFilter {
         return JNIType.toSwift( type: [Int8].self, from: __return )
     }
     
-    @_versioned
-    internal func getServiceDataUuid() -> Android.OS.ParcelUuid? {
+    @usableFromInline
+    func getServiceDataUuid() -> Android.OS.ParcelUuid? {
         
         var __locals = [jobject]()
         
@@ -294,8 +294,8 @@ internal extension Android.Bluetooth.LE.ScanFilter {
         return __return != nil ? Android.OS.ParcelUuid( javaObject: __return ) : nil
     }
     
-    @_versioned
-    internal func getServiceUuid() -> Android.OS.ParcelUuid? {
+    @usableFromInline
+    func getServiceUuid() -> Android.OS.ParcelUuid? {
         
         var __locals = [jobject]()
         
@@ -312,8 +312,8 @@ internal extension Android.Bluetooth.LE.ScanFilter {
         return __return != nil ? Android.OS.ParcelUuid( javaObject: __return ) : nil
     }
     
-    @_versioned
-    internal func getServiceUuidMask() -> Android.OS.ParcelUuid? {
+    @usableFromInline
+    func getServiceUuidMask() -> Android.OS.ParcelUuid? {
         
         var __locals = [jobject]()
         

@@ -12,7 +12,7 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias A2dp = AndroidBluetoothA2dp
+    typealias A2dp = AndroidBluetoothA2dp
 }
 
 /**
@@ -45,7 +45,7 @@ public final class AndroidBluetoothA2dp: JavaObject {
 
 internal extension AndroidBluetoothA2dp {
     
-    internal static var ACTION_CONNECTION_STATE_CHANGED: Int {
+    static var ACTION_CONNECTION_STATE_CHANGED: Int {
         
         get {
             
@@ -60,7 +60,7 @@ internal extension AndroidBluetoothA2dp {
         }
     }
     
-    internal static var ACTION_PLAYING_STATE_CHANGED: Int {
+    static var ACTION_PLAYING_STATE_CHANGED: Int {
         
         get {
             
@@ -75,7 +75,7 @@ internal extension AndroidBluetoothA2dp {
         }
     }
     
-    internal static var STATE_NOT_PLAYING: Int {
+    static var STATE_NOT_PLAYING: Int {
         
         get {
             
@@ -90,7 +90,7 @@ internal extension AndroidBluetoothA2dp {
         }
     }
     
-    internal static var STATE_PLAYING: Int {
+    static var STATE_PLAYING: Int {
         
         get {
             
@@ -113,7 +113,7 @@ public extension AndroidBluetoothA2dp {
     /**
      * Get connected devices for this specific profile.
      */
-    public func getConnectedDevices() -> List? {
+    func getConnectedDevices() -> List? {
         
         var __locals = [jobject]()
         
@@ -134,7 +134,7 @@ public extension AndroidBluetoothA2dp {
     /**
      * Get the current connection state of the profile.
      */
-    public func getConnectionState(device: Android.Bluetooth.Device) -> Int {
+    func getConnectionState(device: Android.Bluetooth.Device) -> Int {
         
         var __locals = [jobject]()
         
@@ -154,7 +154,7 @@ public extension AndroidBluetoothA2dp {
     /**
      * Get a list of devices that match any of the given connection states.
      */
-    public func getDevicesMatchingConnectionStates(states: [Int]) -> List? {
+    func getDevicesMatchingConnectionStates(states: [Int]) -> List? {
         
         var __locals = [jobject]()
         
@@ -177,7 +177,7 @@ public extension AndroidBluetoothA2dp {
     /**
      * Check if A2DP profile is streaming music.
      */
-    public func isA2dpPlaying(device: Android.Bluetooth.Device) -> Bool {
+    func isA2dpPlaying(device: Android.Bluetooth.Device) -> Bool {
         
         var __locals = [jobject]()
         

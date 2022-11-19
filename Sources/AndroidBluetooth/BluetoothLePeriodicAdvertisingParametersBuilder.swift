@@ -11,7 +11,7 @@ import Android
 
 public extension Android.Bluetooth.LE.PeriodicAdvertisingParameters {
     
-    public typealias Builder = AndroidBluetoothLowEnergyPeriodicAdvertisingParametersBuilder
+    typealias Builder = AndroidBluetoothLowEnergyPeriodicAdvertisingParametersBuilder
 }
 
 public final class AndroidBluetoothLowEnergyPeriodicAdvertisingParametersBuilder: JavaObject {
@@ -51,7 +51,7 @@ public final class AndroidBluetoothLowEnergyPeriodicAdvertisingParametersBuilder
 
 public extension Android.Bluetooth.LE.PeriodicAdvertisingParameters.Builder {
     
-    public func build() -> Android.Bluetooth.LE.PeriodicAdvertisingParameters {
+    func build() -> Android.Bluetooth.LE.PeriodicAdvertisingParameters {
         
         var __locals = [jobject]()
         
@@ -72,7 +72,7 @@ public extension Android.Bluetooth.LE.PeriodicAdvertisingParameters.Builder {
     /**
      * Whether the transmission power level should be included in the periodic packet.
      */
-    public func setIncludeTxPower(includeTxPower: Bool) -> Android.Bluetooth.LE.PeriodicAdvertisingParameters.Builder {
+    func setIncludeTxPower(includeTxPower: Bool) -> Android.Bluetooth.LE.PeriodicAdvertisingParameters.Builder {
         
         var __locals = [jobject]()
         
@@ -103,7 +103,7 @@ public extension Android.Bluetooth.LE.PeriodicAdvertisingParameters.Builder {
     /**
      * Set advertising interval for periodic advertising, in 1.25ms unit.
      */
-    public func setInterval(interval: Int) -> Android.Bluetooth.LE.PeriodicAdvertisingParameters.Builder {
+    func setInterval(interval: Int) -> Android.Bluetooth.LE.PeriodicAdvertisingParameters.Builder {
         var __locals = [jobject]()
         
         var __args = [jvalue]( repeating: jvalue(), count: 1 )

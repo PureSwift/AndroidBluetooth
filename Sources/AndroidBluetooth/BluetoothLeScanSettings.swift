@@ -12,20 +12,20 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias ScanSettings = AndroidBluetoothLowEnergyScanSettings
+    typealias ScanSettings = AndroidBluetoothLowEnergyScanSettings
 }
 
 public extension Android.Bluetooth.LE.ScanSettings {
     
-    public typealias ScanMode = AndroidBluetoothLowEnergyScanMode
+    typealias ScanMode = AndroidBluetoothLowEnergyScanMode
     
-    public typealias CallbackType = AndroidBluetoothLowEnergyCallbackType
+    typealias CallbackType = AndroidBluetoothLowEnergyCallbackType
     
-    public typealias MatchMode = AndroidBluetoothLowEnergyMatchMode
+    typealias MatchMode = AndroidBluetoothLowEnergyMatchMode
     
-    public typealias MatchNum = AndroidBluetoothLowEnergyMatchNum
+    typealias MatchNum = AndroidBluetoothLowEnergyMatchNum
     
-    public typealias Phy = AndroidBluetoothLowEnergyPhy
+    typealias Phy = AndroidBluetoothLowEnergyPhy
 }
 
 /// android.bluetooth.le.ScanSettings
@@ -54,7 +54,7 @@ public final class AndroidBluetoothLowEnergyScanSettings: JavaObject {
     
     private static var new_MethodID_1: jmethodID?
     
-    public static var `default`: Android.Bluetooth.LE.ScanSettings {
+    static var `default`: Android.Bluetooth.LE.ScanSettings {
         
         struct Cache {
             
@@ -72,7 +72,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var CALLBACK_TYPE_ALL_MATCHES_FieldID: jfieldID?
     
     /// Trigger a callback for every Bluetooth advertisement found that matches the filter criteria.
-    internal static var CALLBACK_TYPE_ALL_MATCHES: Int {
+    static var CALLBACK_TYPE_ALL_MATCHES: Int {
         
         get {
             
@@ -90,7 +90,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var CALLBACK_TYPE_FIRST_MATCH_FieldID: jfieldID?
     
     /// A result callback is only triggered for the first advertisement packet received that matches the filter criteria.
-    internal static var CALLBACK_TYPE_FIRST_MATCH: Int {
+    static var CALLBACK_TYPE_FIRST_MATCH: Int {
         
         get {
             
@@ -108,7 +108,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var CALLBACK_TYPE_MATCH_LOST_FieldID: jfieldID?
     
     /// Receive a callback when advertisements are no longer received from a device that has been previously reported by a first match callback.
-    internal static var CALLBACK_TYPE_MATCH_LOST: Int {
+    static var CALLBACK_TYPE_MATCH_LOST: Int {
         
         get {
             
@@ -126,7 +126,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var MATCH_MODE_AGGRESSIVE_FieldID: jfieldID?
     
     /// In Aggressive mode, hw will determine a match sooner even with feeble signal strength and few number of sightings/match in a duration.
-    internal static var MATCH_MODE_AGGRESSIVE: Int {
+    static var MATCH_MODE_AGGRESSIVE: Int {
         
         get {
             
@@ -144,7 +144,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var MATCH_MODE_STICKY_FieldID: jfieldID?
     
     /// For sticky mode, higher threshold of signal strength and sightings is required before reporting by hw
-    internal static var MATCH_MODE_STICKY: Int {
+    static var MATCH_MODE_STICKY: Int {
         
         get {
             
@@ -162,7 +162,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var MATCH_NUM_FEW_ADVERTISEMENT_FieldID: jfieldID?
     
     /// Match few advertisement per filter, depends on current capability and availibility of the resources in hw.
-    internal static var MATCH_NUM_FEW_ADVERTISEMENT: Int {
+    static var MATCH_NUM_FEW_ADVERTISEMENT: Int {
         
         get {
             
@@ -180,7 +180,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var MATCH_NUM_MAX_ADVERTISEMENT_FieldID: jfieldID?
     
     /// Match as many advertisement per filter as hw could allow, depends on current capability and availibility of the resources in hw.
-    internal static var MATCH_NUM_MAX_ADVERTISEMENT: Int {
+    static var MATCH_NUM_MAX_ADVERTISEMENT: Int {
         
         get {
             
@@ -198,7 +198,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var MATCH_NUM_ONE_ADVERTISEMENT_FieldID: jfieldID?
     
     /// Match one advertisement per filter
-    internal static var MATCH_NUM_ONE_ADVERTISEMENT: Int {
+    static var MATCH_NUM_ONE_ADVERTISEMENT: Int {
         
         get {
             
@@ -216,7 +216,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var PHY_LE_ALL_SUPPORTED_FieldID: jfieldID?
     
     /// Use all supported PHYs for scanning.
-    internal static var PHY_LE_ALL_SUPPORTED: Int {
+    static var PHY_LE_ALL_SUPPORTED: Int {
         
         get {
             
@@ -234,7 +234,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var SCAN_MODE_BALANCED_FieldID: jfieldID?
     
     /// Perform Bluetooth LE scan in balanced power mode.
-    internal static var SCAN_MODE_BALANCED: Int {
+    static var SCAN_MODE_BALANCED: Int {
         
         get {
             
@@ -252,7 +252,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var SCAN_MODE_LOW_LATENCY_FieldID: jfieldID?
     
     /// Scan using highest duty cycle.
-    internal static var SCAN_MODE_LOW_LATENCY: Int {
+    static var SCAN_MODE_LOW_LATENCY: Int {
         
         get {
             
@@ -270,7 +270,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var SCAN_MODE_LOW_POWER_FieldID: jfieldID?
     
     /// Perform Bluetooth LE scan in low power mode.
-    internal static var SCAN_MODE_LOW_POWER: Int {
+    static var SCAN_MODE_LOW_POWER: Int {
         
         get {
             
@@ -288,7 +288,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var SCAN_MODE_OPPORTUNISTIC_FieldID: jfieldID?
     
     /// A special Bluetooth LE scan mode.
-    internal static var SCAN_MODE_OPPORTUNISTIC: Int {
+    static var SCAN_MODE_OPPORTUNISTIC: Int {
         
         get {
             
@@ -315,7 +315,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     /// must include the CONTENTS_FILE_DESCRIPTOR bit.
     ///
     /// @return a bitmask indicating the set of special object types marshaled by this Parcelable object instance.
-    public func describeContents() -> Int {
+    func describeContents() -> Int {
         
         var __locals = [jobject]()
         
@@ -332,7 +332,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     
     private static var getCallbackType_MethodID: jmethodID?
     
-    public func getCallbackType() -> Android.Bluetooth.LE.ScanSettings.CallbackType {
+    func getCallbackType() -> Android.Bluetooth.LE.ScanSettings.CallbackType {
         
         var __locals = [jobject]()
         
@@ -351,7 +351,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     
     /// Returns whether only legacy advertisements will be returned. Legacy advertisements include advertisements as
     /// specified by the Bluetooth core specification 4.2 and below.
-    public func getLegacy() -> Bool {
+    func getLegacy() -> Bool {
         
         var __locals = [jobject]()
         
@@ -369,7 +369,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var getPhy_MethodID: jmethodID?
     
     /// Returns the physical layer used during a scan.
-    public func getPhy() -> Android.Bluetooth.LE.ScanSettings.Phy {
+    func getPhy() -> Android.Bluetooth.LE.ScanSettings.Phy {
         
         var __locals = [jobject]()
         
@@ -387,7 +387,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     private static var getReportDelayMillis_MethodID: jmethodID?
     
     /// Returns report delay timestamp based on the device clock.
-    public func getReportDelayMillis() -> Int64 {
+    func getReportDelayMillis() -> Int64 {
         
         var __locals = [jobject]()
         
@@ -404,7 +404,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     
     private static var getScanMode_MethodID: jmethodID?
     
-    public func getScanMode() -> Android.Bluetooth.LE.ScanSettings.ScanMode {
+    func getScanMode() -> Android.Bluetooth.LE.ScanSettings.ScanMode {
         
         var __locals = [jobject]()
         
@@ -421,7 +421,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     
     private static var getScanResultType_MethodID: jmethodID?
     
-    public func getScanResultType() -> Int {
+    func getScanResultType() -> Int {
         
         var __locals = [jobject]()
         
@@ -442,7 +442,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
 public extension Android.Bluetooth.LE.ScanSettings {
     
     /// LE Scan mode.
-    public struct AndroidBluetoothLowEnergyScanMode: RawRepresentable {
+    struct AndroidBluetoothLowEnergyScanMode: RawRepresentable {
         
         public let rawValue: Int
         
@@ -469,7 +469,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     }
     
     /// LE Callback Type
-    public struct AndroidBluetoothLowEnergyCallbackType: RawRepresentable {
+    struct AndroidBluetoothLowEnergyCallbackType: RawRepresentable {
         
         public let rawValue: Int
         
@@ -494,7 +494,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     }
     
     /// LE Match Mode
-    public struct AndroidBluetoothLowEnergyMatchMode: RawRepresentable {
+    struct AndroidBluetoothLowEnergyMatchMode: RawRepresentable {
         
         public let rawValue: Int
         
@@ -514,7 +514,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     }
     
     /// LE Match Num
-    public struct AndroidBluetoothLowEnergyMatchNum: RawRepresentable {
+    struct AndroidBluetoothLowEnergyMatchNum: RawRepresentable {
         
         public let rawValue: Int
         
@@ -539,7 +539,7 @@ public extension Android.Bluetooth.LE.ScanSettings {
     }
     
     /// LE Phy
-    public struct AndroidBluetoothLowEnergyPhy: RawRepresentable {
+    struct AndroidBluetoothLowEnergyPhy: RawRepresentable {
         
         public let rawValue: Int
         

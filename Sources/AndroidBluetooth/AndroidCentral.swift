@@ -14,7 +14,7 @@ import Bluetooth
 import Android
 import java_swift
 import java_util
-
+/*
 public enum AndroidCentralError: Error {
     
     /// Bluetooth is disabled.
@@ -30,7 +30,7 @@ public enum AndroidCentralError: Error {
     case nullValue(AnyKeyPath)
 }
 
-public final class AndroidCentral: CentralProtocol {
+public final class AndroidCentral {
             
     // MARK: - Properties
     
@@ -109,7 +109,7 @@ public final class AndroidCentral: CentralProtocol {
         isScanning = false
     }
     
-    public func connect(to peripheral: Peripheral, timeout: TimeInterval = .gattDefaultTimeout) throws {
+    public func connect(to peripheral: Peripheral) throws {
         
         log?("\(type(of: self)) \(#function)")
         
@@ -174,7 +174,7 @@ public final class AndroidCentral: CentralProtocol {
         }
     }
     
-    internal func request(mtu: ATTMaximumTransmissionUnit, for peripheral: Peripheral, timeout: TimeInterval = .gattDefaultTimeout) throws {
+    internal func request(mtu: ATTMaximumTransmissionUnit, for peripheral: Peripheral) throws {
         
         // store semaphore
         let semaphore = Semaphore(timeout: timeout)
@@ -304,7 +304,7 @@ public final class AndroidCentral: CentralProtocol {
         }
     }
     
-    public func readValue(for characteristic: Characteristic<Peripheral>, timeout: TimeInterval = .gattDefaultTimeout) throws -> Data {
+    public func readValue(for characteristic: Characteristic<Peripheral>) throws -> Data {
         
         log?("\(type(of: self)) \(#function)")
         
@@ -350,7 +350,7 @@ public final class AndroidCentral: CentralProtocol {
         }
     }
     
-    public func writeValue(_ data: Data, for characteristic: Characteristic<Peripheral>, withResponse: Bool = true, timeout: TimeInterval = .gattDefaultTimeout) throws {
+    public func writeValue(_ data: Data, for characteristic: Characteristic<Peripheral>, withResponse: Bool = true) throws {
         
         log?("\(type(of: self)) \(#function)")
         
@@ -383,7 +383,7 @@ public final class AndroidCentral: CentralProtocol {
     
     }
     
-    public func notify(_ notification: ((Data) -> ())?, for characteristic: Characteristic<Peripheral>, timeout: TimeInterval = .gattDefaultTimeout) throws {
+    public func notify(_ notification: ((Data) -> ())?, for characteristic: Characteristic<Peripheral>) throws {
         
         log?("\(type(of: self)) \(#function) started")
         
@@ -971,18 +971,16 @@ internal extension AndroidCentral {
         }
     }
 }
-
+*/
 // MARK: - Extentions
 
 fileprivate extension Peripheral {
     
     init(_ device: AndroidBluetoothDevice) {
-        
-        self.init(identifier: device.address)
+        self.init(id: device.address)
     }
     
     init(_ gatt: AndroidBluetoothGatt) {
-        
         self.init(gatt.getDevice())
     }
 }

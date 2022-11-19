@@ -12,12 +12,12 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias GattDescriptor = AndroidBluetoothGattDescriptor
+    typealias GattDescriptor = AndroidBluetoothGattDescriptor
 }
 
 public extension Android.Bluetooth.GattDescriptor {
     
-    public typealias Permission = AndroidBluetoothPermission
+    typealias Permission = AndroidBluetoothPermission
 }
 
 /**
@@ -76,7 +76,7 @@ public final class AndroidBluetoothGattDescriptor: JavaObject {
 public extension AndroidBluetoothGattDescriptor {
     
     /// Descriptor read permission
-    internal static var PERMISSION_READ: Int {
+    static var PERMISSION_READ: Int {
         
         get {
             
@@ -92,7 +92,7 @@ public extension AndroidBluetoothGattDescriptor {
     }
     
     /// Descriptor permission: Allow encrypted read operations
-    internal static var PERMISSION_READ_ENCRYPTED: Int {
+    static var PERMISSION_READ_ENCRYPTED: Int {
         
         get {
             
@@ -108,7 +108,7 @@ public extension AndroidBluetoothGattDescriptor {
     }
     
     /// Descriptor permission: Allow reading with man-in-the-middle protection
-    internal static var PERMISSION_READ_ENCRYPTED_MITM: Int {
+    static var PERMISSION_READ_ENCRYPTED_MITM: Int {
         
         get {
             
@@ -124,7 +124,7 @@ public extension AndroidBluetoothGattDescriptor {
     }
     
     /// Descriptor write permission
-    internal static var PERMISSION_WRITE: Int {
+    static var PERMISSION_WRITE: Int {
         
         get {
             
@@ -140,7 +140,7 @@ public extension AndroidBluetoothGattDescriptor {
     }
     
     /// Descriptor permission: Allow encrypted writes
-    internal static var PERMISSION_WRITE_ENCRYPTED: Int {
+    static var PERMISSION_WRITE_ENCRYPTED: Int {
         
         get {
             
@@ -156,7 +156,7 @@ public extension AndroidBluetoothGattDescriptor {
     }
     
     /// Descriptor permission: Allow encrypted writes with man-in-the-middle protection
-    internal static var PERMISSION_WRITE_ENCRYPTED_MITM: Int {
+    static var PERMISSION_WRITE_ENCRYPTED_MITM: Int {
         
         get {
             
@@ -172,7 +172,7 @@ public extension AndroidBluetoothGattDescriptor {
     }
     
     /// Descriptor permission: Allow signed write operations
-    internal static var PERMISSION_WRITE_SIGNED: Int {
+    static var PERMISSION_WRITE_SIGNED: Int {
         
         get {
             
@@ -188,7 +188,7 @@ public extension AndroidBluetoothGattDescriptor {
     }
     
     /// Descriptor permission: Allow signed write operations with man-in-the-middle protection
-    internal static var PERMISSION_WRITE_SIGNED_MITM: Int {
+    static var PERMISSION_WRITE_SIGNED_MITM: Int {
         
         get {
             
@@ -204,7 +204,7 @@ public extension AndroidBluetoothGattDescriptor {
     }
     
     /// Value used to disable notifications or indicatinos
-    public static var DISABLE_NOTIFICATION_VALUE: [Int8] {
+    static var DISABLE_NOTIFICATION_VALUE: [Int8] {
         
         get {
             
@@ -220,7 +220,7 @@ public extension AndroidBluetoothGattDescriptor {
     }
     
     /// Value used to enable indication for a client configuration descriptor
-    public static var ENABLE_INDICATION_VALUE: [Int8] {
+    static var ENABLE_INDICATION_VALUE: [Int8] {
         
         get {
             
@@ -236,7 +236,7 @@ public extension AndroidBluetoothGattDescriptor {
     }
     
     /// Value used to enable notification for a client configuration descriptor
-    public static var ENABLE_NOTIFICATION_VALUE: [Int8] {
+    static var ENABLE_NOTIFICATION_VALUE: [Int8] {
         
         get {
             
@@ -260,7 +260,7 @@ public extension AndroidBluetoothGattDescriptor {
     /**
      * Returns the characteristic this descriptor belongs to.
      */
-    public func getCharacteristic() -> Android.Bluetooth.GattCharacteristic {
+    func getCharacteristic() -> Android.Bluetooth.GattCharacteristic {
         
         var __locals = [jobject]()
         
@@ -278,7 +278,7 @@ public extension AndroidBluetoothGattDescriptor {
     /**
      * Returns the permissions for this descriptor.
      */
-    public func getPermissions() -> Int {
+    func getPermissions() -> Int {
         
         var __locals = [jobject]()
         
@@ -296,7 +296,7 @@ public extension AndroidBluetoothGattDescriptor {
     /**
      * Returns the UUID of this descriptor.
      */
-    public func getUuid() -> java_util.UUID {
+    func getUuid() -> java_util.UUID {
         
         var __locals = [jobject]()
         
@@ -318,7 +318,7 @@ public extension AndroidBluetoothGattDescriptor {
      *
      * This function returns the stored value for this descriptor as retrieved by calling readDescriptor(BluetoothGattDescriptor).
      */
-    public func getValue() -> [Int8]? {
+    func getValue() -> [Int8]? {
         
         var __locals = [jobject]()
         
@@ -335,7 +335,7 @@ public extension AndroidBluetoothGattDescriptor {
         return JNIType.toSwift( type: [Int8].self, from: __return )
     }
     
-    public func setValue(_ value: [Int8]) -> Bool {
+    func setValue(_ value: [Int8]) -> Bool {
         
         var __locals = [jobject]()
         

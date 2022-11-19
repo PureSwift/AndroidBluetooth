@@ -13,7 +13,7 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias Profile = AndroidBluetoothProfile
+    typealias Profile = AndroidBluetoothProfile
 }
 
 public extension Android.Bluetooth.Profile {
@@ -49,7 +49,7 @@ public protocol AndroidBluetoothProfile: JavaProtocol {
 
 public final class AndroidBluetoothProfileConstants {
     
-    internal static var A2DP: Int {
+    static var A2DP: Int {
         
         get {
             
@@ -64,7 +64,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var EXTRA_PREVIOUS_STATE: String {
+    static var EXTRA_PREVIOUS_STATE: String {
         
         get {
             
@@ -79,7 +79,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var EXTRA_STATE: String {
+    static var EXTRA_STATE: String {
         
         get {
             
@@ -94,7 +94,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var GATT: Int {
+    static var GATT: Int {
         
         get {
             
@@ -109,7 +109,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var GATT_SERVER: Int {
+    static var GATT_SERVER: Int {
         
         get {
             
@@ -124,7 +124,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var HEADSET: Int {
+    static var HEADSET: Int {
         
         get {
             
@@ -139,7 +139,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var HEALTH: Int {
+    static var HEALTH: Int {
         
         get {
             
@@ -154,7 +154,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var HID_DEVICE: Int {
+    static var HID_DEVICE: Int {
         
         get {
             
@@ -169,7 +169,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var SAP: Int {
+    static var SAP: Int {
         
         get {
             
@@ -184,7 +184,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var STATE_CONNECTED: Int {
+    static var STATE_CONNECTED: Int {
         
         get {
             
@@ -198,7 +198,7 @@ public final class AndroidBluetoothProfileConstants {
             return Int(__value)
         }
     }
-    internal static var STATE_CONNECTING: Int {
+    static var STATE_CONNECTING: Int {
         
         get {
             
@@ -213,7 +213,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var STATE_DISCONNECTED: Int {
+    static var STATE_DISCONNECTED: Int {
         
         get {
             
@@ -228,7 +228,7 @@ public final class AndroidBluetoothProfileConstants {
         }
     }
     
-    internal static var STATE_DISCONNECTING: Int {
+    static var STATE_DISCONNECTING: Int {
         
         get {
             

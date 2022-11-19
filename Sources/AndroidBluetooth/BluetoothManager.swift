@@ -138,8 +138,7 @@ public extension AndroidBluetoothManager {
      *
      * @return the default BLUETOOTH Adapter
      */
-    @_versioned
-    internal func getAdapter() -> Android.Bluetooth.Adapter? {
+    func getAdapter() -> Android.Bluetooth.Adapter? {
         
         var __locals = [jobject]()
         

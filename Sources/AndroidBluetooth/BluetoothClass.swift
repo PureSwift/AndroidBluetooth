@@ -12,7 +12,7 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias Class = AndroidBluetoothClass
+    typealias Class = AndroidBluetoothClass
 }
 
 /**
@@ -73,7 +73,7 @@ public extension AndroidBluetoothClass {
     /**
      * Indicates whether some other object is "equal to" this one.
      */
-    public func equals(object: Android.Bluetooth.Class) -> Bool {
+    func equals(object: Android.Bluetooth.Class) -> Bool {
         
         var __locals = [jobject]()
         
@@ -129,7 +129,7 @@ public extension AndroidBluetoothClass {
     /**
      * Return true if the specified service class is supported by this BluetoothClass.
      */
-    public func hasService(service: Android.Bluetooth.Class.Service) -> Bool {
+    func hasService(service: Android.Bluetooth.Class.Service) -> Bool {
         
         var __locals = [jobject]()
         

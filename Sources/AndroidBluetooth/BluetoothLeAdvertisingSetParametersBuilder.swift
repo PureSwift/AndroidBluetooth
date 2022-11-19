@@ -11,7 +11,7 @@ import Android
 
 public extension AndroidBluetoothLowEnergyAdvertisingSetParameters {
     
-    public typealias Builder = AndroidBluetoothLowEnergyAdvertisingSetParametersBuilder
+    typealias Builder = AndroidBluetoothLowEnergyAdvertisingSetParametersBuilder
 }
 
 public final class AndroidBluetoothLowEnergyAdvertisingSetParametersBuilder: JavaObject {
@@ -51,7 +51,7 @@ public final class AndroidBluetoothLowEnergyAdvertisingSetParametersBuilder: Jav
 
 public extension AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
     
-    public func build() -> AndroidBluetoothLowEnergyAdvertisingSetParameters {
+    func build() -> AndroidBluetoothLowEnergyAdvertisingSetParameters {
         
         var __locals = [jobject]()
         
@@ -72,7 +72,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
     /**
      * Set whether advertiser address should be ommited from all packets.
      */
-    public func setConnectable(connectable: Bool) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
+    func setConnectable(connectable: Bool) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
         
         var __locals = [jobject]()
         
@@ -103,7 +103,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
     /**
      * Set whether TX power should be included in the extended header.
      */
-    public func setIncludeTxPower(includeTxPower: Bool) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
+    func setIncludeTxPower(includeTxPower: Bool) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
         
         var __locals = [jobject]()
         
@@ -137,7 +137,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
      * interval - int: Bluetooth LE Advertising interval, in 0.625ms unit. Valid range is from 160 (100ms) to 16777215 (10,485.759375 s).
      * Recommended values are: INTERVAL_LOW, INTERVAL_MEDIUM, or INTERVAL_HIGH.
      */
-    public func setInterval(interval: Int) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
+    func setInterval(interval: Int) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
         var __locals = [jobject]()
         
         var __args = [jvalue]( repeating: jvalue(), count: 1 )
@@ -167,7 +167,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
     /**
      * When set to true, advertising set will advertise 4.x Spec compliant advertisements.
      */
-    public func setLegacyMode( isLegacy: Bool) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
+    func setLegacyMode( isLegacy: Bool) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
         
         var __locals = [jobject]()
         
@@ -199,7 +199,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
      * Set the primary physical channel used for this advertising set. This is used only if legacy mode is not used.
      * Use isLeCodedPhySupported() to determine if LE Coded PHY is supported on this device.
      */
-    public func setPrimaryPhy(primaryphy: Android.Bluetooth.LE.AdvertisingSetParameters.PrimaryPhy) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
+    func setPrimaryPhy(primaryphy: Android.Bluetooth.LE.AdvertisingSetParameters.PrimaryPhy) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
         var __locals = [jobject]()
         
         var __args = [jvalue]( repeating: jvalue(), count: 1 )
@@ -229,7 +229,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
     /**
      * Set whether the advertisement type should be scannable.
      */
-    public func setScannable( scannable: Bool) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
+    func setScannable( scannable: Bool) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
         
         var __locals = [jobject]()
         
@@ -260,7 +260,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
     /**
      * Set the secondary physical channel used for this advertising set.
      */
-    public func setSecondaryPhy(secondaryPhy: Android.Bluetooth.LE.AdvertisingSetParameters.SecondaryPhy) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
+    func setSecondaryPhy(secondaryPhy: Android.Bluetooth.LE.AdvertisingSetParameters.SecondaryPhy) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
         var __locals = [jobject]()
         
         var __args = [jvalue]( repeating: jvalue(), count: 1 )
@@ -290,7 +290,7 @@ public extension AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
     /**
      * Set the transmission power level for the advertising.
      */
-    public func setTxPowerLevel(txPowerLevel: Android.Bluetooth.LE.AdvertisingSetParameters.TxPowerLevel) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
+    func setTxPowerLevel(txPowerLevel: Android.Bluetooth.LE.AdvertisingSetParameters.TxPowerLevel) -> AndroidBluetoothLowEnergyAdvertisingSetParameters.Builder {
         var __locals = [jobject]()
         
         var __args = [jvalue]( repeating: jvalue(), count: 1 )

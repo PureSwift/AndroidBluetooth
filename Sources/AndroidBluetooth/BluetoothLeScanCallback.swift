@@ -13,14 +13,14 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias ScanCallback = AndroidBluetoothLowEnergyScanCallback
+    typealias ScanCallback = AndroidBluetoothLowEnergyScanCallback
     
-    public typealias ScanCallbackType = AndroidBluetoothLowEnergyScanCallbackType
+    typealias ScanCallbackType = AndroidBluetoothLowEnergyScanCallbackType
 }
 
 public extension Android.Bluetooth.LE.ScanCallback {
     
-    public typealias Error = AndroidBluetoothLowEnergyScanCallbackError
+    typealias Error = AndroidBluetoothLowEnergyScanCallbackError
 }
 
 /// Proxy listener class for Android Bluetooth LE callbacks.
@@ -83,7 +83,7 @@ open class AndroidBluetoothLowEnergyScanCallback: JavaObject {
 public extension AndroidBluetoothLowEnergyScanCallback {
     
     /// Fails to start scan as BLE scan with the same settings is already started by the app.
-    public static var SCAN_FAILED_ALREADY_STARTED: Int {
+    static var SCAN_FAILED_ALREADY_STARTED: Int {
         
         get {
             
@@ -99,7 +99,7 @@ public extension AndroidBluetoothLowEnergyScanCallback {
     }
     
     /// Fails to start scan as app cannot be registered.
-    public static var SCAN_FAILED_APPLICATION_REGISTRATION_FAILED: Int {
+    static var SCAN_FAILED_APPLICATION_REGISTRATION_FAILED: Int {
         
         get {
             
@@ -115,7 +115,7 @@ public extension AndroidBluetoothLowEnergyScanCallback {
     }
     
     /// Fails to start power optimized scan as this feature is not supported.
-    public static var SCAN_FAILED_FEATURE_UNSUPPORTED: Int {
+    static var SCAN_FAILED_FEATURE_UNSUPPORTED: Int {
         
         get {
             
@@ -131,7 +131,7 @@ public extension AndroidBluetoothLowEnergyScanCallback {
     }
     
     /// Fails to start scan due an internal error
-    public static var SCAN_FAILED_INTERNAL_ERROR: Int {
+    static var SCAN_FAILED_INTERNAL_ERROR: Int {
         
         get {
             

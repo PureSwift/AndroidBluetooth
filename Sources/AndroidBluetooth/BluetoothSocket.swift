@@ -11,7 +11,7 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias Socket = AndroidBluetoothSocket
+    typealias Socket = AndroidBluetoothSocket
 }
 
 /**
@@ -61,7 +61,7 @@ public final class AndroidBluetoothSocket: JavaObject {
 internal extension AndroidBluetoothSocket {
     
     /// L2CAP socket
-    internal static var TYPE_L2CAP: Int {
+    static var TYPE_L2CAP: Int {
         
         get {
             
@@ -77,7 +77,7 @@ internal extension AndroidBluetoothSocket {
     }
     
     /// RFCOMM socket
-    internal static var TYPE_RFCOMM: Int {
+    static var TYPE_RFCOMM: Int {
         
         get {
             
@@ -93,7 +93,7 @@ internal extension AndroidBluetoothSocket {
     }
     
     /// SCO socket
-    internal static var TYPE_SCO: Int {
+    static var TYPE_SCO: Int {
         
         get {
             
@@ -117,7 +117,7 @@ public extension AndroidBluetoothSocket {
     /**
      * Closes this stream and releases any system resources associated with it.
      */
-    public func close() {
+    func close() {
         
         var __locals = [jobject]()
         
@@ -134,7 +134,7 @@ public extension AndroidBluetoothSocket {
     /**
      * Attempt to connect to a remote device.
      */
-    public func connect() {
+    func connect() {
         
         var __locals = [jobject]()
         
@@ -151,7 +151,7 @@ public extension AndroidBluetoothSocket {
     /**
      * Attempt to connect to a remote device.
      */
-    public func getConnectionType() -> Int {
+    func getConnectionType() -> Int {
         
         var __locals = [jobject]()
         
@@ -170,7 +170,7 @@ public extension AndroidBluetoothSocket {
     /**
      * Get the input stream associated with this socket.
      */
-    public func getInputStream() -> JavaObject {
+    func getInputStream() -> JavaObject {
         
         var __locals = [jobject]()
         
@@ -191,7 +191,7 @@ public extension AndroidBluetoothSocket {
     /**
      * Get the maximum supported Receive packet size for the underlying transport.
      */
-    public func getMaxReceivePacketSize() -> Int {
+    func getMaxReceivePacketSize() -> Int {
         
         var __locals = [jobject]()
         
@@ -209,7 +209,7 @@ public extension AndroidBluetoothSocket {
     /**
      * Get the maximum supported Transmit packet size for the underlying transport.
      */
-    public func getMaxTransmitPacketSize() -> Int {
+    func getMaxTransmitPacketSize() -> Int {
         
         var __locals = [jobject]()
         
@@ -227,7 +227,7 @@ public extension AndroidBluetoothSocket {
     /**
      * Get the output stream associated with this socket.
      */
-    public func getOutputStream() -> JavaObject {
+    func getOutputStream() -> JavaObject {
         
         var __locals = [jobject]()
         
@@ -247,7 +247,7 @@ public extension AndroidBluetoothSocket {
     /**
      * Get the remote device this socket is connecting, or connected, to.
      */
-    public func getRemoteDevice() -> Android.Bluetooth.Device {
+    func getRemoteDevice() -> Android.Bluetooth.Device {
         
         var __locals = [jobject]()
         
@@ -267,7 +267,7 @@ public extension AndroidBluetoothSocket {
     /**
      * Get the connection status of this socket, ie, whether there is an active connection with remote device.
      */
-    public func isConnected() -> Bool {
+    func isConnected() -> Bool {
         
         var __locals = [jobject]()
         

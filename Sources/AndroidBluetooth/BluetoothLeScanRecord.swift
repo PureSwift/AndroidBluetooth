@@ -12,7 +12,7 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias ScanRecord = AndroidBluetoothLowEnergyScanRecord
+    typealias ScanRecord = AndroidBluetoothLowEnergyScanRecord
 }
 
 public final class AndroidBluetoothLowEnergyScanRecord: JavaObject {
@@ -145,8 +145,8 @@ public final class AndroidBluetoothLowEnergyScanRecord: JavaObject {
 
 internal extension Android.Bluetooth.LE.ScanRecord {
     
-    @_versioned
-    internal func getServiceUuids() -> List? {
+    @usableFromInline
+    func getServiceUuids() -> List? {
         
         var __locals = [jobject]()
         
@@ -164,8 +164,8 @@ internal extension Android.Bluetooth.LE.ScanRecord {
         return __return != nil ? ListForward( javaObject: __return ) : nil
     }
     
-    @_versioned
-    internal func __getServiceData() -> JavaMap? {
+    @usableFromInline
+    func __getServiceData() -> JavaMap? {
         
         var __locals = [jobject]()
         
@@ -183,8 +183,8 @@ internal extension Android.Bluetooth.LE.ScanRecord {
         return JNIType.toSwift( type: java_swift.JavaMapForward.self, from: __return )
     }
     
-    @_versioned
-    internal func __getManufacturerSpecificData() -> [Int8]? {
+    @usableFromInline
+    func __getManufacturerSpecificData() -> [Int8]? {
         
         var __locals = [jobject]()
         
@@ -202,8 +202,8 @@ internal extension Android.Bluetooth.LE.ScanRecord {
         return JNIType.toSwift( type: [Int8].self, from: __return )
     }
     
-    @_versioned
-    internal func getDeviceName() -> String {
+    @usableFromInline
+    func getDeviceName() -> String {
         
         var __locals = [jobject]()
         
@@ -221,8 +221,8 @@ internal extension Android.Bluetooth.LE.ScanRecord {
         return String(javaObject: __return)
     }
     
-    @_versioned
-    internal func getBytes() -> [Int8]? {
+    @usableFromInline
+    func getBytes() -> [Int8]? {
         
         var __locals = [jobject]()
         
@@ -240,8 +240,8 @@ internal extension Android.Bluetooth.LE.ScanRecord {
         return JNIType.toSwift(type: [Int8].self, from: __return, consume: false )
     }
     
-    @_versioned
-    internal func getAdvertiseFlags() -> Int {
+    @usableFromInline
+    func getAdvertiseFlags() -> Int {
         
         var __locals = [jobject]()
         
@@ -256,8 +256,8 @@ internal extension Android.Bluetooth.LE.ScanRecord {
         return Int(__return)
     }
     
-    @_versioned
-    internal func getTxPowerLevel() -> Int {
+    @usableFromInline
+    func getTxPowerLevel() -> Int {
         
         var __locals = [jobject]()
         

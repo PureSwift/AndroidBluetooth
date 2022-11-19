@@ -12,7 +12,7 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias Scanner = AndroidBluetoothLowEnergyScanner
+    typealias Scanner = AndroidBluetoothLowEnergyScanner
 }
 
 public final class AndroidBluetoothLowEnergyScanner: JavaObject {
@@ -38,7 +38,7 @@ public final class AndroidBluetoothLowEnergyScanner: JavaObject {
 public extension AndroidBluetoothLowEnergyScanner {
     
     /// Optional extra indicating the callback type, which will be one of CALLBACK_TYPE_* constants in ScanSettings.
-    public static var EXTRA_CALLBACK_TYPE: Int {
+    static var EXTRA_CALLBACK_TYPE: Int {
         
         get {
             
@@ -54,7 +54,7 @@ public extension AndroidBluetoothLowEnergyScanner {
     }
     
     /// Optional extra indicating the error code, if any.
-    public static var EXTRA_ERROR_CODE: Int {
+    static var EXTRA_ERROR_CODE: Int {
         
         get {
             
@@ -70,7 +70,7 @@ public extension AndroidBluetoothLowEnergyScanner {
     }
     
     /// Extra containing a list of ScanResults.
-    public static var EXTRA_LIST_SCAN_RESULT: Int {
+    static var EXTRA_LIST_SCAN_RESULT: Int {
         
         get {
             
@@ -103,7 +103,7 @@ public extension AndroidBluetoothLowEnergyScanner {
      *
      * Returns 0 for success or an error code from ScanCallback if the scan request could not be sent.
      */
-    public func startScan(filters: [Android.Bluetooth.LE.ScanFilter]? = nil,
+    func startScan(filters: [Android.Bluetooth.LE.ScanFilter]? = nil,
                           settings: Android.Bluetooth.LE.ScanSettings = Android.Bluetooth.LE.ScanSettings.Builder().build(),
                           callbackIntent: JavaObject) -> Int {
         let filterList: ArrayList?
@@ -152,7 +152,7 @@ public extension AndroidBluetoothLowEnergyScanner {
      *
      * Requires the BLUETOOTH_ADMIN permission.
      */
-    public func startScan(callback: Android.Bluetooth.LE.ScanCallback) {
+    func startScan(callback: Android.Bluetooth.LE.ScanCallback) {
         
         var __locals = [jobject]()
         
@@ -176,7 +176,7 @@ public extension AndroidBluetoothLowEnergyScanner {
      * @- Parameter settings: Settings for the scan.
      * @- Parameter callback: Callback used to deliver scan results.
      */
-    public func startScan(filters: [Android.Bluetooth.LE.ScanFilter]? = nil,
+    func startScan(filters: [Android.Bluetooth.LE.ScanFilter]? = nil,
                           settings: Android.Bluetooth.LE.ScanSettings,
                           callback: Android.Bluetooth.LE.ScanCallback) {
         
@@ -220,7 +220,7 @@ public extension AndroidBluetoothLowEnergyScanner {
      *
      * Requires the BLUETOOTH_ADMIN permission.
      */
-    public func stopScan(callback: Android.Bluetooth.LE.ScanCallback) {
+    func stopScan(callback: Android.Bluetooth.LE.ScanCallback) {
         
         var __locals = [jobject]()
         
@@ -242,7 +242,7 @@ public extension AndroidBluetoothLowEnergyScanner {
      *
      * Requires the BLUETOOTH_ADMIN permission.
      */
-    public func stopScan(callbackIntent: JavaObject) {
+    func stopScan(callbackIntent: JavaObject) {
         
         var __locals = [jobject]()
         
@@ -263,7 +263,7 @@ public extension AndroidBluetoothLowEnergyScanner {
      * Flush pending batch scan results stored in Bluetooth controller. This will return Bluetooth LE scan results batched on bluetooth controller.
      * Returns immediately, batch scan results data will be delivered through the callback.
      */
-    public func flushPendingScanResults(callback: Android.Bluetooth.LE.ScanCallback) {
+    func flushPendingScanResults(callback: Android.Bluetooth.LE.ScanCallback) {
         
         var __locals = [jobject]()
         

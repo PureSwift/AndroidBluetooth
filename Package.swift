@@ -1,9 +1,14 @@
-// swift-tools-version:4.1
-
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
     name: "AndroidBluetooth",
+    platforms: [
+        .macOS(.v10_15),
+        .iOS(.v13),
+        .watchOS(.v6),
+        .tvOS(.v13),
+    ],
     products: [
         .library(
             name: "AndroidBluetooth",
@@ -12,15 +17,11 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/PureSwift/Android.git",
-            .branch("master")
-        ),
-        .package(
-            url: "https://github.com/PureSwift/Bluetooth.git",
-            .branch("master")
+            branch: "master"
         ),
         .package(
             url: "https://github.com/PureSwift/GATT.git",
-            .branch("master")
+            branch: "master"
         )
     ],
     targets: [
@@ -28,7 +29,6 @@ let package = Package(
             name: "AndroidBluetooth",
             dependencies: [
                 "Android",
-                "Bluetooth",
                 "GATT"
             ]),
         .testTarget(

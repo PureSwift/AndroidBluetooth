@@ -11,7 +11,7 @@ import Android
 
 public extension Android.Bluetooth.LE.AdvertiseData {
     
-    public typealias Builder = AndroidBluetoothLowEnergyAdvertiseDataBuilder
+    typealias Builder = AndroidBluetoothLowEnergyAdvertiseDataBuilder
 }
 
 /**
@@ -54,7 +54,7 @@ public final class AndroidBluetoothLowEnergyAdvertiseDataBuilder: JavaObject {
 
 public extension AndroidBluetoothLowEnergyAdvertiseDataBuilder {
     
-    public func build() -> AndroidBluetoothLowEnergyAdvertiseData {
+    func build() -> AndroidBluetoothLowEnergyAdvertiseData {
         
         var __locals = [jobject]()
         
@@ -75,7 +75,7 @@ public extension AndroidBluetoothLowEnergyAdvertiseDataBuilder {
     /**
      * Add manufacturer specific data.
      */
-    public func addManufacturerData(_ manufacturerId: Int, _ manufacturerSpecificData: [Int8]) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
+    func addManufacturerData(_ manufacturerId: Int, _ manufacturerSpecificData: [Int8]) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
         
         var __locals = [jobject]()
         
@@ -104,7 +104,7 @@ public extension AndroidBluetoothLowEnergyAdvertiseDataBuilder {
         return AndroidBluetoothLowEnergyAdvertiseData.Builder(javaObject: __return)
     }
     
-    public func addServiceData(serviceDataUuid: Android.OS.ParcelUuid, serviceData: [Int8]) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
+    func addServiceData(serviceDataUuid: Android.OS.ParcelUuid, serviceData: [Int8]) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
         
         var __locals = [jobject]()
         
@@ -125,7 +125,7 @@ public extension AndroidBluetoothLowEnergyAdvertiseDataBuilder {
         return AndroidBluetoothLowEnergyAdvertiseData.Builder(javaObject: __return)
     }
     
-    public func addServiceData(serviceDataUuid: Android.OS.ParcelUuid) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
+    func addServiceData(serviceDataUuid: Android.OS.ParcelUuid) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
         
         var __locals = [jobject]()
         
@@ -145,7 +145,7 @@ public extension AndroidBluetoothLowEnergyAdvertiseDataBuilder {
         return AndroidBluetoothLowEnergyAdvertiseData.Builder(javaObject: __return)
     }
     
-    public func setIncludeDeviceName( includeDeviceName: Bool) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
+    func setIncludeDeviceName( includeDeviceName: Bool) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
         
         var __locals = [jobject]()
         
@@ -173,7 +173,7 @@ public extension AndroidBluetoothLowEnergyAdvertiseDataBuilder {
         return AndroidBluetoothLowEnergyAdvertiseData.Builder(javaObject: __return)
     }
     
-    public func setIncludeTxPowerLevel( includeTxPowerLevel: Bool) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
+    func setIncludeTxPowerLevel( includeTxPowerLevel: Bool) -> AndroidBluetoothLowEnergyAdvertiseData.Builder {
         
         var __locals = [jobject]()
         

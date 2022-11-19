@@ -12,12 +12,12 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias GattService = AndroidBluetoothGattService
+    typealias GattService = AndroidBluetoothGattService
 }
 
 public extension Android.Bluetooth.GattService {
     
-    public typealias ServiceType = AndroidBluetootServiceType
+    typealias ServiceType = AndroidBluetootServiceType
 }
 
 /**
@@ -99,7 +99,7 @@ public final class AndroidBluetoothGattService: JavaObject {
 public extension AndroidBluetoothGattService {
     
     /// RFCOMM socket
-    internal static var SERVICE_TYPE_PRIMARY: Int {
+    static var SERVICE_TYPE_PRIMARY: Int {
         
         get {
             
@@ -115,7 +115,7 @@ public extension AndroidBluetoothGattService {
     }
     
     /// RFCOMM socket
-    internal static var SERVICE_TYPE_SECONDARY: Int {
+    static var SERVICE_TYPE_SECONDARY: Int {
         
         get {
             
@@ -135,7 +135,7 @@ public extension AndroidBluetoothGattService {
 
 public extension AndroidBluetoothGattService {
     
-    public func addCharacteristic(characteristic: Android.Bluetooth.GattCharacteristic) -> Bool {
+    func addCharacteristic(characteristic: Android.Bluetooth.GattCharacteristic) -> Bool {
         
         var __locals = [jobject]()
         
@@ -152,7 +152,7 @@ public extension AndroidBluetoothGattService {
         return __return != jboolean(JNI_FALSE)
     }
     
-    public func addService(service: Android.Bluetooth.GattService) -> Bool {
+    func addService(service: Android.Bluetooth.GattService) -> Bool {
         
         var __locals = [jobject]()
         
@@ -169,7 +169,7 @@ public extension AndroidBluetoothGattService {
         return __return != jboolean(JNI_FALSE)
     }
     
-    public func getCharacteristic(uuid: java_util.UUID) -> Android.Bluetooth.GattCharacteristic {
+    func getCharacteristic(uuid: java_util.UUID) -> Android.Bluetooth.GattCharacteristic {
         
         var __locals = [jobject]()
         
@@ -188,7 +188,7 @@ public extension AndroidBluetoothGattService {
         return Android.Bluetooth.GattCharacteristic(javaObject: __return)
     }
     
-    public func getCharacteristics() -> [Android.Bluetooth.GattCharacteristic] {
+    func getCharacteristics() -> [Android.Bluetooth.GattCharacteristic] {
         
         var __locals = [jobject]()
         
@@ -222,7 +222,7 @@ public extension AndroidBluetoothGattService {
         return swiftCharacteristics
     }
     
-    public func getIncludedServices() -> java_util.List? {
+    func getIncludedServices() -> java_util.List? {
         
         var __locals = [jobject]()
         
@@ -239,7 +239,7 @@ public extension AndroidBluetoothGattService {
         return java_util.ListForward(javaObject: __return)
     }
     
-    public func getInstanceId() -> Int {
+    func getInstanceId() -> Int {
         
         var __locals = [jobject]()
         
@@ -254,7 +254,7 @@ public extension AndroidBluetoothGattService {
         return Int(__return)
     }
     
-    public func getType() -> Android.Bluetooth.GattService.ServiceType {
+    func getType() -> Android.Bluetooth.GattService.ServiceType {
         
         var __locals = [jobject]()
         
@@ -270,7 +270,7 @@ public extension AndroidBluetoothGattService {
         return Android.Bluetooth.GattService.ServiceType(rawValue: Int(__return))
     }
     
-    public func getUuid() -> java_util.UUID {
+    func getUuid() -> java_util.UUID {
         
         var __locals = [jobject]()
         
@@ -293,7 +293,7 @@ public extension AndroidBluetoothGattService {
 public extension AndroidBluetoothGattService {
     
     /// LE Secondary Phy
-    public struct AndroidBluetootServiceType: RawRepresentable {
+    struct AndroidBluetootServiceType: RawRepresentable {
         
         public let rawValue: Int
         

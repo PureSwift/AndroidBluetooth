@@ -11,7 +11,7 @@ import Android
 
 public extension Android.Bluetooth.LE.ScanFilter {
     
-    public typealias Builder = AndroidBluetoothLowEnergyScanFilterBuilder
+    typealias Builder = AndroidBluetoothLowEnergyScanFilterBuilder
 }
 
 /**
@@ -65,7 +65,7 @@ public final class AndroidBluetoothLowEnergyScanFilterBuilder: JavaObject {
 public extension Android.Bluetooth.LE.ScanFilter {
     private static var build_MethodID: jmethodID?
     
-    public func build() -> Android.Bluetooth.LE.ScanSettings {
+    func build() -> Android.Bluetooth.LE.ScanSettings {
         
         var __locals = [jobject]()
         
@@ -86,7 +86,7 @@ public extension Android.Bluetooth.LE.ScanFilter {
     private static var setDeviceAddress_MethodID: jmethodID?
     
     /// Set filter on device address.
-    public func setDeviceAddress(_ deviceAddress: String) -> Android.Bluetooth.LE.ScanFilter.Builder {
+    func setDeviceAddress(_ deviceAddress: String) -> Android.Bluetooth.LE.ScanFilter.Builder {
         
         var __locals = [jobject]()
         
@@ -117,7 +117,7 @@ public extension Android.Bluetooth.LE.ScanFilter {
     private static var setDeviceName_MethodID: jmethodID?
     
     /// Set filter on device name.
-    public func setDeviceName(_ deviceName: String) -> Android.Bluetooth.LE.ScanFilter.Builder {
+    func setDeviceName(_ deviceName: String) -> Android.Bluetooth.LE.ScanFilter.Builder {
         
         var __locals = [jobject]()
         
@@ -148,7 +148,7 @@ public extension Android.Bluetooth.LE.ScanFilter {
     private static var setManufacturerData_MethodID: jmethodID?
     
     /// Set filter on on manufacturerData.
-    public func setManufacturerData(_ manufacturerId: Int, _ manufacturerData: [Int8]) -> Android.Bluetooth.LE.ScanFilter.Builder {
+    func setManufacturerData(_ manufacturerId: Int, _ manufacturerData: [Int8]) -> Android.Bluetooth.LE.ScanFilter.Builder {
         
         var __locals = [jobject]()
         
@@ -180,7 +180,7 @@ public extension Android.Bluetooth.LE.ScanFilter {
     private static var setManufacturerData2_MethodID: jmethodID?
     
     /// Set filter on partial manufacture data.
-    public func setManufacturerData(_ manufacturerId: Int, _ manufacturerData: [Int8], _ manufacturerDataMask: [Int8]) -> Android.Bluetooth.LE.ScanFilter.Builder {
+    func setManufacturerData(_ manufacturerId: Int, _ manufacturerData: [Int8], _ manufacturerDataMask: [Int8]) -> Android.Bluetooth.LE.ScanFilter.Builder {
         
         var __locals = [jobject]()
         
@@ -214,7 +214,7 @@ public extension Android.Bluetooth.LE.ScanFilter {
     /**
      * Set filtering on service data.
      */
-    public func setServiceData(serviceDataUuid: Android.OS.ParcelUuid, serviceData: [Int8]) -> Android.Bluetooth.LE.ScanFilter.Builder {
+    func setServiceData(serviceDataUuid: Android.OS.ParcelUuid, serviceData: [Int8]) -> Android.Bluetooth.LE.ScanFilter.Builder {
         
         var __locals = [jobject]()
         
@@ -239,7 +239,7 @@ public extension Android.Bluetooth.LE.ScanFilter {
     /**
      * Set filtering on service data.
      */
-    public func setServiceData(serviceDataUuid: Android.OS.ParcelUuid, serviceData: [Int8], serviceDataMask: [Int8]) -> Android.Bluetooth.LE.ScanFilter.Builder {
+    func setServiceData(serviceDataUuid: Android.OS.ParcelUuid, serviceData: [Int8], serviceDataMask: [Int8]) -> Android.Bluetooth.LE.ScanFilter.Builder {
         
         var __locals = [jobject]()
         
@@ -263,7 +263,7 @@ public extension Android.Bluetooth.LE.ScanFilter {
     
     /// Set filter on partial service uuid.
     private static var setServiceUuuid_MethodID: jmethodID?
-    public func setServiceUuuid(serviceUuid: Android.OS.ParcelUuid, uuidMask: Android.OS.ParcelUuid) -> Android.Bluetooth.LE.ScanFilter.Builder {
+    func setServiceUuuid(serviceUuid: Android.OS.ParcelUuid, uuidMask: Android.OS.ParcelUuid) -> Android.Bluetooth.LE.ScanFilter.Builder {
         
         var __locals = [jobject]()
         
@@ -286,7 +286,7 @@ public extension Android.Bluetooth.LE.ScanFilter {
     
     /// Set filter on service uuid.
     private static var setServiceUuuid2_MethodID: jmethodID?
-    public func setServiceUuuid(serviceUuid: Android.OS.ParcelUuid) -> Android.Bluetooth.LE.ScanFilter.Builder {
+    func setServiceUuuid(serviceUuid: Android.OS.ParcelUuid) -> Android.Bluetooth.LE.ScanFilter.Builder {
         
         var __locals = [jobject]()
         

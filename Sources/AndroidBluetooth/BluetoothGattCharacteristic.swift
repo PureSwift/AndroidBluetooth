@@ -12,15 +12,15 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias GattCharacteristic = AndroidBluetoothGattCharacteristic
+    typealias GattCharacteristic = AndroidBluetoothGattCharacteristic
 }
 
 public extension Android.Bluetooth.GattCharacteristic {
     
-    public typealias FormatType = AndroidBluetoothFormatType
-    public typealias Permission = AndroidBluetoothPermission
-    public typealias Property = AndroidBluetoothProperty
-    public typealias WriteType = AndroidBluetoothWriteType
+    typealias FormatType = AndroidBluetoothFormatType
+    typealias Permission = AndroidBluetoothPermission
+    typealias Property = AndroidBluetoothProperty
+    typealias WriteType = AndroidBluetoothWriteType
 }
 
 
@@ -53,7 +53,7 @@ public final class AndroidBluetoothGattCharacteristic: JavaObject {
 public extension AndroidBluetoothGattCharacteristic {
     
     /// Characteristic value format type float (32-bit float)
-    internal static var FORMAT_FLOAT: Int {
+    static var FORMAT_FLOAT: Int {
         
         get {
             
@@ -69,7 +69,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic value format type sfloat (16-bit float)
-    internal static var FORMAT_SFLOAT: Int {
+    static var FORMAT_SFLOAT: Int {
         
         get {
             
@@ -85,7 +85,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic value format type sint16
-    internal static var FORMAT_SINT16: Int {
+    static var FORMAT_SINT16: Int {
         
         get {
             
@@ -101,7 +101,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic value format type sint32
-    internal static var FORMAT_SINT32: Int {
+    static var FORMAT_SINT32: Int {
         
         get {
             
@@ -117,7 +117,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic value format type sint8
-    internal static var FORMAT_SINT8: Int {
+    static var FORMAT_SINT8: Int {
         
         get {
             
@@ -133,7 +133,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic value format type uint16
-    internal static var FORMAT_UINT16: Int {
+    static var FORMAT_UINT16: Int {
         
         get {
             
@@ -149,7 +149,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic value format type uint32
-    internal static var FORMAT_UINT32: Int {
+    static var FORMAT_UINT32: Int {
         
         get {
             
@@ -165,7 +165,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic value format type uint8
-    internal static var FORMAT_UINT8: Int {
+    static var FORMAT_UINT8: Int {
         
         get {
             
@@ -181,7 +181,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic read permission
-    internal static var PERMISSION_READ: Int {
+    static var PERMISSION_READ: Int {
         
         get {
             
@@ -197,7 +197,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic permission: Allow encrypted read operations
-    internal static var PERMISSION_READ_ENCRYPTED: Int {
+    static var PERMISSION_READ_ENCRYPTED: Int {
         
         get {
             
@@ -213,7 +213,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic permission: Allow reading with man-in-the-middle protection
-    internal static var PERMISSION_READ_ENCRYPTED_MITM: Int {
+    static var PERMISSION_READ_ENCRYPTED_MITM: Int {
         
         get {
             
@@ -229,7 +229,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic write permission
-    internal static var PERMISSION_WRITE: Int {
+    static var PERMISSION_WRITE: Int {
         
         get {
             
@@ -245,7 +245,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic permission: Allow encrypted writes
-    internal static var PERMISSION_WRITE_ENCRYPTED: Int {
+    static var PERMISSION_WRITE_ENCRYPTED: Int {
         
         get {
             
@@ -261,7 +261,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic permission: Allow encrypted writes with man-in-the-middle protection
-    internal static var PERMISSION_WRITE_ENCRYPTED_MITM: Int {
+    static var PERMISSION_WRITE_ENCRYPTED_MITM: Int {
         
         get {
             
@@ -277,7 +277,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic permission: Allow signed write operations
-    internal static var PERMISSION_WRITE_SIGNED: Int {
+    static var PERMISSION_WRITE_SIGNED: Int {
         
         get {
             
@@ -293,7 +293,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic permission: Allow signed write operations with man-in-the-middle protection.
-    internal static var PERMISSION_WRITE_SIGNED_MITM: Int {
+    static var PERMISSION_WRITE_SIGNED_MITM: Int {
         
         get {
             
@@ -309,7 +309,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic proprty: Characteristic is broadcastable.
-    internal static var PROPERTY_BROADCAST: Int {
+    static var PROPERTY_BROADCAST: Int {
         
         get {
             
@@ -325,7 +325,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic property: Characteristic has extended properties.
-    internal static var PROPERTY_EXTENDED_PROPS: Int {
+    static var PROPERTY_EXTENDED_PROPS: Int {
         
         get {
             
@@ -341,7 +341,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic property: Characteristic supports indication.
-    internal static var PROPERTY_INDICATE: Int {
+    static var PROPERTY_INDICATE: Int {
         
         get {
             
@@ -357,7 +357,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic property: Characteristic supports notification.
-    internal static var PROPERTY_NOTIFY: Int {
+    static var PROPERTY_NOTIFY: Int {
         
         get {
             
@@ -373,7 +373,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic property: Characteristic is readable.
-    internal static var PROPERTY_READ: Int {
+    static var PROPERTY_READ: Int {
         
         get {
             
@@ -389,7 +389,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic property: Characteristic supports write with signature.
-    internal static var PROPERTY_SIGNED_WRITE: Int {
+    static var PROPERTY_SIGNED_WRITE: Int {
         
         get {
             
@@ -405,7 +405,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic property: Characteristic can be written.
-    internal static var PROPERTY_WRITE: Int {
+    static var PROPERTY_WRITE: Int {
         
         get {
             
@@ -421,7 +421,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Characteristic property: Characteristic can be written without response.
-    internal static var PROPERTY_WRITE_NO_RESPONSE: Int {
+    static var PROPERTY_WRITE_NO_RESPONSE: Int {
         
         get {
             
@@ -437,7 +437,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Write characteristic, requesting acknoledgement by the remote device.
-    internal static var WRITE_TYPE_DEFAULT: Int {
+    static var WRITE_TYPE_DEFAULT: Int {
         
         get {
             
@@ -452,7 +452,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Write characteristic without requiring a response by the remote device
-    internal static var WRITE_TYPE_NO_RESPONSE: Int {
+    static var WRITE_TYPE_NO_RESPONSE: Int {
         
         get {
             
@@ -468,7 +468,7 @@ public extension AndroidBluetoothGattCharacteristic {
     }
     
     /// Write characteristic including authentication signature.
-    internal static var WRITE_TYPE_SIGNED: Int {
+    static var WRITE_TYPE_SIGNED: Int {
         
         get {
             
@@ -491,7 +491,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Adds a descriptor to this characteristic.
      */
-    public func addDescriptor(descriptor: Android.Bluetooth.GattDescriptor) -> Bool {
+    func addDescriptor(descriptor: Android.Bluetooth.GattDescriptor) -> Bool {
         
         var __locals = [jobject]()
         
@@ -511,7 +511,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Returns a descriptor with a given UUID out of the list of descriptors for this characteristic.
      */
-    public func getDescriptor(uuid: java_util.UUID) -> Android.Bluetooth.GattDescriptor? {
+    func getDescriptor(uuid: java_util.UUID) -> Android.Bluetooth.GattDescriptor? {
         
         var __locals = [jobject]()
         
@@ -534,7 +534,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Returns a list of descriptors for this characteristic.
      */
-    public func getDescriptors() -> List? {
+    func getDescriptors() -> List? {
         
         var __locals = [jobject]()
         
@@ -555,7 +555,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Return the stored value of this characteristic.
      */
-    public func getFloatValue(formatType: FormatType, offset: Int) -> Float {
+    func getFloatValue(formatType: FormatType, offset: Int) -> Float {
         
         var __locals = [jobject]()
         
@@ -576,7 +576,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Returns the instance ID for this characteristic.
      */
-    public func getInstanceId() -> Int {
+    func getInstanceId() -> Int {
         
         var __locals = [jobject]()
         
@@ -598,7 +598,7 @@ public extension AndroidBluetoothGattCharacteristic {
      * settting formatType to FORMAT_UINT16 specifies that the first two bytes of the characteristic value
      * at the given offset are interpreted to generate the return value.
      */
-    public func getIntValue(formatType: FormatType, offset: Int) -> Int {
+    func getIntValue(formatType: FormatType, offset: Int) -> Int {
         
         var __locals = [jobject]()
         
@@ -619,7 +619,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Returns the permissions for this characteristic.
      */
-    public func getPermissions() -> Int {
+    func getPermissions() -> Int {
         
         var __locals = [jobject]()
         
@@ -639,7 +639,7 @@ public extension AndroidBluetoothGattCharacteristic {
      *
      * The properties contain a bit mask of property flags indicating the features of this characteristic.
      */
-    public func getProperties() -> Int {
+    func getProperties() -> Int {
         
         var __locals = [jobject]()
         
@@ -657,7 +657,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Returns the service this characteristic belongs to.
      */
-    public func getService() -> Android.Bluetooth.GattService {
+    func getService() -> Android.Bluetooth.GattService {
         
         var __locals = [jobject]()
         
@@ -678,7 +678,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Return the stored value of this characteristic.
      */
-    public func getStringValue(offSet: Int) -> String {
+    func getStringValue(offSet: Int) -> String {
         
         var __locals = [jobject]()
         
@@ -701,7 +701,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Returns the UUID of this characteristic.
      */
-    public func getUuid() -> java_util.UUID {
+    func getUuid() -> java_util.UUID {
         
         var __locals = [jobject]()
         
@@ -724,7 +724,7 @@ public extension AndroidBluetoothGattCharacteristic {
      * This function returns the stored value for this characteristic as retrieved by calling readCharacteristic(BluetoothGattCharacteristic).
      * The cached value of the characteristic is updated as a result of a read characteristic operation or if a characteristic update notification has been received.
      */
-    public func getValue() -> [Int8]? {
+    func getValue() -> [Int8]? {
         
         var __locals = [jobject]()
         
@@ -764,7 +764,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Gets the write type for this characteristic.
      */
-    public func getWriteType() -> WriteType {
+    func getWriteType() -> WriteType {
         
         var __locals = [jobject]()
         
@@ -784,7 +784,7 @@ public extension AndroidBluetoothGattCharacteristic {
      *
      * See setValue(byte[]) for details.
      */
-    public func setValue(value: String) -> Bool {
+    func setValue(value: String) -> Bool {
         
         var __locals = [jobject]()
         
@@ -806,7 +806,7 @@ public extension AndroidBluetoothGattCharacteristic {
      *
      * See setValue(byte[]) for details.
      */
-    public func setValue(value: Int, formatType: FormatType, offset: Int) -> Bool {
+    func setValue(value: Int, formatType: FormatType, offset: Int) -> Bool {
         
         var __locals = [jobject]()
         
@@ -831,7 +831,7 @@ public extension AndroidBluetoothGattCharacteristic {
      * This function modifies the locally stored cached value of this characteristic. To send the value to the remote device,
      * call writeCharacteristic(BluetoothGattCharacteristic) to send the value to the remote device.
      */
-    public func setValue(value: [Int8]) -> Bool {
+    func setValue(value: [Int8]) -> Bool {
         
         var __locals = [jobject]()
         
@@ -853,7 +853,7 @@ public extension AndroidBluetoothGattCharacteristic {
      *
      * See setValue(byte[]) for details.
      */
-    public func setValue(mantissa: Int, exponent: Int, formatType: FormatType, offset: Int) -> Bool {
+    func setValue(mantissa: Int, exponent: Int, formatType: FormatType, offset: Int) -> Bool {
         
         var __locals = [jobject]()
         
@@ -878,7 +878,7 @@ public extension AndroidBluetoothGattCharacteristic {
      *
      * Setting the write type of a characteristic determines how the writeCharacteristic(BluetoothGattCharacteristic) function write this characteristic.
      */
-    public func setWriteType(writeType: WriteType) {
+    func setWriteType(writeType: WriteType) {
         
         var __locals = [jobject]()
         
@@ -899,7 +899,7 @@ public extension AndroidBluetoothGattCharacteristic {
 
 public extension AndroidBluetoothGattCharacteristic {
     
-    public struct AndroidBluetoothPermission: RawRepresentable {
+    struct AndroidBluetoothPermission: RawRepresentable {
         
         public let rawValue: Int
         
@@ -948,7 +948,7 @@ public extension AndroidBluetoothGattCharacteristic {
         public static let writeSignedMITM = AndroidBluetoothGattCharacteristic.Permission(rawValue: AndroidBluetoothGattCharacteristic.PERMISSION_WRITE_SIGNED_MITM)
     }
     
-    public struct AndroidBluetoothProperty: RawRepresentable {
+    struct AndroidBluetoothProperty: RawRepresentable {
         
         public let rawValue: Int
         
@@ -997,7 +997,7 @@ public extension AndroidBluetoothGattCharacteristic {
         public static let writeNoResponse = AndroidBluetoothGattCharacteristic.Property(rawValue: AndroidBluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE)
     }
     
-    public struct AndroidBluetoothWriteType: RawRepresentable {
+    struct AndroidBluetoothWriteType: RawRepresentable {
         
         public let rawValue: Int
         
@@ -1021,7 +1021,7 @@ public extension AndroidBluetoothGattCharacteristic {
         public static let signed = AndroidBluetoothGattCharacteristic.WriteType(rawValue: AndroidBluetoothGattCharacteristic.WRITE_TYPE_SIGNED)
     }
     
-    public struct AndroidBluetoothFormatType: RawRepresentable {
+    struct AndroidBluetoothFormatType: RawRepresentable {
         
         public let rawValue: Int
         

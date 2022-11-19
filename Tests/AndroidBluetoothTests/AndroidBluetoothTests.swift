@@ -5,9 +5,4 @@ final class AndroidBluetoothTests: XCTestCase {
     func testExample() {
         
     }
-
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
 }

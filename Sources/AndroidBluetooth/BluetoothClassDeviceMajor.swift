@@ -12,7 +12,7 @@ import Android
 
 public extension AndroidBluetoothClassDevice {
     
-    public typealias Major = AndroidBluetoothClassDeviceMajor
+    typealias Major = AndroidBluetoothClassDeviceMajor
 }
 
 /**

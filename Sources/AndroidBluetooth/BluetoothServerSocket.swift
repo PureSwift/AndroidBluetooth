@@ -11,7 +11,7 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias ServerSocket = AndroidBluetoothServerSocket
+    typealias ServerSocket = AndroidBluetoothServerSocket
 }
 
 /**

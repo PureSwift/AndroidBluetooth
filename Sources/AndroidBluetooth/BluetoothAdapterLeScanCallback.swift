@@ -13,7 +13,7 @@ import Android
 
 public extension Android.Bluetooth.Adapter {
     
-    public typealias LeScanCallback = AndroidBluetoothAdapterLeScanCallback
+    typealias LeScanCallback = AndroidBluetoothAdapterLeScanCallback
 }
 
 /**
@@ -26,9 +26,9 @@ public protocol AndroidBluetoothAdapterLeScanCallback: JavaProtocol {
 
 // MARK: - Local Listener
 
-extension AndroidBluetoothAdapterLeScanCallback {
+public extension AndroidBluetoothAdapterLeScanCallback {
     
-    public func localJavaObject( _ locals: UnsafeMutablePointer<[jobject]> ) -> jobject? {
+    func localJavaObject( _ locals: UnsafeMutablePointer<[jobject]> ) -> jobject? {
         
         return AndroidBluetoothAdapterLeScanCallbackLocal( owned: self, proto: self ).localJavaObject( locals )
     }

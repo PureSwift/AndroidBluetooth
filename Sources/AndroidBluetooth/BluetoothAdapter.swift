@@ -13,13 +13,13 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias Adapter = AndroidBluetoothAdapter
+    typealias Adapter = AndroidBluetoothAdapter
 }
 
 public extension Android.Bluetooth.Adapter {
     
-    public typealias Action = AndroidBluetoothAdapterAction
-    public typealias Extra = AndroidBluetoothAdapterExtra
+    typealias Action = AndroidBluetoothAdapterAction
+    typealias Extra = AndroidBluetoothAdapterExtra
 }
 
 public final class AndroidBluetoothAdapter: JavaObject {
@@ -48,7 +48,7 @@ public final class AndroidBluetoothAdapter: JavaObject {
      *
      * - Returns: The default local adapter, or null if Bluetooth is not supported on this hardware platform.
      */
-    public static var `default`: Android.Bluetooth.Adapter? {
+    static var `default`: Android.Bluetooth.Adapter? {
     
         @inline(__always)
         get { return getDefaultAdapter() }
@@ -74,7 +74,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Cancel the current device discovery process.
      */
-    public func cancelDiscovery() -> Bool {
+    func cancelDiscovery() -> Bool {
         
         var __locals = [jobject]()
         
@@ -94,7 +94,7 @@ public extension Android.Bluetooth.Adapter {
      *
      * Alphabetic characters must be uppercase to be valid.
      */
-    public class func checkBluetoothAddress() -> Bool {
+    class func checkBluetoothAddress() -> Bool {
         
         var __locals = [jobject]()
         
@@ -113,7 +113,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Close the connection of the profile proxy to the Service.
      */
-    public func closeProfileProxy(profile: Int, proxy: JavaObject) {
+    func closeProfileProxy(profile: Int, proxy: JavaObject) {
         
         var __locals = [jobject]()
         
@@ -133,7 +133,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Turn off the local Bluetooth adapter—do not use without explicit user action to turn off Bluetooth.
      */
-    public func disable() -> Bool {
+    func disable() -> Bool {
         
         var __locals = [jobject]()
         
@@ -151,7 +151,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Turn on the local Bluetooth adapter—do not use without explicit user action to turn on Bluetooth.
      */
-    public func enable() -> Bool {
+    func enable() -> Bool {
         
         var __locals = [jobject]()
         
@@ -169,8 +169,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Returns the hardware address of the local Bluetooth adapter.
      */
-    @_versioned
-    internal func getAddress() -> String {
+    func getAddress() -> String {
         
         var __locals = [jobject]()
         
@@ -191,7 +190,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Returns a BluetoothLeAdvertiser object for Bluetooth LE Advertising operations.
      */
-    public func getBluetoothLeAdvertiser() -> Android.Bluetooth.LE.Advertiser {
+    func getBluetoothLeAdvertiser() -> Android.Bluetooth.LE.Advertiser {
         
         var __locals = [jobject]()
         
@@ -212,8 +211,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Returns a BluetoothLeScanner object for Bluetooth LE scan operations.
      */
-    @_versioned
-    internal func getBluetoothLeScanner() -> Android.Bluetooth.LE.Scanner? {
+    func getBluetoothLeScanner() -> Android.Bluetooth.LE.Scanner? {
         
         var __locals = [jobject]()
         
@@ -234,7 +232,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Returns a BluetoothLeScanner object for Bluetooth LE scan operations.
      */
-    public func getBondedDevices() -> JavaSet {
+    func getBondedDevices() -> JavaSet {
         
         var __locals = [jobject]()
         
@@ -261,8 +259,7 @@ public extension Android.Bluetooth.Adapter {
      *
      * - Returns: The default local adapter, or null if Bluetooth is not supported on this hardware platform.
      */
-    @_versioned
-    internal static func getDefaultAdapter() -> Android.Bluetooth.Adapter? {
+    static func getDefaultAdapter() -> Android.Bluetooth.Adapter? {
         
         var __locals = [jobject]()
         
@@ -287,7 +284,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Return the maximum LE advertising data length in bytes, if LE Extended Advertising feature is supported, 0 otherwise.
      */
-    public func getLeMaximumAdvertisingDataLength() -> Int {
+    func getLeMaximumAdvertisingDataLength() -> Int {
         
         var __locals = [jobject]()
         
@@ -305,7 +302,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Get the friendly Bluetooth name of the local Bluetooth adapter.
      */
-    public func getName() -> String {
+    func getName() -> String {
         
         var __locals = [jobject]()
         
@@ -326,7 +323,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Get the current connection state of a profile.
      */
-    public func getProfileConnectionState(profile: Int) -> Int {
+    func getProfileConnectionState(profile: Int) -> Int {
         
         var __locals = [jobject]()
         
@@ -345,7 +342,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Get the profile proxy object associated with the profile.
      */
-    public func getProfileProxy(context: Android.Content.Context, listener: JavaObject, profile: Int) -> Bool {
+    func getProfileProxy(context: Android.Content.Context, listener: JavaObject, profile: Int) -> Bool {
         
         var __locals = [jobject]()
         
@@ -367,7 +364,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Get a BluetoothDevice object for the given Bluetooth hardware address.
      */
-    public func getRemoteDevice(address: [Int8]) -> Android.Bluetooth.Device {
+    func getRemoteDevice(address: [Int8]) -> Android.Bluetooth.Device {
         
         var __locals = [jobject]()
         
@@ -390,7 +387,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Get a BluetoothDevice object for the given Bluetooth hardware address.
      */
-    public func getRemoteDevice(address: String) -> Android.Bluetooth.Device {
+    func getRemoteDevice(address: String) -> Android.Bluetooth.Device {
         
         var __locals = [jobject]()
         
@@ -413,7 +410,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Get the current Bluetooth scan mode of the local Bluetooth adapter.
      */
-    public func getScanMode() -> Int {
+    func getScanMode() -> Int {
         
         var __locals = [jobject]()
         
@@ -431,7 +428,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Get the current state of the local Bluetooth adapter.
      */
-    public func getState() -> Int {
+    func getState() -> Int {
         
         var __locals = [jobject]()
         
@@ -503,7 +500,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Return true if LE Coded PHY feature is supported.
      */
-    public func isLeCodedPhySupported() -> Bool {
+    func isLeCodedPhySupported() -> Bool {
         
         var __locals = [jobject]()
         
@@ -521,7 +518,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Return true if LE Extended Advertising feature is supported.
      */
-    public func isLeExtendedAdvertisingSupported() -> Bool {
+    func isLeExtendedAdvertisingSupported() -> Bool {
         
         var __locals = [jobject]()
         
@@ -539,7 +536,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Return true if LE Periodic Advertising feature is supported.
      */
-    public func isLePeriodicAdvertisingSupported() -> Bool {
+    func isLePeriodicAdvertisingSupported() -> Bool {
         
         var __locals = [jobject]()
         
@@ -557,7 +554,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Return true if the multi advertisement is supported by the chipset.
      */
-    public func isMultipleAdvertisementSupported() -> Bool {
+    func isMultipleAdvertisementSupported() -> Bool {
         
         var __locals = [jobject]()
         
@@ -575,7 +572,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Return true if offloaded filters are supported.
      */
-    public func isOffloadedFilteringSupported() -> Bool {
+    func isOffloadedFilteringSupported() -> Bool {
         
         var __locals = [jobject]()
         
@@ -593,7 +590,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Return true if offloaded scan batching is supported.
      */
-    public func isOffloadedScanBatchingSupported() -> Bool {
+    func isOffloadedScanBatchingSupported() -> Bool {
         
         var __locals = [jobject]()
         
@@ -611,7 +608,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Create a listening, insecure RFCOMM Bluetooth socket with Service Record.
      */
-    public func listenUsingInsecureRfcommWithServiceRecord(name: String, uuid: java_util.UUID) -> Android.Bluetooth.ServerSocket {
+    func listenUsingInsecureRfcommWithServiceRecord(name: String, uuid: java_util.UUID) -> Android.Bluetooth.ServerSocket {
         
         var __locals = [jobject]()
         
@@ -635,7 +632,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Create a listening, secure RFCOMM Bluetooth socket with Service Record.
      */
-    public func listenUsingRfcommWithServiceRecord(name: String, uuid: java_util.UUID) -> Android.Bluetooth.ServerSocket {
+    func listenUsingRfcommWithServiceRecord(name: String, uuid: java_util.UUID) -> Android.Bluetooth.ServerSocket {
         
         var __locals = [jobject]()
         
@@ -659,7 +656,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Set the friendly Bluetooth name of the local Bluetooth adapter.
      */
-    public func setName(name: String) -> Bool {
+    func setName(name: String) -> Bool {
         
         var __locals = [jobject]()
         
@@ -679,7 +676,7 @@ public extension Android.Bluetooth.Adapter {
     /**
      * Start the remote device discovery process.
      */
-    public func startDiscovery() -> Bool {
+    func startDiscovery() -> Bool {
         
         var __locals = [jobject]()
         
@@ -700,7 +697,7 @@ public extension Android.Bluetooth.Adapter {
 internal extension Android.Bluetooth.Adapter {
     
     /// Intent used to broadcast the change in connection state of the local Bluetooth adapter to a profile of the remote device.
-    internal static var ACTION_CONNECTION_STATE_CHANGED: String {
+    static var ACTION_CONNECTION_STATE_CHANGED: String {
         
         get {
             
@@ -718,7 +715,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Broadcast Action: The local Bluetooth adapter has finished the device discovery process.
-    internal static var ACTION_DISCOVERY_FINISHED: String {
+    static var ACTION_DISCOVERY_FINISHED: String {
         
         get {
             
@@ -736,7 +733,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Broadcast Action: The local Bluetooth adapter has started the remote device discovery process.
-    internal static var ACTION_DISCOVERY_STARTED: String {
+    static var ACTION_DISCOVERY_STARTED: String {
         
         get {
             
@@ -754,7 +751,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Broadcast Action: The local Bluetooth adapter has changed its friendly Bluetooth name.
-    internal static var ACTION_LOCAL_NAME_CHANGED: String {
+    static var ACTION_LOCAL_NAME_CHANGED: String {
         
         get {
             
@@ -772,7 +769,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Activity Action: Show a system activity that requests discoverable mode.
-    internal static var ACTION_REQUEST_DISCOVERABLE: String {
+    static var ACTION_REQUEST_DISCOVERABLE: String {
         
         get {
             
@@ -790,7 +787,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Activity Action: Show a system activity that allows the user to turn on Bluetooth.
-    internal static var ACTION_REQUEST_ENABLE: String {
+    static var ACTION_REQUEST_ENABLE: String {
         
         get {
             
@@ -808,7 +805,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Broadcast Action: Indicates the Bluetooth scan mode of the local Adapter has changed.
-    internal static var ACTION_SCAN_MODE_CHANGED: String {
+    static var ACTION_SCAN_MODE_CHANGED: String {
         
         get {
             
@@ -826,7 +823,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Broadcast Action: The state of the local Bluetooth adapter has been changed.
-    internal static var ACTION_STATE_CHANGED: String {
+    static var ACTION_STATE_CHANGED: String {
         
         get {
             
@@ -844,7 +841,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Sentinel error value for this class.
-    internal static var ERROR: Int {
+    static var ERROR: Int {
         
         get {
             
@@ -860,7 +857,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Extra used by ACTION_CONNECTION_STATE_CHANGED This extra represents the current connection state.
-    internal static var EXTRA_CONNECTION_STATE: String {
+    static var EXTRA_CONNECTION_STATE: String {
         
         get {
             
@@ -878,7 +875,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Used as an optional int extra field in ACTION_REQUEST_DISCOVERABLE intents to request a specific duration for discoverability in seconds.
-    internal static var EXTRA_DISCOVERABLE_DURATION: String {
+    static var EXTRA_DISCOVERABLE_DURATION: String {
         
         get {
             
@@ -896,7 +893,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Used as a String extra field in ACTION_LOCAL_NAME_CHANGED intents to request the local Bluetooth name.
-    internal static var EXTRA_LOCAL_NAME: String {
+    static var EXTRA_LOCAL_NAME: String {
         
         get {
             
@@ -914,7 +911,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Extra used by ACTION_CONNECTION_STATE_CHANGED This extra represents the previous connection state.
-    internal static var EXTRA_PREVIOUS_CONNECTION_STATE: String {
+    static var EXTRA_PREVIOUS_CONNECTION_STATE: String {
         
         get {
             
@@ -932,7 +929,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Used as an int extra field in ACTION_SCAN_MODE_CHANGED intents to request the previous scan mode.
-    internal static var EXTRA_PREVIOUS_SCAN_MODE: String {
+    static var EXTRA_PREVIOUS_SCAN_MODE: String {
         
         get {
             
@@ -950,7 +947,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Used as an int extra field in ACTION_STATE_CHANGED intents to request the previous power state.
-    internal static var EXTRA_PREVIOUS_STATE: String {
+    static var EXTRA_PREVIOUS_STATE: String {
         
         get {
             
@@ -968,7 +965,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Used as an int extra field in ACTION_SCAN_MODE_CHANGED intents to request the current scan mode.
-    internal static var EXTRA_SCAN_MODE: String {
+    static var EXTRA_SCAN_MODE: String {
         
         get {
             
@@ -986,7 +983,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Used as an int extra field in ACTION_STATE_CHANGED intents to request the current power state.
-    internal static var EXTRA_STATE: String {
+    static var EXTRA_STATE: String {
         
         get {
             
@@ -1004,7 +1001,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Indicates that inquiry scan is disabled, but page scan is enabled on the local Bluetooth adapter.
-    internal static var SCAN_MODE_CONNECTABLE: Int {
+    static var SCAN_MODE_CONNECTABLE: Int {
         
         get {
             
@@ -1020,7 +1017,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Indicates that both inquiry scan and page scan are enabled on the local Bluetooth adapter.
-    internal static var SCAN_MODE_CONNECTABLE_DISCOVERABLE: Int {
+    static var SCAN_MODE_CONNECTABLE_DISCOVERABLE: Int {
         
         get {
             
@@ -1036,7 +1033,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Indicates that both inquiry scan and page scan are disabled on the local Bluetooth adapter.
-    internal static var SCAN_MODE_NONE: Int {
+    static var SCAN_MODE_NONE: Int {
         
         get {
             
@@ -1052,7 +1049,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// The profile is in connected state
-    internal static var STATE_CONNECTED: Int {
+    static var STATE_CONNECTED: Int {
         
         get {
             
@@ -1068,7 +1065,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// The profile is in connecting state
-    internal static var STATE_CONNECTING: Int {
+    static var STATE_CONNECTING: Int {
         
         get {
             
@@ -1084,7 +1081,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// The profile is in disconnected state
-    internal static var STATE_DISCONNECTED: Int {
+    static var STATE_DISCONNECTED: Int {
         
         get {
             
@@ -1100,7 +1097,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// The profile is in disconnecting state
-    internal static var STATE_DISCONNECTING: Int {
+    static var STATE_DISCONNECTING: Int {
         
         get {
             
@@ -1116,7 +1113,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Indicates the local Bluetooth adapter is off.
-    internal static var STATE_OFF: Int {
+    static var STATE_OFF: Int {
         
         get {
             
@@ -1132,7 +1129,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Indicates the local Bluetooth adapter is on, and ready for use.
-    internal static var STATE_ON: Int {
+    static var STATE_ON: Int {
         
         get {
             
@@ -1148,7 +1145,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Indicates the local Bluetooth adapter is turning off.
-    internal static var STATE_TURNING_OFF: Int {
+    static var STATE_TURNING_OFF: Int {
         
         get {
             
@@ -1164,7 +1161,7 @@ internal extension Android.Bluetooth.Adapter {
     }
     
     /// Indicates the local Bluetooth adapter is turning on.
-    internal static var STATE_TURNING_ON: Int {
+    static var STATE_TURNING_ON: Int {
         
         get {
             
@@ -1185,7 +1182,7 @@ internal extension Android.Bluetooth.Adapter {
 public extension Android.Bluetooth.Adapter {
     
     /// Adapter Action
-    public struct AndroidBluetoothAdapterAction: RawRepresentable {
+    struct AndroidBluetoothAdapterAction: RawRepresentable {
         
         public let rawValue: String
         
@@ -1211,7 +1208,7 @@ public extension Android.Bluetooth.Adapter {
     }
     
     /// Adapter Action
-    public struct AndroidBluetoothAdapterExtra: RawRepresentable {
+    struct AndroidBluetoothAdapterExtra: RawRepresentable {
         
         public let rawValue: String
         

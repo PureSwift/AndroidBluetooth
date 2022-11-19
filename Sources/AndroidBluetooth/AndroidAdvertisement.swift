@@ -7,6 +7,7 @@
 
 import Foundation
 import Bluetooth
+import BluetoothGAP
 import GATT
 
 /// Android's BLE Advertisement data
@@ -19,7 +20,7 @@ public struct AndroidLowEnergyAdvertisementData: Equatable {
     }
 }
 
-extension AndroidLowEnergyAdvertisementData: AdvertisementDataProtocol {
+extension AndroidLowEnergyAdvertisementData: AdvertisementData {
     
     /// Decode GAP data types.
     private func decode() -> [GAPData] {
@@ -71,6 +72,9 @@ extension AndroidLowEnergyAdvertisementData: AdvertisementDataProtocol {
         decoded.compactMap { $0 as? GAPServiceData128BitUUID }
             .forEach { serviceData[.bit128(UInt128(uuid: $0.uuid))] = $0.serviceData }
         
+        guard serviceData.isEmpty == false
+            else { return nil }
+        
         return serviceData
     }
     
@@ -109,6 +113,9 @@ extension AndroidLowEnergyAdvertisementData: AdvertisementDataProtocol {
             .compactMap { $0 as? GAPIncompleteListOf128BitServiceClassUUIDs }
             .reduce([BluetoothUUID](), { $0 + $1.uuids.map { BluetoothUUID(uuid: $0) } })
         
+        guard uuids.isEmpty == false
+            else { return nil }
+        
         return uuids
     }
     
@@ -143,6 +150,9 @@ extension AndroidLowEnergyAdvertisementData: AdvertisementDataProtocol {
         
         decoded.compactMap { $0 as? GAPListOf128BitServiceSolicitationUUIDs }
             .forEach { $0.uuids.forEach { uuids.append(.bit128(UInt128(uuid: $0))) } }
+        
+        guard uuids.isEmpty == false
+            else { return nil }
         
         return uuids
     }

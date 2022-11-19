@@ -13,12 +13,12 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias AdvertisingSetCallback = AndroidBluetoothLowEnergyAdvertisingSetCallback
+    typealias AdvertisingSetCallback = AndroidBluetoothLowEnergyAdvertisingSetCallback
 }
 
 public extension Android.Bluetooth.LE.AdvertisingSetCallback {
     
-    public typealias Status = AndroidBluetoothLowEnergyAdvertisingStatus
+    typealias Status = AndroidBluetoothLowEnergyAdvertisingStatus
 }
 
 /// Bluetooth LE advertising set callbacks, used to deliver advertising operation status.
@@ -119,7 +119,7 @@ public struct AndroidBluetoothLowEnergyAdvertisingStatus: RawRepresentable {
 internal class AndroidBluetoothLowEnergyAdvertisingSetCallbackConstants {
     
     /// Failed to start advertising as the advertising is already started.
-    internal static var ADVERTISE_FAILED_ALREADY_STARTED: Int {
+    static var ADVERTISE_FAILED_ALREADY_STARTED: Int {
         
         get {
             
@@ -135,7 +135,7 @@ internal class AndroidBluetoothLowEnergyAdvertisingSetCallbackConstants {
     }
     
     /// Failed to start advertising as the advertise data to be broadcasted is too large.
-    internal static var ADVERTISE_FAILED_DATA_TOO_LARGE: Int {
+    static var ADVERTISE_FAILED_DATA_TOO_LARGE: Int {
         
         get {
             
@@ -151,7 +151,7 @@ internal class AndroidBluetoothLowEnergyAdvertisingSetCallbackConstants {
     }
     
     /// This feature is not supported on this platform.
-    internal static var ADVERTISE_FAILED_FEATURE_UNSUPPORTED: Int {
+    static var ADVERTISE_FAILED_FEATURE_UNSUPPORTED: Int {
         
         get {
             
@@ -168,7 +168,7 @@ internal class AndroidBluetoothLowEnergyAdvertisingSetCallbackConstants {
     
     
     /// Operation failed due to an internal error.
-    internal static var ADVERTISE_FAILED_INTERNAL_ERROR: Int {
+    static var ADVERTISE_FAILED_INTERNAL_ERROR: Int {
         
         get {
             
@@ -184,7 +184,7 @@ internal class AndroidBluetoothLowEnergyAdvertisingSetCallbackConstants {
     }
     
     /// Failed to start advertising because no advertising instance is available.
-    internal static var ADVERTISE_FAILED_TOO_MANY_ADVERTISERS: Int {
+    static var ADVERTISE_FAILED_TOO_MANY_ADVERTISERS: Int {
         
         get {
             
@@ -200,7 +200,7 @@ internal class AndroidBluetoothLowEnergyAdvertisingSetCallbackConstants {
     }
     
     /// The requested operation was successful.
-    internal static var ADVERTISE_SUCCESS: Int {
+    static var ADVERTISE_SUCCESS: Int {
         
         get {
             

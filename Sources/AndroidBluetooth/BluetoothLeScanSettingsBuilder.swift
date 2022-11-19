@@ -12,7 +12,7 @@ import Android
 
 public extension Android.Bluetooth.LE.ScanSettings {
     
-    public typealias Builder = AndroidBluetoothLowEnergyScanSettingsBuilder
+    typealias Builder = AndroidBluetoothLowEnergyScanSettingsBuilder
 }
 
 // android.bluetooth.le.ScanSettings.Builder
@@ -67,7 +67,7 @@ public extension Android.Bluetooth.LE.ScanSettings.Builder {
     
     private static var build_MethodID: jmethodID?
     /// Build ScanSettings.
-    public func build() -> Android.Bluetooth.LE.ScanSettings {
+    func build() -> Android.Bluetooth.LE.ScanSettings {
         
         var __locals = [jobject]()
         
@@ -87,7 +87,7 @@ public extension Android.Bluetooth.LE.ScanSettings.Builder {
     
     private static var setCallbackType_MethodID: jmethodID?
     /// Set callback type for Bluetooth LE scan.
-    public func setCallbackType(callbackType: Android.Bluetooth.LE.ScanSettings.CallbackType) -> Android.Bluetooth.LE.ScanSettings.Builder {
+    func setCallbackType(callbackType: Android.Bluetooth.LE.ScanSettings.CallbackType) -> Android.Bluetooth.LE.ScanSettings.Builder {
         
         var __locals = [jobject]()
         
@@ -120,7 +120,7 @@ public extension Android.Bluetooth.LE.ScanSettings.Builder {
     /// Set whether only legacy advertisments should be returned in scan results. Legacy advertisements include
     /// advertisements as specified by the Bluetooth core specification 4.2 and below. This is true by default for compatibility
     /// with older apps.
-    public func setLegacy(legacy: Bool) -> Android.Bluetooth.LE.ScanSettings.Builder {
+    func setLegacy(legacy: Bool) -> Android.Bluetooth.LE.ScanSettings.Builder {
         
         var __locals = [jobject]()
         
@@ -151,7 +151,7 @@ public extension Android.Bluetooth.LE.ScanSettings.Builder {
     private static var setMatchMode_MethodID: jmethodID?
     
     /// Set match mode for Bluetooth LE scan filters hardware match
-    public func setMatchMode(matchMode: Android.Bluetooth.LE.ScanSettings.MatchMode) -> Android.Bluetooth.LE.ScanSettings.Builder {
+    func setMatchMode(matchMode: Android.Bluetooth.LE.ScanSettings.MatchMode) -> Android.Bluetooth.LE.ScanSettings.Builder {
         
         var __locals = [jobject]()
         
@@ -181,7 +181,7 @@ public extension Android.Bluetooth.LE.ScanSettings.Builder {
     
     private static var setNumOfMatches_MethodID: jmethodID?
     
-    public func setNumOfMatches(numOfMatches: Android.Bluetooth.LE.ScanSettings.MatchNum) -> Android.Bluetooth.LE.ScanSettings.Builder {
+    func setNumOfMatches(numOfMatches: Android.Bluetooth.LE.ScanSettings.MatchNum) -> Android.Bluetooth.LE.ScanSettings.Builder {
         
         var __locals = [jobject]()
         
@@ -211,7 +211,7 @@ public extension Android.Bluetooth.LE.ScanSettings.Builder {
     
     private static var setPhy_MethodID: jmethodID?
     
-    public func setPhy(phy: Android.Bluetooth.LE.ScanSettings.Phy) -> Android.Bluetooth.LE.ScanSettings.Builder {
+    func setPhy(phy: Android.Bluetooth.LE.ScanSettings.Phy) -> Android.Bluetooth.LE.ScanSettings.Builder {
         
         var __locals = [jobject]()
         
@@ -241,7 +241,7 @@ public extension Android.Bluetooth.LE.ScanSettings.Builder {
     
     private static var setReportDelay_MethodID: jmethodID?
     
-    public func setReportDelay(reportDelayMillis: Int64) -> Android.Bluetooth.LE.ScanSettings.Builder {
+    func setReportDelay(reportDelayMillis: Int64) -> Android.Bluetooth.LE.ScanSettings.Builder {
         
         var __locals = [jobject]()
         
@@ -272,7 +272,7 @@ public extension Android.Bluetooth.LE.ScanSettings.Builder {
     private static var setScanMode_MethodID: jmethodID?
     
     // Set scan mode for Bluetooth LE scan.
-    public func setScanMode(_ scanMode: Android.Bluetooth.LE.ScanSettings.ScanMode) -> Android.Bluetooth.LE.ScanSettings.Builder {
+    func setScanMode(_ scanMode: Android.Bluetooth.LE.ScanSettings.ScanMode) -> Android.Bluetooth.LE.ScanSettings.Builder {
         
         var __locals = [jobject]()
         

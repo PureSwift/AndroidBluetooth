@@ -11,7 +11,7 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias PeriodicAdvertisingParameters = AndroidBluetoothLowEnergyPeriodicAdvertisingParameters
+    typealias PeriodicAdvertisingParameters = AndroidBluetoothLowEnergyPeriodicAdvertisingParameters
 }
 
 /**
@@ -50,8 +50,8 @@ public final class AndroidBluetoothLowEnergyPeriodicAdvertisingParameters: JavaO
 
 internal extension Android.Bluetooth.LE.PeriodicAdvertisingParameters {
     
-    @_versioned
-    internal func getIncludeTxPower() -> Bool {
+    @usableFromInline
+    func getIncludeTxPower() -> Bool {
         
         var __locals = [jobject]()
         
@@ -66,8 +66,8 @@ internal extension Android.Bluetooth.LE.PeriodicAdvertisingParameters {
         return __return != jboolean(JNI_FALSE)
     }
     
-    @_versioned
-    internal func getInterval() -> Int {
+    @usableFromInline
+    func getInterval() -> Int {
         
         var __locals = [jobject]()
         

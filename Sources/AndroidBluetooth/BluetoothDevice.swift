@@ -13,18 +13,18 @@ import Bluetooth
 
 public extension Android.Bluetooth {
     
-    public typealias Device = AndroidBluetoothDevice
+    typealias Device = AndroidBluetoothDevice
 }
 
 public extension Android.Bluetooth.Device {
     
-    public typealias DeviceType = AndroidBluetoothLowEnergyDeviceType
+    typealias DeviceType = AndroidBluetoothLowEnergyDeviceType
     
-    public typealias BondState = AndroidBluetoothLowEnergyBondState
+    typealias BondState = AndroidBluetoothLowEnergyBondState
     
-    public typealias State = AndroidBluetoothLowEnergyState
+    typealias State = AndroidBluetoothLowEnergyState
     
-    public typealias Transport = AndroidBluetoothLowEnergyDeviceTransportType
+    typealias Transport = AndroidBluetoothLowEnergyDeviceTransportType
 }
 
 public final class AndroidBluetoothDevice: JavaObject {
@@ -68,7 +68,7 @@ public final class AndroidBluetoothDevice: JavaObject {
 public extension Android.Bluetooth.Device {
     
     /// Broadcast Action: Indicates a low level (ACL) connection has been established with a remote device.
-    internal static var ACTION_ACL_CONNECTED: String {
+    static var ACTION_ACL_CONNECTED: String {
         
         get {
             
@@ -84,7 +84,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Broadcast Action: Indicates a low level (ACL) disconnection from a remote device.
-    internal static var ACTION_ACL_DISCONNECTED: String {
+    static var ACTION_ACL_DISCONNECTED: String {
         
         get {
             
@@ -100,7 +100,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Broadcast Action: Indicates that a low level (ACL) disconnection has been requested for a remote device, and it will soon be disconnected.
-    internal static var ACTION_ACL_DISCONNECT_REQUESTED: String {
+    static var ACTION_ACL_DISCONNECT_REQUESTED: String {
         
         get {
             
@@ -116,7 +116,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Broadcast Action: Indicates a change in the bond state of a remote device. For example, if a device is bonded (paired).
-    internal static var ACTION_BOND_STATE_CHANGED: String {
+    static var ACTION_BOND_STATE_CHANGED: String {
         
         get {
             
@@ -132,7 +132,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Broadcast Action: Bluetooth class of a remote device has changed.
-    internal static var ACTION_CLASS_CHANGED: String {
+    static var ACTION_CLASS_CHANGED: String {
         
         get {
             
@@ -148,7 +148,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Broadcast Action: Remote device discovered.
-    internal static var ACTION_FOUND: String {
+    static var ACTION_FOUND: String {
         
         get {
             
@@ -164,7 +164,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Broadcast Action: Indicates the friendly name of a remote device has been retrieved for the first time, or changed since the last retrieval.
-    internal static var ACTION_NAME_CHANGED: String {
+    static var ACTION_NAME_CHANGED: String {
         
         get {
             
@@ -180,7 +180,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Broadcast Action: This intent is used to broadcast PAIRING REQUEST
-    internal static var ACTION_PAIRING_REQUEST: String {
+    static var ACTION_PAIRING_REQUEST: String {
         
         get {
             
@@ -197,7 +197,7 @@ public extension Android.Bluetooth.Device {
     
     /// Broadcast Action: This intent is used to broadcast the UUID wrapped as a ParcelUuid of the remote device after it has been fetched.
     /// This intent is sent only when the UUIDs of the remote device are requested to be fetched using Service Discovery Protocol.
-    internal static var ACTION_UUID: String {
+    static var ACTION_UUID: String {
         
         get {
             
@@ -213,7 +213,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// A shared link keys exists locally for the remote device, so communication can be authenticated and encrypted.
-    internal static var BOND_BONDED: Int {
+    static var BOND_BONDED: Int {
         
         get {
             
@@ -229,7 +229,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Indicates bonding (pairing) is in progress with the remote device.
-    internal static var BOND_BONDING: Int {
+    static var BOND_BONDING: Int {
         
         get {
             
@@ -245,7 +245,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Indicates the remote device is not bonded (paired).
-    internal static var BOND_NONE: Int {
+    static var BOND_NONE: Int {
         
         get {
             
@@ -261,7 +261,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Bluetooth device type, Classic - BR/EDR devices
-    internal static var DEVICE_TYPE_CLASSIC: Int {
+    static var DEVICE_TYPE_CLASSIC: Int {
         
         get {
             
@@ -277,7 +277,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Bluetooth device type, Dual Mode - BR/EDR/LE
-    internal static var DEVICE_TYPE_DUAL: Int {
+    static var DEVICE_TYPE_DUAL: Int {
         
         get {
             
@@ -293,7 +293,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Bluetooth device type, Low Energy - LE-only
-    internal static var DEVICE_TYPE_LE: Int {
+    static var DEVICE_TYPE_LE: Int {
         
         get {
             
@@ -309,7 +309,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Bluetooth device type, Unknown
-    internal static var DEVICE_TYPE_UNKNOWN: Int {
+    static var DEVICE_TYPE_UNKNOWN: Int {
         
         get {
             
@@ -327,7 +327,7 @@ public extension Android.Bluetooth.Device {
     /// Sentinel error value for this class. Guaranteed to not equal any other integer constant in this class.
     /// Provided as a convenience for functions that require a sentinel error value, for example:
     /// Intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR)
-    internal static var ERROR: Int {
+    static var ERROR: Int {
         
         get {
             
@@ -343,7 +343,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Used as an int extra field in ACTION_BOND_STATE_CHANGED intents. Contains the bond state of the remote device.
-    internal static var EXTRA_BOND_STATE: String {
+    static var EXTRA_BOND_STATE: String {
         
         get {
             
@@ -359,7 +359,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Used as a Parcelable BluetoothClass extra field in ACTION_FOUND and ACTION_CLASS_CHANGED intents.
-    internal static var EXTRA_CLASS: String {
+    static var EXTRA_CLASS: String {
         
         get {
             
@@ -375,7 +375,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Used as a Parcelable BluetoothDevice extra field in every intent broadcast by this class. It contains the BluetoothDevice that the intent applies to.
-    internal static var EXTRA_DEVICE: String {
+    static var EXTRA_DEVICE: String {
         
         get {
             
@@ -391,7 +391,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Used as a String extra field in ACTION_NAME_CHANGED and ACTION_FOUND intents. It contains the friendly Bluetooth name.
-    internal static var EXTRA_NAME: String {
+    static var EXTRA_NAME: String {
         
         get {
             
@@ -407,7 +407,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Used as an int extra field in ACTION_PAIRING_REQUEST intents as the value of passkey.
-    internal static var EXTRA_PAIRING_KEY: String {
+    static var EXTRA_PAIRING_KEY: String {
         
         get {
             
@@ -423,7 +423,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Used as an int extra field in ACTION_PAIRING_REQUEST intents to indicate pairing method used. Possible values are: PAIRING_VARIANT_PIN, PAIRING_VARIANT_PASSKEY_CONFIRMATION,
-    internal static var EXTRA_PAIRING_VARIANT: String {
+    static var EXTRA_PAIRING_VARIANT: String {
         
         get {
             
@@ -439,7 +439,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Used as an int extra field in ACTION_BOND_STATE_CHANGED intents. Contains the previous bond state of the remote device.
-    internal static var EXTRA_PREVIOUS_BOND_STATE: String {
+    static var EXTRA_PREVIOUS_BOND_STATE: String {
         
         get {
             
@@ -455,7 +455,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Used as an optional short extra field in ACTION_FOUND intents. Contains the RSSI value of the remote device as reported by the Bluetooth hardware.
-    internal static var EXTRA_RSSI: String {
+    static var EXTRA_RSSI: String {
         
         get {
             
@@ -471,7 +471,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Used as an extra field in ACTION_UUID intents, Contains the ParcelUuids of the remote device which is a parcelable version of UUID.
-    internal static var EXTRA_UUID: String {
+    static var EXTRA_UUID: String {
         
         get {
             
@@ -487,7 +487,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// The user will be prompted to confirm the passkey displayed on the screen or an app will confirm the passkey for the user.
-    internal static var PAIRING_VARIANT_PASSKEY_CONFIRMATION: Int {
+    static var PAIRING_VARIANT_PASSKEY_CONFIRMATION: Int {
         
         get {
             
@@ -503,7 +503,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// The user will be prompted to enter a pin or an app will enter a pin for user.
-    internal static var PAIRING_VARIANT_PIN: Int {
+    static var PAIRING_VARIANT_PIN: Int {
         
         get {
             
@@ -519,7 +519,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Bluetooth LE 1M PHY.
-    internal static var PHY_LE_1M: Int {
+    static var PHY_LE_1M: Int {
         
         get {
             
@@ -535,7 +535,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Bluetooth LE 1M PHY mask.
-    internal static var PHY_LE_1M_MASK: Int {
+    static var PHY_LE_1M_MASK: Int {
         
         get {
             
@@ -551,7 +551,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Bluetooth LE 2M PHY.
-    internal static var PHY_LE_2M: Int {
+    static var PHY_LE_2M: Int {
         
         get {
             
@@ -567,7 +567,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Bluetooth LE 2M PHY mask.
-    internal static var PHY_LE_2M_MASK: Int {
+    static var PHY_LE_2M_MASK: Int {
         
         get {
             
@@ -583,7 +583,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Bluetooth LE Coded PHY.
-    internal static var PHY_LE_CODED: Int {
+    static var PHY_LE_CODED: Int {
         
         get {
             
@@ -599,7 +599,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Bluetooth LE Coded PHY mask.
-    internal static var PHY_LE_CODED_MASK: Int {
+    static var PHY_LE_CODED_MASK: Int {
         
         get {
             
@@ -615,7 +615,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// No preferred coding when transmitting on the LE Coded PHY.
-    internal static var PHY_OPTION_NO_PREFERRED: Int {
+    static var PHY_OPTION_NO_PREFERRED: Int {
         
         get {
             
@@ -631,7 +631,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Prefer the S=2 coding to be used when transmitting on the LE Coded PHY.
-    internal static var PHY_OPTION_S2: Int {
+    static var PHY_OPTION_S2: Int {
         
         get {
             
@@ -647,7 +647,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Prefer the S=8 coding to be used when transmitting on the LE Coded PHY.
-    internal static var PHY_OPTION_S8: Int {
+    static var PHY_OPTION_S8: Int {
         
         get {
             
@@ -663,7 +663,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// No preferrence of physical transport for GATT connections to remote dual-mode devices
-    internal static var TRANSPORT_AUTO: Int {
+    static var TRANSPORT_AUTO: Int {
         
         get {
             
@@ -679,7 +679,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Prefer BR/EDR transport for GATT connections to remote dual-mode devices
-    internal static var TRANSPORT_BREDR: Int {
+    static var TRANSPORT_BREDR: Int {
         
         get {
             
@@ -695,7 +695,7 @@ public extension Android.Bluetooth.Device {
     }
     
     /// Prefer LE transport for GATT connections to remote dual-mode devices
-    internal static var TRANSPORT_LE: Int {
+    static var TRANSPORT_LE: Int {
         
         get {
             
@@ -718,7 +718,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Connect to GATT Server hosted by this device.
      */
-    public func connectGatt(context: Android.Content.Context, autoConnect: Bool, callback: Android.Bluetooth.GattCallback) -> Android.Bluetooth.Gatt {
+    func connectGatt(context: Android.Content.Context, autoConnect: Bool, callback: Android.Bluetooth.GattCallback) -> Android.Bluetooth.Gatt {
         
         var __locals = [jobject]()
         
@@ -743,7 +743,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Connect to GATT Server hosted by this device.
      */
-    public func connectGatt(context: Android.Content.Context, autoConnect: Bool, callback: Android.Bluetooth.GattCallback, transport: Android.Bluetooth.Device.Transport, phy: Int, handler: JavaObject) -> Android.Bluetooth.Gatt {
+    func connectGatt(context: Android.Content.Context, autoConnect: Bool, callback: Android.Bluetooth.GattCallback, transport: Android.Bluetooth.Device.Transport, phy: Int, handler: JavaObject) -> Android.Bluetooth.Gatt {
         
         var __locals = [jobject]()
         
@@ -771,7 +771,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Connect to GATT Server hosted by this device.
      */
-    public func connectGatt(context: Android.Content.Context, autoConnect: Bool, callback: Android.Bluetooth.GattCallback, transport: Android.Bluetooth.Device.Transport, phy: Int) -> Android.Bluetooth.Gatt {
+    func connectGatt(context: Android.Content.Context, autoConnect: Bool, callback: Android.Bluetooth.GattCallback, transport: Android.Bluetooth.Device.Transport, phy: Int) -> Android.Bluetooth.Gatt {
         
         var __locals = [jobject]()
         
@@ -798,7 +798,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Connect to GATT Server hosted by this device.
      */
-    public func connectGatt(context: Android.Content.Context, autoConnect: Bool, callback: Android.Bluetooth.GattCallback, transport: Android.Bluetooth.Device.Transport) -> Android.Bluetooth.Gatt {
+    func connectGatt(context: Android.Content.Context, autoConnect: Bool, callback: Android.Bluetooth.GattCallback, transport: Android.Bluetooth.Device.Transport) -> Android.Bluetooth.Gatt {
         
         var __locals = [jobject]()
         
@@ -824,7 +824,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Start the bonding (pairing) process with the remote device.
      */
-    public func createBond() -> Bool {
+    func createBond() -> Bool {
         
         var __locals = [jobject]()
         
@@ -842,7 +842,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Create an RFCOMM BluetoothSocket socket ready to start an insecure outgoing connection to this remote device using SDP lookup of uuid.
      */
-    public func createInsecureRfcommSocketToServiceRecord(uuid: java_util.UUID) -> Android.Bluetooth.Socket {
+    func createInsecureRfcommSocketToServiceRecord(uuid: java_util.UUID) -> Android.Bluetooth.Socket {
         
         var __locals = [jobject]()
         
@@ -865,7 +865,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Create an RFCOMM BluetoothSocket ready to start a secure outgoing connection to this remote device using SDP lookup of uuid.
      */
-    public func createRfcommSocketToServiceRecord(uuid: java_util.UUID) -> Android.Bluetooth.Socket {
+    func createRfcommSocketToServiceRecord(uuid: java_util.UUID) -> Android.Bluetooth.Socket {
         
         var __locals = [jobject]()
         
@@ -888,7 +888,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Perform a service discovery on the remote device to get the UUIDs supported.
      */
-    public func fetchUuidsWithSd() -> Bool {
+    func fetchUuidsWithSd() -> Bool {
         
         var __locals = [jobject]()
         
@@ -906,7 +906,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Returns the hardware address of this BluetoothDevice.
      */
-    public func getAddress() -> String {
+    func getAddress() -> String {
         
         var __locals = [jobject]()
         
@@ -927,7 +927,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Get the Bluetooth class of the remote device.
      */
-    public func getBluetoothClass() -> String {
+    func getBluetoothClass() -> String {
         
         var __locals = [jobject]()
         
@@ -948,8 +948,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Get the bond state of the remote device.
      */
-    @_versioned
-    internal func getBondState() -> Android.Bluetooth.Device.BondState {
+    func getBondState() -> Android.Bluetooth.Device.BondState {
         
         var __locals = [jobject]()
         
@@ -967,7 +966,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Get the friendly Bluetooth name of the remote device.
      */
-    public func getName() -> String? {
+    func getName() -> String? {
         
         var __locals = [jobject]()
         
@@ -988,8 +987,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Get the Bluetooth device type of the remote device.
      */
-    @_versioned
-    internal func getType() -> Android.Bluetooth.Device.DeviceType {
+    func getType() -> Android.Bluetooth.Device.DeviceType {
         
         var __locals = [jobject]()
         
@@ -1007,7 +1005,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Get the friendly Bluetooth name of the remote device.
      */
-    public func getUuids() -> [Android.OS.ParcelUuid]? {
+    func getUuids() -> [Android.OS.ParcelUuid]? {
         
         var __locals = [jobject]()
         
@@ -1028,7 +1026,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Confirm passkey for PAIRING_VARIANT_PASSKEY_CONFIRMATION pairing.
      */
-    public func setPairingConfirmation(confirm: Bool) -> Bool {
+    func setPairingConfirmation(confirm: Bool) -> Bool {
         
         var __locals = [jobject]()
         
@@ -1048,7 +1046,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Set the pin during pairing when the pairing method is PAIRING_VARIANT_PIN.
      */
-    public func setPin(pin: [Int8]) -> Bool {
+    func setPin(pin: [Int8]) -> Bool {
         
         var __locals = [jobject]()
         
@@ -1070,7 +1068,7 @@ public extension Android.Bluetooth.Device {
 
 public extension Android.Bluetooth.Device {
     
-    public struct AndroidBluetoothLowEnergyDeviceTransportType: RawRepresentable, Equatable {
+    struct AndroidBluetoothLowEnergyDeviceTransportType: RawRepresentable, Equatable {
         
         public let rawValue: Int
         
@@ -1085,7 +1083,7 @@ public extension Android.Bluetooth.Device {
         public static let bredr = Android.Bluetooth.Device.DeviceType(rawValue: Android.Bluetooth.Device.TRANSPORT_BREDR)
     }
     
-    public struct AndroidBluetoothLowEnergyDeviceType: RawRepresentable, Equatable {
+    struct AndroidBluetoothLowEnergyDeviceType: RawRepresentable, Equatable {
         
         public let rawValue: Int
         
@@ -1114,7 +1112,7 @@ public extension Android.Bluetooth.Device {
         public static let unknow = Android.Bluetooth.Device.DeviceType(rawValue: Android.Bluetooth.Device.DEVICE_TYPE_UNKNOWN)
     }
     
-    public struct AndroidBluetoothLowEnergyBondState: RawRepresentable, Equatable {
+    struct AndroidBluetoothLowEnergyBondState: RawRepresentable, Equatable {
         
         public let rawValue: Int
         
@@ -1138,7 +1136,7 @@ public extension Android.Bluetooth.Device {
         public static let bonded = Android.Bluetooth.Device.BondState(rawValue: Android.Bluetooth.Device.BOND_BONDED)
     }
     
-    public struct AndroidBluetoothLowEnergyState: RawRepresentable, Equatable {
+    struct AndroidBluetoothLowEnergyState: RawRepresentable, Equatable {
         
         public let rawValue: Int
         

@@ -13,7 +13,7 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias Advertiser = AndroidBluetoothLowEnergyAdvertiser
+    typealias Advertiser = AndroidBluetoothLowEnergyAdvertiser
 }
 
 /**
@@ -51,7 +51,7 @@ public extension AndroidBluetoothLowEnergyAdvertiser {
      *
      * Requires BLUETOOTH_ADMIN permission.
      */
-    public func startAdvertising(settings: Android.Bluetooth.LE.AdvertiseSettings,
+    func startAdvertising(settings: Android.Bluetooth.LE.AdvertiseSettings,
                           advertiseData: Android.Bluetooth.LE.AdvertiseData,
                           callback: Android.Bluetooth.LE.AdvertiseCallback) {
         
@@ -79,7 +79,7 @@ public extension AndroidBluetoothLowEnergyAdvertiser {
      *
      * Requires BLUETOOTH_ADMIN
      */
-    public func startAdvertising(settings: Android.Bluetooth.LE.AdvertiseSettings,
+    func startAdvertising(settings: Android.Bluetooth.LE.AdvertiseSettings,
                           advertiseData: Android.Bluetooth.LE.AdvertiseData,
                           scanResponse: Android.Bluetooth.LE.AdvertiseData,
                           callback: Android.Bluetooth.LE.AdvertiseCallback) {
@@ -106,7 +106,7 @@ public extension AndroidBluetoothLowEnergyAdvertiser {
      * Creates a new advertising set. If operation succeed, device will start advertising. This method returns immediately, the
      * operation status is delivered through callback.onAdvertisingSetStarted().
      */
-    public func startAdvertisingSet(parameters: Android.Bluetooth.LE.AdvertisingSetParameters,
+    func startAdvertisingSet(parameters: Android.Bluetooth.LE.AdvertisingSetParameters,
                                  advertiseData: Android.Bluetooth.LE.AdvertiseData,
                                  scanResponse: Android.Bluetooth.LE.AdvertiseData,
                                  periodicParameters: Android.Bluetooth.LE.PeriodicAdvertisingParameters,
@@ -141,7 +141,7 @@ public extension AndroidBluetoothLowEnergyAdvertiser {
      * Creates a new advertising set. If operation succeed, device will start advertising. This method returns immediately, the
      * operation status is delivered through callback.onAdvertisingSetStarted().
      */
-    public func startAdvertisingSet(parameters: Android.Bluetooth.LE.AdvertisingSetParameters,
+    func startAdvertisingSet(parameters: Android.Bluetooth.LE.AdvertisingSetParameters,
                                     advertiseData: Android.Bluetooth.LE.AdvertiseData,
                                     scanResponse: Android.Bluetooth.LE.AdvertiseData,
                                     periodicParameters: Android.Bluetooth.LE.PeriodicAdvertisingParameters,
@@ -178,7 +178,7 @@ public extension AndroidBluetoothLowEnergyAdvertiser {
      * Creates a new advertising set. If operation succeed, device will start advertising. This method returns immediately, the
      * operation status is delivered through callback.onAdvertisingSetStarted().
      */
-    public func startAdvertisingSet(parameters: Android.Bluetooth.LE.AdvertisingSetParameters,
+    func startAdvertisingSet(parameters: Android.Bluetooth.LE.AdvertisingSetParameters,
                                     advertiseData: Android.Bluetooth.LE.AdvertiseData,
                                     scanResponse: Android.Bluetooth.LE.AdvertiseData,
                                     periodicParameters: Android.Bluetooth.LE.PeriodicAdvertisingParameters,
@@ -209,7 +209,7 @@ public extension AndroidBluetoothLowEnergyAdvertiser {
      * Creates a new advertising set. If operation succeed, device will start advertising. This method returns immediately, the
      * operation status is delivered through callback.onAdvertisingSetStarted().
      */
-    public func startAdvertisingSet(parameters: Android.Bluetooth.LE.AdvertisingSetParameters,
+    func startAdvertisingSet(parameters: Android.Bluetooth.LE.AdvertisingSetParameters,
                                     advertiseData: Android.Bluetooth.LE.AdvertiseData,
                                     scanResponse: Android.Bluetooth.LE.AdvertiseData,
                                     periodicParameters: Android.Bluetooth.LE.PeriodicAdvertisingParameters,
@@ -243,7 +243,7 @@ public extension AndroidBluetoothLowEnergyAdvertiser {
      *
      * Requires BLUETOOTH_ADMIN permission.
      */
-    public func stopAdvertising(callback: Android.Bluetooth.LE.AdvertiseCallback) {
+    func stopAdvertising(callback: Android.Bluetooth.LE.AdvertiseCallback) {
         
         var __locals = [jobject]()
         
@@ -264,7 +264,7 @@ public extension AndroidBluetoothLowEnergyAdvertiser {
      * Used to dispose of a AdvertisingSet object, obtained with startAdvertisingSet(AdvertisingSetParameters,
      * AdvertiseData, AdvertiseData, PeriodicAdvertisingParameters, AdvertiseData, AdvertisingSetCallback).
      */
-    public func stopAdvertising(callback: Android.Bluetooth.LE.AdvertisingSetCallback) {
+    func stopAdvertising(callback: Android.Bluetooth.LE.AdvertisingSetCallback) {
         
         var __locals = [jobject]()
         

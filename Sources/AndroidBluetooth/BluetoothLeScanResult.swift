@@ -11,19 +11,20 @@ import java_util
 import JNI
 import Android
 import Bluetooth
+import BluetoothGAP
 
 public extension Android.Bluetooth.LE {
     
-    public typealias ScanResult = AndroidBluetoothLowEnergyScanResult
+    typealias ScanResult = AndroidBluetoothLowEnergyScanResult
 }
 
 public extension Android.Bluetooth.LE.ScanResult {
     
-    public typealias DataStatus = AndroidBluetoothLowEnergyDataStatus
+    typealias DataStatus = AndroidBluetoothLowEnergyDataStatus
     
-    public typealias PrimaryPhy = AndroidBluetoothLowEnergyPrimaryPhy
+    typealias PrimaryPhy = AndroidBluetoothLowEnergyPrimaryPhy
     
-    public typealias SecondaryPhy = AndroidBluetoothLowEnergySecondaryPhy
+    typealias SecondaryPhy = AndroidBluetoothLowEnergySecondaryPhy
 }
 
 /**
@@ -165,7 +166,7 @@ public final class AndroidBluetoothLowEnergyScanResult: JavaObject {
 public extension Android.Bluetooth.LE.ScanResult {
     
     /// For chained advertisements, inidcates tha the data contained in this scan result is complete.
-    public static var DATA_COMPLETE: Int {
+    static var DATA_COMPLETE: Int {
         
         get {
             
@@ -181,7 +182,7 @@ public extension Android.Bluetooth.LE.ScanResult {
     }
     
     /// For chained advertisements, indicates that the controller was unable to receive all chained packets and the scan result contains incomplete truncated data.
-    public static var DATA_TRUNCATED: Int {
+    static var DATA_TRUNCATED: Int {
         
         get {
             
@@ -197,7 +198,7 @@ public extension Android.Bluetooth.LE.ScanResult {
     }
     
     /// Periodic advertising interval is not present in the packet.
-    public static var PERIODIC_INTERVAL_NOT_PRESENT: Int {
+    static var PERIODIC_INTERVAL_NOT_PRESENT: Int {
         
         get {
             
@@ -213,7 +214,7 @@ public extension Android.Bluetooth.LE.ScanResult {
     }
     
     /// Indicates that the secondary physical layer was not used.
-    public static var PHY_UNUSED: Int {
+    static var PHY_UNUSED: Int {
         
         get {
             
@@ -229,7 +230,7 @@ public extension Android.Bluetooth.LE.ScanResult {
     }
     
     /// Advertising Set ID is not present in the packet.
-    public static var SID_NOT_PRESENT: Int {
+    static var SID_NOT_PRESENT: Int {
         
         get {
             
@@ -245,7 +246,7 @@ public extension Android.Bluetooth.LE.ScanResult {
     }
     
     /// TX power is not present in the packet.
-    public static var TX_POWER_NOT_PRESENT: Int {
+    static var TX_POWER_NOT_PRESENT: Int {
         
         get {
             
@@ -265,8 +266,8 @@ public extension Android.Bluetooth.LE.ScanResult {
 
 internal extension Android.Bluetooth.LE.ScanResult {
     
-    @_versioned
-    internal func getAdvertisingSid() -> Int {
+    @usableFromInline
+    func getAdvertisingSid() -> Int {
         
         var __locals = [jobject]()
         
@@ -281,8 +282,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
         return Int(__return)
     }
     
-    @_versioned
-    internal func getDataStatus() -> Android.Bluetooth.LE.ScanResult.DataStatus {
+    @usableFromInline
+    func getDataStatus() -> Android.Bluetooth.LE.ScanResult.DataStatus {
         
         var __locals = [jobject]()
         
@@ -298,8 +299,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
         return Android.Bluetooth.LE.ScanResult.DataStatus(rawValue: Int(__return))
     }
     
-    @_versioned
-    internal func getDevice() -> Android.Bluetooth.Device {
+    @usableFromInline
+    func getDevice() -> Android.Bluetooth.Device {
         
         var __locals = [jobject]()
         
@@ -317,8 +318,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
         return Android.Bluetooth.Device( javaObject: __return )
     }
     
-    @_versioned
-    internal func getPeriodicAdvertisingInterval() -> Int {
+    @usableFromInline
+    func getPeriodicAdvertisingInterval() -> Int {
         
         var __locals = [jobject]()
         
@@ -333,8 +334,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
         return Int(__return)
     }
     
-    @_versioned
-    internal func getPrimaryPhy() -> Android.Bluetooth.LE.ScanResult.PrimaryPhy {
+    @usableFromInline
+    func getPrimaryPhy() -> Android.Bluetooth.LE.ScanResult.PrimaryPhy {
         
         var __locals = [jobject]()
         
@@ -352,8 +353,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
     
     
     
-    @_versioned
-    internal func getSecondaryPhy() -> Android.Bluetooth.LE.ScanResult.SecondaryPhy {
+    @usableFromInline
+    func getSecondaryPhy() -> Android.Bluetooth.LE.ScanResult.SecondaryPhy {
         
         var __locals = [jobject]()
         
@@ -369,8 +370,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
         return Android.Bluetooth.LE.ScanResult.SecondaryPhy(rawValue: Int(__return))
     }
     
-    @_versioned
-    internal func getRssi() -> Int {
+    @usableFromInline
+    func getRssi() -> Int {
         
         var __locals = [jobject]()
         
@@ -385,8 +386,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
         return Int(__return)
     }
     
-    @_versioned
-    internal func getTimestampNanos() -> Int64 {
+    @usableFromInline
+    func getTimestampNanos() -> Int64 {
         
         var __locals = [jobject]()
         
@@ -401,8 +402,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
         return Int64(__return)
     }
     
-    @_versioned
-    internal func getTxPower() -> Int {
+    @usableFromInline
+    func getTxPower() -> Int {
         
         var __locals = [jobject]()
         
@@ -417,8 +418,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
         return Int(__return)
     }
     
-    @_versioned
-    internal func getConnectable() -> Bool {
+    @usableFromInline
+    func getConnectable() -> Bool {
         
         var __locals = [jobject]()
         
@@ -433,8 +434,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
         return __return != jboolean(JNI_FALSE)
     }
     
-    @_versioned
-    internal func getLegacy() -> Bool {
+    @usableFromInline
+    func getLegacy() -> Bool {
         
         var __locals = [jobject]()
         
@@ -449,8 +450,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
         return __return != jboolean(JNI_FALSE)
     }
     
-    @_versioned
-    internal func getScanRecord() -> Android.Bluetooth.LE.ScanRecord {
+    @usableFromInline
+    func getScanRecord() -> Android.Bluetooth.LE.ScanRecord {
         
         var __locals = [jobject]()
         
@@ -471,8 +472,8 @@ internal extension Android.Bluetooth.LE.ScanResult {
     /**
      Returns the advertising flags indicating the discoverable mode and capability of the device. Returns -1 if the flag field is not set.
      */
-    @_versioned
-    internal func getAdvertiseFlags() -> Int {
+    @usableFromInline
+    func getAdvertiseFlags() -> Int {
         
         var __locals = [jobject]()
         
@@ -551,7 +552,7 @@ internal extension Android.Bluetooth.LE.ScanResult {
 public extension Android.Bluetooth.LE.ScanResult {
     
     /// LE Primary Phy
-    public struct AndroidBluetoothLowEnergyPrimaryPhy: RawRepresentable {
+    struct AndroidBluetoothLowEnergyPrimaryPhy: RawRepresentable {
         
         public let rawValue: Int
         
@@ -571,7 +572,7 @@ public extension Android.Bluetooth.LE.ScanResult {
     }
     
     /// LE Secondary Phy
-    public struct AndroidBluetoothLowEnergySecondaryPhy: RawRepresentable {
+    struct AndroidBluetoothLowEnergySecondaryPhy: RawRepresentable {
         
         public let rawValue: Int
         
@@ -601,7 +602,7 @@ public extension Android.Bluetooth.LE.ScanResult {
     }
     
     /// LE Data Status.
-    public struct AndroidBluetoothLowEnergyDataStatus: RawRepresentable {
+    struct AndroidBluetoothLowEnergyDataStatus: RawRepresentable {
         
         public let rawValue: Int
         

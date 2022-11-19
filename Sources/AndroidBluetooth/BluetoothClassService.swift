@@ -12,7 +12,7 @@ import Android
 
 public extension Android.Bluetooth.Class {
     
-    public typealias Service = AndroidBluetoothClassService
+    typealias Service = AndroidBluetoothClassService
 }
 
 /**

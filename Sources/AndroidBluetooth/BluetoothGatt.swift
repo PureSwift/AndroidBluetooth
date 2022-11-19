@@ -12,20 +12,20 @@ import Android
 
 public extension Android.Bluetooth {
     
-    public typealias Gatt = AndroidBluetoothGatt
+    typealias Gatt = AndroidBluetoothGatt
 }
 
 public extension Android.Bluetooth.Gatt {
     
-    public typealias ConnectionPriority = AndroidBluetoothConnectionPriority
+    typealias ConnectionPriority = AndroidBluetoothConnectionPriority
     
-    public typealias TxPhy = AndroidBluetoothTxPhy
+    typealias TxPhy = AndroidBluetoothTxPhy
     
-    public typealias RxPhy = AndroidBluetoothRxPhy
+    typealias RxPhy = AndroidBluetoothRxPhy
     
-    public typealias PhyOptions = AndroidBluetoothPhyOptions
+    typealias PhyOptions = AndroidBluetoothPhyOptions
     
-    public typealias Status = AndroidBluetoothGattStatus
+    typealias Status = AndroidBluetoothGattStatus
 }
 
 /**
@@ -64,7 +64,7 @@ public final class AndroidBluetoothGatt: JavaObject {
 internal extension AndroidBluetoothGatt {
     
     /// Connection paramter update - Use the connection paramters recommended by the Bluetooth SIG.
-    internal static var CONNECTION_PRIORITY_BALANCED: Int {
+    static var CONNECTION_PRIORITY_BALANCED: Int {
         
         get {
             
@@ -80,7 +80,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// Connection paramter update - Request a high priority, low latency connection.
-    internal static var CONNECTION_PRIORITY_HIGH: Int {
+    static var CONNECTION_PRIORITY_HIGH: Int {
         
         get {
             
@@ -96,7 +96,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// Connection paramter update - Request low power, reduced data rate connection parameters.
-    internal static var CONNECTION_PRIORITY_LOW_POWER: Int {
+    static var CONNECTION_PRIORITY_LOW_POWER: Int {
         
         get {
             
@@ -112,7 +112,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// A remote device connection is congested.
-    internal static var GATT_CONNECTION_CONGESTED: Int {
+    static var GATT_CONNECTION_CONGESTED: Int {
         
         get {
             
@@ -128,7 +128,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// Insufficient authentication for a given operation.
-    internal static var GATT_INSUFFICIENT_AUTHENTICATION: Int {
+    static var GATT_INSUFFICIENT_AUTHENTICATION: Int {
         
         get {
             
@@ -144,7 +144,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// A GATT operation failed, errors other than the above
-    internal static var GATT_FAILURE: Int {
+    static var GATT_FAILURE: Int {
         
         get {
             
@@ -160,7 +160,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// Insufficient encryption for a given operation.
-    internal static var GATT_INSUFFICIENT_ENCRYPTION: Int {
+    static var GATT_INSUFFICIENT_ENCRYPTION: Int {
         
         get {
             
@@ -176,7 +176,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// A write operation exceeds the maximum length of the attribute
-    internal static var GATT_INVALID_ATTRIBUTE_LENGTH: Int {
+    static var GATT_INVALID_ATTRIBUTE_LENGTH: Int {
         
         get {
             
@@ -192,7 +192,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// A read or write operation was requested with an invalid offset.
-    internal static var GATT_INVALID_OFFSET: Int {
+    static var GATT_INVALID_OFFSET: Int {
         
         get {
             
@@ -208,7 +208,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// GATT read operation is not permitted.
-    internal static var GATT_READ_NOT_PERMITTED: Int {
+    static var GATT_READ_NOT_PERMITTED: Int {
         
         get {
             
@@ -224,7 +224,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// The given request is not supported.
-    internal static var GATT_REQUEST_NOT_SUPPORTED: Int {
+    static var GATT_REQUEST_NOT_SUPPORTED: Int {
         
         get {
             
@@ -240,7 +240,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// A GATT operation completed successfully.
-    internal static var GATT_SUCCESS: Int {
+    static var GATT_SUCCESS: Int {
         
         get {
             
@@ -256,7 +256,7 @@ internal extension AndroidBluetoothGatt {
     }
     
     /// GATT write operation is not permitted.
-    internal static var GATT_WRITE_NOT_PERMITTED: Int {
+    static var GATT_WRITE_NOT_PERMITTED: Int {
         
         get {
             
@@ -279,7 +279,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Cancels a reliable write transaction for a given device.
      */
-    public func abortReliableWrite() {
+    func abortReliableWrite() {
         
         var __locals = [jobject]()
         
@@ -296,7 +296,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Initiates a reliable write transaction for a given remote device.
      */
-    public func beginReliableWrite() -> Bool {
+    func beginReliableWrite() -> Bool {
         var __locals = [jobject]()
         
         var __args = [jvalue](repeating: jvalue(), count: 1)
@@ -313,7 +313,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Close this Bluetooth GATT client.
      */
-    public func close() {
+    func close() {
         
         var __locals = [jobject]()
         
@@ -330,7 +330,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Close this Bluetooth GATT client.
      */
-    public func connect() -> Bool {
+    func connect() -> Bool {
         
         var __locals = [jobject]()
         
@@ -348,7 +348,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Disconnects an established connection, or cancels a connection attempt currently in progress.
      */
-    public func disconnect() {
+    func disconnect() {
         
         var __locals = [jobject]()
         
@@ -365,7 +365,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Discovers services offered by a remote device as well as their characteristics and descriptors.
      */
-    public func discoverServices() -> Bool {
+    func discoverServices() -> Bool {
         
         var __locals = [jobject]()
         
@@ -383,7 +383,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Executes a reliable write transaction for a given remote device.
      */
-    public func executeReliableWrite() -> Bool {
+    func executeReliableWrite() -> Bool {
         
         var __locals = [jobject]()
         
@@ -401,7 +401,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Return the remote bluetooth device this GATT client targets to.
      */
-    public func getDevice() -> Android.Bluetooth.Device {
+    func getDevice() -> Android.Bluetooth.Device {
         
         var __locals = [jobject]()
         
@@ -422,7 +422,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Returns a BluetoothGattService, if the requested UUID is supported by the remote device.
      */
-    public func getService(uuid: java_util.UUID) -> Android.Bluetooth.GattService {
+    func getService(uuid: java_util.UUID) -> Android.Bluetooth.GattService {
         
         var __locals = [jobject]()
         
@@ -484,7 +484,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Reads the requested characteristic from the associated remote device.
      */
-    public func readCharacteristic(characteristic: Android.Bluetooth.GattCharacteristic) -> Bool {
+    func readCharacteristic(characteristic: Android.Bluetooth.GattCharacteristic) -> Bool {
         
         var __locals = [jobject]()
         
@@ -504,7 +504,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Reads the value for a given descriptor from the associated remote device.
      */
-    public func readDescriptor(descriptor: Android.Bluetooth.GattDescriptor) -> Bool {
+    func readDescriptor(descriptor: Android.Bluetooth.GattDescriptor) -> Bool {
         
         var __locals = [jobject]()
         
@@ -524,7 +524,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Read the current transmitter PHY and receiver PHY of the connection.
      */
-    public func readPhy() {
+    func readPhy() {
         
         var __locals = [jobject]()
         
@@ -541,7 +541,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Read the RSSI for a connected remote device.
      */
-    public func readRemoteRssi() -> Bool {
+    func readRemoteRssi() -> Bool {
         
         var __locals = [jobject]()
         
@@ -559,7 +559,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Request a connection parameter update.
      */
-    public func requestConnectionPriority(connectionPriority: Android.Bluetooth.Gatt.ConnectionPriority) -> Bool {
+    func requestConnectionPriority(connectionPriority: Android.Bluetooth.Gatt.ConnectionPriority) -> Bool {
         
         var __locals = [jobject]()
         
@@ -579,7 +579,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Request an MTU size used for a given connection.
      */
-    public func requestMtu(mtu: Int) -> Bool {
+    func requestMtu(mtu: Int) -> Bool {
         
         var __locals = [jobject]()
         
@@ -599,7 +599,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Enable or disable notifications/indications for a given characteristic.
      */
-    public func setCharacteristicNotification(characteristic: Android.Bluetooth.GattCharacteristic, enable: Bool) -> Bool {
+    func setCharacteristicNotification(characteristic: Android.Bluetooth.GattCharacteristic, enable: Bool) -> Bool {
         
         var __locals = [jobject]()
         
@@ -620,7 +620,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Set the preferred connection PHY for this app.
      */
-    public func setPreferredPhy(txPhy: Android.Bluetooth.Gatt.TxPhy, rxPhy: Android.Bluetooth.Gatt.RxPhy, phyOptions: Android.Bluetooth.Gatt.PhyOptions)  {
+    func setPreferredPhy(txPhy: Android.Bluetooth.Gatt.TxPhy, rxPhy: Android.Bluetooth.Gatt.RxPhy, phyOptions: Android.Bluetooth.Gatt.PhyOptions)  {
         
         var __locals = [jobject]()
         
@@ -641,7 +641,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Writes a given characteristic and its values to the associated remote device.
      */
-    public func writeCharacteristic(characteristic: Android.Bluetooth.GattCharacteristic) -> Bool {
+    func writeCharacteristic(characteristic: Android.Bluetooth.GattCharacteristic) -> Bool {
         
         var __locals = [jobject]()
         
@@ -661,7 +661,7 @@ public extension AndroidBluetoothGatt {
     /**
      * Write the value of a given descriptor to the associated remote device.
      */
-    public func writeDescriptor(descriptor: Android.Bluetooth.GattDescriptor) -> Bool {
+    func writeDescriptor(descriptor: Android.Bluetooth.GattDescriptor) -> Bool {
         
         var __locals = [jobject]()
         
@@ -683,7 +683,7 @@ public extension AndroidBluetoothGatt {
 
 public extension AndroidBluetoothGatt {
     
-    public struct AndroidBluetoothConnectionPriority: RawRepresentable {
+    struct AndroidBluetoothConnectionPriority: RawRepresentable {
         
         public let rawValue: Int
         
@@ -708,7 +708,7 @@ public extension AndroidBluetoothGatt {
         public static let lowPower = Android.Bluetooth.Gatt.ConnectionPriority(rawValue: Android.Bluetooth.Gatt.CONNECTION_PRIORITY_LOW_POWER)
     }
     
-    public struct AndroidBluetoothTxPhy: RawRepresentable {
+    struct AndroidBluetoothTxPhy: RawRepresentable {
         
         public let rawValue: Int
         
@@ -732,7 +732,7 @@ public extension AndroidBluetoothGatt {
         public static let phyLecodedMask = Android.Bluetooth.Gatt.TxPhy(rawValue: Android.Bluetooth.Device.PHY_LE_CODED_MASK)
     }
     
-    public struct AndroidBluetoothRxPhy: RawRepresentable {
+    struct AndroidBluetoothRxPhy: RawRepresentable {
         
         public let rawValue: Int
         
@@ -756,7 +756,7 @@ public extension AndroidBluetoothGatt {
         public static let phyLecodedMask = Android.Bluetooth.Gatt.TxPhy(rawValue: Android.Bluetooth.Device.PHY_LE_CODED_MASK)
     }
     
-    public struct AndroidBluetoothPhyOptions: RawRepresentable {
+    struct AndroidBluetoothPhyOptions: RawRepresentable {
         
         public let rawValue: Int
         
@@ -780,7 +780,7 @@ public extension AndroidBluetoothGatt {
         public static let optionS8 = Android.Bluetooth.Gatt.PhyOptions(rawValue: Android.Bluetooth.Device.PHY_OPTION_S8)
     }
     
-    public struct AndroidBluetoothGattStatus: RawRepresentable, Equatable, Error {
+    struct AndroidBluetoothGattStatus: RawRepresentable, Equatable, Error {
         
         public let rawValue: Int
         

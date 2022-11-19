@@ -12,7 +12,7 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias AdvertiseData = AndroidBluetoothLowEnergyAdvertiseData
+    typealias AdvertiseData = AndroidBluetoothLowEnergyAdvertiseData
 }
 
 /**
@@ -67,8 +67,8 @@ public final class AndroidBluetoothLowEnergyAdvertiseData: JavaObject {
 
 internal extension AndroidBluetoothLowEnergyAdvertiseData {
     
-    @_versioned
-    internal func getIncludeDeviceName() -> Bool {
+    @usableFromInline
+    func getIncludeDeviceName() -> Bool {
         
         var __locals = [jobject]()
         
@@ -83,8 +83,8 @@ internal extension AndroidBluetoothLowEnergyAdvertiseData {
         return __return != jboolean(JNI_FALSE)
     }
     
-    @_versioned
-    internal func getIncludeTxPowerLevel() -> Bool {
+    @usableFromInline
+    func getIncludeTxPowerLevel() -> Bool {
         
         var __locals = [jobject]()
         
@@ -99,8 +99,8 @@ internal extension AndroidBluetoothLowEnergyAdvertiseData {
         return __return != jboolean(JNI_FALSE)
     }
     
-    @_versioned
-    internal func getManufacturerSpecificData() -> Android.Util.SparseArray? {
+    @usableFromInline
+    func getManufacturerSpecificData() -> Android.Util.SparseArray? {
         
         var __locals = [jobject]()
         
@@ -119,8 +119,8 @@ internal extension AndroidBluetoothLowEnergyAdvertiseData {
     }
     
     
-    @_versioned
-    internal func getServiceUuids() -> List? {
+    @usableFromInline
+    func getServiceUuids() -> List? {
         
         var __locals = [jobject]()
         
@@ -138,8 +138,8 @@ internal extension AndroidBluetoothLowEnergyAdvertiseData {
         return __return != nil ? ListForward( javaObject: __return ) : nil
     }
     
-    @_versioned
-    internal func getServiceData() -> JavaMap? {
+    @usableFromInline
+    func getServiceData() -> JavaMap? {
         
         var __locals = [jobject]()
         

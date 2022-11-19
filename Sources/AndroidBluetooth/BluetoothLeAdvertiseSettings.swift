@@ -11,13 +11,13 @@ import Android
 
 public extension Android.Bluetooth.LE {
     
-    public typealias AdvertiseSettings = AndroidBluetoothLowEnergyAdvertiseSettings
+    typealias AdvertiseSettings = AndroidBluetoothLowEnergyAdvertiseSettings
 }
 
 public extension AndroidBluetoothLowEnergyAdvertiseSettings {
     
-    public typealias AdvertiseMode = AndroidBluetoothLowEnergyAdvertiseMode
-    public typealias TxPowerLevel = AndroidBluetoothLowEnergyTxPowerLevel
+    typealias AdvertiseMode = AndroidBluetoothLowEnergyAdvertiseMode
+    typealias TxPowerLevel = AndroidBluetoothLowEnergyTxPowerLevel
 }
 
 /**
@@ -79,7 +79,7 @@ public final class AndroidBluetoothLowEnergyAdvertiseSettings: JavaObject {
 
 public extension Android.Bluetooth.LE.AdvertiseSettings {
     
-    public static var ADVERTISE_MODE_BALANCED: Int {
+    static var ADVERTISE_MODE_BALANCED: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "ADVERTISE_MODE_BALANCED",
@@ -91,7 +91,7 @@ public extension Android.Bluetooth.LE.AdvertiseSettings {
         }
     }
     
-    public static var ADVERTISE_MODE_LOW_LATENCY: Int {
+    static var ADVERTISE_MODE_LOW_LATENCY: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "ADVERTISE_MODE_LOW_LATENCY",
@@ -103,7 +103,7 @@ public extension Android.Bluetooth.LE.AdvertiseSettings {
         }
     }
     
-    public static var ADVERTISE_MODE_LOW_POWER: Int {
+    static var ADVERTISE_MODE_LOW_POWER: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "ADVERTISE_MODE_LOW_POWER",
@@ -115,7 +115,7 @@ public extension Android.Bluetooth.LE.AdvertiseSettings {
         }
     }
     
-    public static var ADVERTISE_TX_POWER_HIGH: Int {
+    static var ADVERTISE_TX_POWER_HIGH: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "ADVERTISE_TX_POWER_HIGH",
@@ -127,7 +127,7 @@ public extension Android.Bluetooth.LE.AdvertiseSettings {
         }
     }
     
-    public static var ADVERTISE_TX_POWER_LOW: Int {
+    static var ADVERTISE_TX_POWER_LOW: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "ADVERTISE_TX_POWER_LOW",
@@ -139,7 +139,7 @@ public extension Android.Bluetooth.LE.AdvertiseSettings {
         }
     }
     
-    public static var ADVERTISE_TX_POWER_MEDIUM: Int {
+    static var ADVERTISE_TX_POWER_MEDIUM: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "ADVERTISE_TX_POWER_MEDIUM",
@@ -151,7 +151,7 @@ public extension Android.Bluetooth.LE.AdvertiseSettings {
         }
     }
     
-    public static var ADVERTISE_TX_POWER_ULTRA_LOW: Int {
+    static var ADVERTISE_TX_POWER_ULTRA_LOW: Int {
         get {
             let __value = JNIField.GetStaticIntField(
                 fieldName: "ADVERTISE_TX_POWER_ULTRA_LOW",
@@ -168,8 +168,8 @@ public extension Android.Bluetooth.LE.AdvertiseSettings {
 
 internal extension Android.Bluetooth.LE.AdvertiseSettings {
     
-    @_versioned
-    internal func getIsConnectable() -> Bool {
+    @usableFromInline
+    func getIsConnectable() -> Bool {
         
         var __locals = [jobject]()
         
@@ -184,8 +184,8 @@ internal extension Android.Bluetooth.LE.AdvertiseSettings {
         return __return != jboolean(JNI_FALSE)
     }
     
-    @_versioned
-    internal func getMode() -> Android.Bluetooth.LE.AdvertiseSettings.AdvertiseMode? {
+    @usableFromInline
+    func getMode() -> Android.Bluetooth.LE.AdvertiseSettings.AdvertiseMode? {
         
         var __locals = [jobject]()
         
@@ -201,8 +201,8 @@ internal extension Android.Bluetooth.LE.AdvertiseSettings {
         return Android.Bluetooth.LE.AdvertiseSettings.AdvertiseMode( rawValue: Int( __return ))
     }
     
-    @_versioned
-    internal func getTimeout() -> Int {
+    @usableFromInline
+    func getTimeout() -> Int {
         
         var __locals = [jobject]()
         
@@ -218,8 +218,8 @@ internal extension Android.Bluetooth.LE.AdvertiseSettings {
         return Int( __return )
     }
     
-    @_versioned
-    internal func getTxPowerLevel() -> Android.Bluetooth.LE.AdvertiseSettings.TxPowerLevel? {
+    @usableFromInline
+    func getTxPowerLevel() -> Android.Bluetooth.LE.AdvertiseSettings.TxPowerLevel? {
         
         var __locals = [jobject]()
         
@@ -280,7 +280,7 @@ internal extension Android.Bluetooth.LE.AdvertiseSettings {
 public extension Android.Bluetooth.LE.AdvertiseSettings {
     
     /// LE Advertise Mode.
-    public struct AndroidBluetoothLowEnergyAdvertiseMode: RawRepresentable {
+    struct AndroidBluetoothLowEnergyAdvertiseMode: RawRepresentable {
         
         public let rawValue: Int
         
@@ -305,7 +305,7 @@ public extension Android.Bluetooth.LE.AdvertiseSettings {
     }
     
     /// LE Advertise Mode.
-    public struct AndroidBluetoothLowEnergyTxPowerLevel: RawRepresentable {
+    struct AndroidBluetoothLowEnergyTxPowerLevel: RawRepresentable {
         
         public let rawValue: Int
         
