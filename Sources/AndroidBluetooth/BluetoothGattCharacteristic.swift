@@ -701,7 +701,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Returns the UUID of this characteristic.
      */
-    func getUuid() -> java_util.UUID {
+    func getUUID() -> java_util.UUID {
         
         var __locals = [jobject]()
         

@@ -296,7 +296,7 @@ public extension AndroidBluetoothGattDescriptor {
     /**
      * Returns the UUID of this descriptor.
      */
-    func getUuid() -> java_util.UUID {
+    func getUUID() -> java_util.UUID {
         
         var __locals = [jobject]()
         

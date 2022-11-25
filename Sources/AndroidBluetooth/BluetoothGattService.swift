@@ -270,7 +270,7 @@ public extension AndroidBluetoothGattService {
         return Android.Bluetooth.GattService.ServiceType(rawValue: Int(__return))
     }
     
-    func getUuid() -> java_util.UUID {
+    func getUUID() -> java_util.UUID {
         
         var __locals = [jobject]()
         

@@ -1005,7 +1005,7 @@ public extension Android.Bluetooth.Device {
     /**
      * Get the friendly Bluetooth name of the remote device.
      */
-    func getUuids() -> [Android.OS.ParcelUuid]? {
+    func getUUIDs() -> [Android.OS.ParcelUuid]? {
         
         var __locals = [jobject]()
         
