@@ -78,8 +78,17 @@ public final class AndroidCentral: CentralManager {
         })
     }
     
-    /// Connect to the specified device
+    /// Connect to the specified device.
     public func connect(to peripheral: Peripheral) async throws {
+        try await connect(to: peripheral, autoConnect: true, transport: .le)
+    }
+    
+    /// Connect to the specified device.
+    public func connect(
+        to peripheral: Peripheral,
+        autoConnect: Bool,
+        transport: Android.Bluetooth.Device.Transport
+    ) async throws {
         
         log?("\(type(of: self)) \(#function)")
         
@@ -96,35 +105,39 @@ public final class AndroidCentral: CentralManager {
                     // attempt to connect (does not timeout)
                     await storage.update { [unowned self] state in
                         
+                        // store continuation
                         let callback = GattCallback(central: self)
                         let gatt: AndroidBluetoothGatt
                         
                         // call the correct method for connecting
                         if Android.OS.Build.Version.Sdk.sdkInt.rawValue <= Android.OS.Build.VersionCodes.lollipopMr1 {
-                            
-                            gatt = scanDevice.scanResult.device.connectGatt(context: self.context,
-                                                                            autoConnect: false,
-                                                                            callback: callback)
+                            gatt = scanDevice.scanResult.device.connectGatt(
+                                context: self.context,
+                                autoConnect: autoConnect,
+                                callback: callback
+                            )
                         } else {
-                            
-                            gatt = scanDevice.scanResult.device.connectGatt(context: self.context,
-                                                                            autoConnect: false,
-                                                                            callback: callback,
-                                                                            transport: Android.Bluetooth.Device.Transport.le)
+                            gatt = scanDevice.scanResult.device.connectGatt(
+                                context: self.context,
+                                autoConnect: autoConnect,
+                                callback: callback,
+                                transport: transport
+                            )
                         }
-                        
-                        state.cache[peripheral] = Cache(gatt: gatt, callback: callback)
-                        state.cache[peripheral]?.continuation.connect = continuation
+                        var cache = Cache(gatt: gatt, callback: callback)
+                        cache.continuation.connect = continuation
+                        state.cache[peripheral] = cache
                     }
                 }
             }
         }
         catch let error as CancellationError {
-            // cancel connection if we timeout
+            // cancel connection if we timeout or cancel
             await storage.update { state in
                 
                 // Close, disconnect or cancel connection
                 state.cache[peripheral]?.gatt.disconnect()
+                state.cache[peripheral]?.gatt.close()
                 state.cache[peripheral] = nil
             }
             throw error
@@ -143,11 +156,27 @@ public final class AndroidCentral: CentralManager {
     /// Disconnect the specified device.
     public func disconnect(_ peripheral: Peripheral) async {
         
+        log?("\(type(of: self)) \(#function)")
+                
+        await storage.update { state in
+            state.cache[peripheral]?.gatt.disconnect()
+            state.cache[peripheral]?.gatt.close()
+            state.cache[peripheral] = nil
+        }
     }
     
     /// Disconnect all connected devices.
     public func disconnectAll() async {
         
+        log?("\(type(of: self)) \(#function)")
+        
+        await storage.update { state in
+            state.cache.values.forEach {
+                $0.gatt.disconnect()
+                $0.gatt.close()
+            }
+            state.cache.removeAll()
+        }
     }
     
     /// Discover Services
@@ -155,7 +184,34 @@ public final class AndroidCentral: CentralManager {
         _ services: Set<BluetoothUUID>,
         for peripheral: Peripheral
     ) async throws -> [Service<Peripheral, AttributeID>] {
-        fatalError()
+        
+        log?("\(type(of: self)) \(#function)")
+        
+        guard hostController.isEnabled()
+            else { throw AndroidCentralError.bluetoothDisabled }
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            Task {
+                do {
+                    try await storage.update { state in
+                        // store continuation
+                        state.cache[peripheral]?.continuation.discoverServices = continuation
+                        
+                        guard state.scan.peripherals.keys.contains(peripheral)
+                            else { throw CentralError.unknownPeripheral }
+                        
+                        guard let cache = state.cache[peripheral]
+                            else { throw CentralError.disconnected }
+                        
+                        guard cache.gatt.discoverServices()
+                            else { throw AndroidCentralError.binderFailure }
+                    }
+                }
+                catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
     }
     
     /// Discover Characteristics for service
@@ -163,7 +219,26 @@ public final class AndroidCentral: CentralManager {
         _ characteristics: Set<BluetoothUUID>,
         for service: Service<Peripheral, AttributeID>
     ) async throws -> [Characteristic<Peripheral, AttributeID>] {
-        fatalError()
+        
+        log?("\(type(of: self)) \(#function)")
+        
+        return try await storage.update { state in
+            
+            guard let cache = state.cache[service.peripheral]
+                else { throw CentralError.disconnected }
+            
+            guard let gattService = cache.services.values[service.id]
+                else { throw AndroidCentralError.binderFailure }
+            
+            let gattCharacteristics = gattService.getCharacteristics()
+            
+            guard let services = state.cache[service.peripheral]?.update(gattCharacteristics, for: service) else {
+                assertionFailure("Missing connection cache")
+                return []
+            }
+            
+            return services
+        }
     }
     
     /// Read Characteristic Value
