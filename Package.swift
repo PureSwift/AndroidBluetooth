@@ -22,6 +22,10 @@ let package = Package(
         .package(
             url: "https://github.com/PureSwift/GATT.git",
             branch: "master"
+        ),
+        .package(
+            url: "https://github.com/PureSwift/Bluetooth.git",
+            .upToNextMajor(from: "6.0.0")
         )
     ],
     targets: [
@@ -29,7 +33,12 @@ let package = Package(
             name: "AndroidBluetooth",
             dependencies: [
                 "Android",
-                "GATT"
+                "Bluetooth",
+                "GATT",
+                .product(
+                    name: "BluetoothGAP",
+                    package: "Bluetooth"
+                )
             ]),
         .testTarget(
             name: "AndroidBluetoothTests",
