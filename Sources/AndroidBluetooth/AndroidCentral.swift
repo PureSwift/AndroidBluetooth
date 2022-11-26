@@ -245,7 +245,39 @@ public final class AndroidCentral: CentralManager {
     public func readValue(
         for characteristic: Characteristic<Peripheral, AttributeID>
     ) async throws -> Data {
-        fatalError()
+        
+        log?("\(type(of: self)) \(#function)")
+        
+        guard hostController.isEnabled()
+            else { throw AndroidCentralError.bluetoothDisabled }
+        
+        let peripheral = characteristic.peripheral
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            Task {
+                do {
+                    try await storage.update { state in
+                        // store continuation
+                        state.cache[peripheral]?.continuation.readCharacteristic = continuation
+                        
+                        guard state.scan.peripherals.keys.contains(peripheral)
+                            else { throw CentralError.unknownPeripheral }
+                        
+                        guard let cache = state.cache[peripheral]
+                            else { throw CentralError.disconnected }
+                        
+                        guard let gattCharacteristic = cache.characteristics.values[characteristic.id]?.attribute
+                            else { throw AndroidCentralError.characteristicNotFound }
+                        
+                        guard cache.gatt.readCharacteristic(characteristic: gattCharacteristic)
+                            else { throw AndroidCentralError.binderFailure }
+                    }
+                }
+                catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
     }
     
     /// Write Characteristic Value
@@ -255,6 +287,41 @@ public final class AndroidCentral: CentralManager {
         withResponse: Bool
     ) async throws {
         
+        log?("\(type(of: self)) \(#function)")
+        
+        guard hostController.isEnabled()
+            else { throw AndroidCentralError.bluetoothDisabled }
+        
+        let peripheral = characteristic.peripheral
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            Task {
+                do {
+                    try await storage.update { state in
+                        // store continuation
+                        state.cache[peripheral]?.continuation.writeCharacteristic = continuation
+                        
+                        guard state.scan.peripherals.keys.contains(peripheral)
+                            else { throw CentralError.unknownPeripheral }
+                        
+                        guard let cache = state.cache[peripheral]
+                            else { throw CentralError.disconnected }
+                        
+                        guard let gattCharacteristic = cache.characteristics.values[characteristic.id]?.attribute
+                            else { throw AndroidCentralError.characteristicNotFound }
+                        
+                        let dataArray = [UInt8](data)
+                        let _ = gattCharacteristic.setValue(value: unsafeBitCast(dataArray, to: [Int8].self))
+                        
+                        guard cache.gatt.writeCharacteristic(characteristic: gattCharacteristic)
+                            else { throw AndroidCentralError.binderFailure }
+                    }
+                }
+                catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
     }
     
     /// Discover descriptors
@@ -292,7 +359,7 @@ public final class AndroidCentral: CentralManager {
         guard hostController.isEnabled()
             else { throw AndroidCentralError.bluetoothDisabled }
         
-        guard let cache = await self.storage.state.cache[peripheral]
+        guard let cache = await storage.state.cache[peripheral]
             else { throw CentralError.disconnected }
         
         return cache.maximumTransmissionUnit // cached MTU
@@ -300,7 +367,39 @@ public final class AndroidCentral: CentralManager {
     
     // Read RSSI
     public func rssi(for peripheral: Peripheral) async throws -> RSSI {
-        fatalError()
+        
+        guard hostController.isEnabled()
+            else { throw AndroidCentralError.bluetoothDisabled }
+        
+        let rawValue = try await withCheckedThrowingContinuation { continuation in
+            Task {
+                do {
+                    try await storage.update { state in
+                        // store continuation
+                        state.cache[peripheral]?.continuation.readRemoteRSSI = continuation
+                        
+                        guard state.scan.peripherals.keys.contains(peripheral)
+                            else { throw CentralError.unknownPeripheral }
+                        
+                        guard let cache = state.cache[peripheral]
+                            else { throw CentralError.disconnected }
+                        
+                        guard cache.gatt.readRemoteRssi()
+                            else { throw AndroidCentralError.binderFailure }
+                    }
+                }
+                catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+        
+        guard let value = RSSI(rawValue: numericCast(rawValue)) else {
+            assertionFailure()
+            return RSSI(rawValue: -127)!
+        }
+        
+        return value
     }
     
     // MARK: - Private Methods
@@ -347,193 +446,6 @@ public final class AndroidCentral: CentralManager {
     }
     
     /*
-     
-    public func disconnect(peripheral: Peripheral) {
-        
-        log?("\(type(of: self)) \(#function)")
-        
-        await storage.update { [unowned self] in
-            self.internalState.cache[peripheral]?.gatt.disconnect()
-            //self.internalState.cache[peripheral]?.gatt.close()
-            self.internalState.cache[peripheral] = nil
-        }
-    }
-    
-    public func disconnectAll() {
-        
-        log?("\(type(of: self)) \(#function)")
-        
-        await storage.update { [unowned self] in
-            self.internalState.cache.values.forEach {
-                $0.gatt.disconnect()
-            }
-            self.internalState.cache.removeAll()
-        }
-    }
-    
-    public func discoverServices(_ services: [BluetoothUUID] = [],
-                                 for peripheral: Peripheral,
-                                 timeout: TimeInterval = .gattDefaultTimeout) throws -> [Service<Peripheral>] {
-        
-        log?("\(type(of: self)) \(#function)")
-        
-        guard hostController.isEnabled()
-            else { throw AndroidCentralError.bluetoothDisabled }
-        
-        // store semaphore
-        let semaphore = Semaphore(timeout: timeout)
-        await storage.update { [unowned self] in self.internalState.discoverServices.semaphore = semaphore }
-        defer { await storage.update { [unowned self] in self.internalState.discoverServices.semaphore = nil } }
-        
-        try await storage.update { [unowned self] in
-            
-            guard self.internalState.scan.peripherals.keys.contains(peripheral)
-                else { throw CentralError.unknownPeripheral }
-            
-            guard let cache = self.internalState.cache[peripheral]
-                else { throw CentralError.disconnected }
-            
-            guard cache.gatt.discoverServices()
-                else { throw AndroidCentralError.binderFailure }
-        }
-        
-        // throw async error
-        do { try semaphore.wait() }
-        
-        // get values from internal state
-        return try await storage.update { [unowned self] in
-            
-            guard let cache = self.internalState.cache[peripheral]
-                else { throw CentralError.unknownPeripheral }
-            
-            return cache.services.values.map { identifier, service in
-                
-                let uuid = BluetoothUUID(android: service.getUuid())
-                
-                let isPrimary = service.getType() == AndroidBluetoothGattService.ServiceType.primary
-                
-                let service = Service(identifier: identifier,
-                                      uuid: uuid,
-                                      peripheral: peripheral,
-                                      isPrimary: isPrimary)
-                
-                return service
-            }
-        }
-    }
-    
-    public func discoverCharacteristics(_ characteristics: [BluetoothUUID] = [],
-                                        for service: Service<Peripheral>,
-                                        timeout: TimeInterval = .gattDefaultTimeout) throws -> [Characteristic<Peripheral>] {
-        
-        log?("\(type(of: self)) \(#function)")
-        
-        return try await storage.update { [unowned self] in
-            
-            guard let cache = self.internalState.cache[service.peripheral]
-                else { throw CentralError.disconnected }
-            
-            guard let gattService = cache.services.values[service.identifier]
-                else { throw AndroidCentralError.binderFailure }
-            
-            let gattCharacteristics = gattService.getCharacteristics()
-            
-            internalState.cache[service.peripheral]?.update(gattCharacteristics, for: service)
-            
-            return internalState.cache[service.peripheral]!.characteristics.values.map { (identifier, characteristic) in
-                
-                let uuid = BluetoothUUID(android: characteristic.attribute.getUuid())
-                
-                let properties = BitMaskOptionSet<GATT.CharacteristicProperty>(rawValue: UInt8(characteristic.attribute.getProperties()))
-                
-                let characteristic = Characteristic<Peripheral>(identifier: identifier,
-                                                                uuid: uuid,
-                                                                peripheral: service.peripheral,
-                                                                properties: properties)
-                return characteristic
-            }
-        }
-    }
-    
-    public func readValue(for characteristic: Characteristic<Peripheral>) throws -> Data {
-        
-        log?("\(type(of: self)) \(#function)")
-        
-        guard hostController.isEnabled()
-            else { throw AndroidCentralError.bluetoothDisabled }
-        
-        // store semaphore
-        let semaphore = Semaphore(timeout: timeout)
-        await storage.update { [unowned self] in self.internalState.readCharacteristic.semaphore = semaphore }
-        defer { await storage.update { [unowned self] in self.internalState.readCharacteristic.semaphore = nil } }
-        
-        try await storage.update { [unowned self] in
-            
-            guard let cache = self.internalState.cache[characteristic.peripheral]
-                else { throw CentralError.disconnected }
-
-            guard let gattCharacteristic = cache.characteristics.values[characteristic.identifier]?.attribute
-                else { throw AndroidCentralError.characteristicNotFound }
-            
-            guard cache.gatt.readCharacteristic(characteristic: gattCharacteristic)
-                else { throw AndroidCentralError.binderFailure }
-        }
-        
-        // throw async error
-        do { try semaphore.wait() }
-        
-        // get values from internal state
-        return try await storage.update { [unowned self] in
-            
-            guard let cache = self.internalState.cache[characteristic.peripheral]
-                else { throw CentralError.unknownPeripheral }
-            
-            guard let readCharacteristic = cache.readCharacteristic
-                else { throw CentralError.invalidAttribute(characteristic.uuid) }
-
-            if let value = readCharacteristic.getValue() {
-                
-                return Data(unsafeBitCast(value, to: [UInt8].self))
-            } else {
-                
-                return Data()
-            }
-        }
-    }
-    
-    public func writeValue(_ data: Data, for characteristic: Characteristic<Peripheral>, withResponse: Bool = true) throws {
-        
-        log?("\(type(of: self)) \(#function)")
-        
-        guard hostController.isEnabled()
-            else { throw AndroidCentralError.bluetoothDisabled }
-        
-        // store semaphore
-        let semaphore = Semaphore(timeout: timeout)
-        await storage.update { [unowned self] in self.internalState.writeCharacteristic.semaphore = semaphore }
-        defer { await storage.update { [unowned self] in self.internalState.writeCharacteristic.semaphore = nil } }
-        
-        try await storage.update { [unowned self] in
-            
-            guard let cache = self.internalState.cache[characteristic.peripheral]
-                else { throw CentralError.disconnected }
-            
-            guard let gattCharacteristic = cache.characteristics.values[characteristic.identifier]?.attribute
-                else { throw AndroidCentralError.characteristicNotFound }
-            
-            let dataArray = [UInt8](data)
-            
-            let _ = gattCharacteristic.setValue(value: unsafeBitCast(dataArray, to: [Int8].self))
-            
-            guard cache.gatt.writeCharacteristic(characteristic: gattCharacteristic)
-                else { throw AndroidCentralError.binderFailure }
-        }
-        
-        // throw async error
-        do { try semaphore.wait() }
-    
-    }
-    
     public func notify(_ notification: ((Data) -> ())?, for characteristic: Characteristic<Peripheral>) throws {
         
         log?("\(type(of: self)) \(#function) started")
@@ -904,19 +816,33 @@ public final class AndroidCentral: CentralManager {
             }
         }
         
-        public override func onPhyRead(gatt: Android.Bluetooth.Gatt, txPhy: AndroidBluetoothGatt.TxPhy, rxPhy: AndroidBluetoothGatt.RxPhy, status: AndroidBluetoothGatt.Status) {
+        public override func onPhyRead(gatt: Android.Bluetooth.Gatt, txPhy: Android.Bluetooth.Gatt.TxPhy, rxPhy: Android.Bluetooth.Gatt.RxPhy, status: AndroidBluetoothGatt.Status) {
             
             central?.log?("\(type(of: self)): \(#function)")
         }
         
-        public override func onPhyUpdate(gatt: Android.Bluetooth.Gatt, txPhy: AndroidBluetoothGatt.TxPhy, rxPhy: AndroidBluetoothGatt.RxPhy, status: AndroidBluetoothGatt.Status) {
+        public override func onPhyUpdate(gatt: Android.Bluetooth.Gatt, txPhy: Android.Bluetooth.Gatt.TxPhy, rxPhy: Android.Bluetooth.Gatt.RxPhy, status: AndroidBluetoothGatt.Status) {
             
             central?.log?("\(type(of: self)): \(#function)")
         }
         
-        public override func onReadRemoteRssi(gatt: Android.Bluetooth.Gatt, rssi: Int, status: AndroidBluetoothGatt.Status) {
+        public override func onReadRemoteRssi(gatt: Android.Bluetooth.Gatt, rssi: Int, status: Android.Bluetooth.Gatt.Status) {
             
-            central?.log?("\(type(of: self)): \(#function)")
+            central?.log?("\(type(of: self)): \(#function) \(rssi) \(status)")
+            
+            let peripheral = Peripheral(gatt)
+                        
+            Task {
+                await central?.storage.update { state in
+                    switch status {
+                    case .success:
+                        state.cache[peripheral]?.continuation.writeCharacteristic?.resume()
+                    default:
+                        state.cache[peripheral]?.continuation.writeCharacteristic?.resume(throwing: status)
+                    }
+                    state.cache[peripheral]?.continuation.writeCharacteristic = nil
+                }
+            }
         }
         
         public override func onReliableWriteCompleted(gatt: Android.Bluetooth.Gatt, status: AndroidBluetoothGatt.Status) {
@@ -1015,9 +941,7 @@ internal extension AndroidCentral {
         var services = Services()
         
         var characteristics = Characteristics()
-        
-        var readCharacteristic: Android.Bluetooth.GattCharacteristic?
-        
+                
         var continuation = PeripheralContinuation()
         
         struct Characteristics {
@@ -1041,7 +965,6 @@ internal extension AndroidCentral {
         }
         
         fileprivate mutating func update(_ newValues: [Android.Bluetooth.GattService]) -> [Service<Peripheral, AttributeID>] {
-            
             services.values.removeAll(keepingCapacity: true)
             return newValues.map {
                 let id = identifier(for: $0)
@@ -1064,13 +987,12 @@ internal extension AndroidCentral {
             _ newValues: [Android.Bluetooth.GattCharacteristic],
             for service: Service<Peripheral, AttributeID>
         ) -> [Characteristic<Peripheral, AttributeID>] {
-            
             characteristics.values.removeAll(keepingCapacity: true)
             return newValues.map {
                 let id = identifier(for: $0)
                 let peripheral = Peripheral(gatt)
                 let uuid = BluetoothUUID(android: $0.getUUID())
-                //let properties = BitMaskOptionSet<CharacteristicProperty>(rawValue: UInt8($0.attribute.getProperties()))
+                let properties = BitMaskOptionSet<CharacteristicProperty>(rawValue: UInt8($0.getProperties()))
                 // cache
                 characteristics.values[id] = ($0, nil)
                 //
@@ -1078,23 +1000,9 @@ internal extension AndroidCentral {
                     id: id,
                     uuid: uuid,
                     peripheral: peripheral,
-                    properties: [] // FIXME:
+                    properties: properties
                 )
             }
-        }
-        
-        fileprivate mutating func update(id: AndroidCentral.AttributeID, notification: ((Data) -> ())?){
-            
-            let value = characteristics.values[id]
-            
-            guard let characteristic = value
-                else { return }
-            
-            characteristics.values[id] = (characteristic.attribute, notification )
-        }
-        
-        fileprivate mutating func update(_ newValue: Android.Bluetooth.GattCharacteristic) {
-            readCharacteristic = newValue
         }
     }
     
@@ -1108,6 +1016,8 @@ internal extension AndroidCentral {
         
         var discoverCharacteristics: CheckedContinuation<[Characteristic<Peripheral, AttributeID>], Error>?
         
+        var discoverDescriptors: CheckedContinuation<[Descriptor<Peripheral, AttributeID>], Error>?
+        
         var readCharacteristic: CheckedContinuation<Data, Error>?
         
         var writeCharacteristic: CheckedContinuation<Void, Error>?
@@ -1115,6 +1025,8 @@ internal extension AndroidCentral {
         var readDescriptor: CheckedContinuation<Data, Error>?
         
         var writeDescriptor: CheckedContinuation<Void, Error>?
+        
+        var readRemoteRSSI: CheckedContinuation<Int, Error>?
     }
 }
 
