@@ -534,7 +534,7 @@ public extension AndroidBluetoothGattCharacteristic {
     /**
      * Returns a list of descriptors for this characteristic.
      */
-    func getDescriptors() -> List? {
+    func getDescriptors() -> [Android.Bluetooth.GattDescriptor] {
         
         var __locals = [jobject]()
         
@@ -549,7 +549,11 @@ public extension AndroidBluetoothGattCharacteristic {
         
         defer { JNI.DeleteLocalRef(__return) }
         
-        return ListForward(javaObject: __return)
+        let list = ListForward(javaObject: __return)
+        
+        return (list.toArray() ?? []).map {
+            Android.Bluetooth.GattDescriptor(casting: $0)!
+        }
     }
     
     /**
