@@ -43,7 +43,7 @@ extension AndroidLowEnergyAdvertisementData: AdvertisementData {
     }
     
     /// The Manufacturer data of a peripheral.
-    public var manufacturerData: GAPManufacturerSpecificData? {
+    public var manufacturerData: ManufacturerSpecificData? {
         
         let decoded = decode()
         
