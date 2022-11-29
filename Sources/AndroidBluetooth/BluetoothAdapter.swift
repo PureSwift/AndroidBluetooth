@@ -48,14 +48,14 @@ public final class AndroidBluetoothAdapter: JavaObject {
      *
      * - Returns: The default local adapter, or null if Bluetooth is not supported on this hardware platform.
      */
-    static var `default`: Android.Bluetooth.Adapter? {
+    public static var `default`: Android.Bluetooth.Adapter? {
     
         @inline(__always)
         get { return getDefaultAdapter() }
     }
     
     internal func getBluetoothLeAdvertiser() -> JavaObject? {
-        
+        assertionFailure("Not implemented")
         // TODO
         return nil
     }
