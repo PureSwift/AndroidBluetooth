@@ -16,4 +16,8 @@ public enum AndroidCentralError: Swift.Error {
     
     /// Unexpected null value.
     case nullValue(AnyKeyPath)
+    
+    case scanFailed(Int32)
+    
+    
 }
