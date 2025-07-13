@@ -100,20 +100,20 @@ open class BluetoothDevice: JavaObject {
     _ context: AndroidContent.Context?,
     _ autoConnect: Bool,
     _ callback: BluetoothGattCallback?,
-    _ transport: BluetoothTransport,
+    _ transport: Int32,
     _ phy: Int32
   ) -> BluetoothGatt!
-
+/*
   @JavaMethod
   public func connectGatt(
     _ context: AndroidContent.Context?,
     _ autoConnect: Bool,
     _ callback: BluetoothGattCallback?,
-    _ transport: Int,
+    _ transport: Int32,
     _ phy: Int32,
     _ handler: Handler?
   ) -> BluetoothGatt!
-  
+  */
   @JavaMethod
   open func createL2capChannel(_ arg0: Int32) throws -> BluetoothSocket!
 
