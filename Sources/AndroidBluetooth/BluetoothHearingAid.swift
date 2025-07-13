@@ -3,38 +3,20 @@ import JavaKit
 import JavaKitCollection
 import JavaRuntime
 
-@JavaClass("android.bluetooth.BluetoothA2dp", implements: BluetoothProfile.self)
-open class BluetoothA2dp: JavaObject {
+@JavaClass("android.bluetooth.BluetoothHearingAid", implements: BluetoothProfile.self)
+open class BluetoothHearingAid: JavaObject {
   @JavaMethod
   open func getConnectionState(_ arg0: BluetoothDevice?) -> Int32
-
-  @JavaMethod
-  open func isA2dpPlaying(_ arg0: BluetoothDevice?) -> Bool
 
   @JavaMethod
   open func getConnectedDevices() -> List<BluetoothDevice>!
 
   @JavaMethod
   open func getDevicesMatchingConnectionStates(_ arg0: [Int32]) -> List<BluetoothDevice>!
-
-  @JavaMethod
-  open func getSupportedCodecTypes() -> JavaCollection<BluetoothCodecType>!
-
-  @JavaMethod
-  open override func finalize()
 }
-extension JavaClass<BluetoothA2dp> {
+extension JavaClass<BluetoothHearingAid> {
   @JavaStaticField(isFinal: true)
   public var ACTION_CONNECTION_STATE_CHANGED: String
-
-  @JavaStaticField(isFinal: true)
-  public var ACTION_PLAYING_STATE_CHANGED: String
-
-  @JavaStaticField(isFinal: true)
-  public var STATE_NOT_PLAYING: Int32
-
-  @JavaStaticField(isFinal: true)
-  public var STATE_PLAYING: Int32
 
   @JavaStaticField(isFinal: true)
   public var A2DP: Int32

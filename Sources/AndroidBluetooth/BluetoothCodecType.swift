@@ -3,8 +3,8 @@ import AndroidOS
 import JavaKit
 import JavaRuntime
 
-@JavaClass("android.bluetooth.BluetoothClass", implements: Parcelable.self)
-open class BluetoothClass: JavaObject {
+@JavaClass("android.bluetooth.BluetoothCodecType", implements: Parcelable.self)
+open class BluetoothCodecType: JavaObject {
   @JavaMethod
   open func describeContents() -> Int32
 
@@ -12,16 +12,13 @@ open class BluetoothClass: JavaObject {
   open func writeToParcel(_ arg0: Parcel?, _ arg1: Int32)
 
   @JavaMethod
-  open func hasService(_ arg0: Int32) -> Bool
+  open func isMandatoryCodec() -> Bool
 
   @JavaMethod
-  open func getDeviceClass() -> Int32
+  open func getCodecId() -> Int64
 
   @JavaMethod
-  open func doesClassMatch(_ arg0: Int32) -> Bool
-
-  @JavaMethod
-  open func getMajorDeviceClass() -> Int32
+  open func getCodecName() -> String
 
   @JavaMethod
   open override func equals(_ arg0: JavaObject?) -> Bool
@@ -32,18 +29,27 @@ open class BluetoothClass: JavaObject {
   @JavaMethod
   open override func hashCode() -> Int32
 }
-extension JavaClass<BluetoothClass> {
+extension JavaClass<BluetoothCodecType> {
   @JavaStaticField(isFinal: true)
-  public var CREATOR: Parcelable.Creator<BluetoothClass>!
+  public var CODEC_ID_AAC: Int64
 
   @JavaStaticField(isFinal: true)
-  public var PROFILE_A2DP: Int32
+  public var CODEC_ID_APTX: Int64
 
   @JavaStaticField(isFinal: true)
-  public var PROFILE_HEADSET: Int32
+  public var CODEC_ID_APTX_HD: Int64
 
   @JavaStaticField(isFinal: true)
-  public var PROFILE_HID: Int32
+  public var CODEC_ID_LDAC: Int64
+
+  @JavaStaticField(isFinal: true)
+  public var CODEC_ID_OPUS: Int64
+
+  @JavaStaticField(isFinal: true)
+  public var CODEC_ID_SBC: Int64
+
+  @JavaStaticField(isFinal: true)
+  public var CREATOR: Parcelable.Creator<BluetoothCodecType>!
 
   @JavaStaticField(isFinal: true)
   public var CONTENTS_FILE_DESCRIPTOR: Int32
