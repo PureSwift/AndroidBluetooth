@@ -4,6 +4,7 @@ import AndroidOS
 import JavaKit
 import JavaRuntime
 import JavaUtil
+import Bluetooth
 
 @JavaClass("android.bluetooth.BluetoothDevice", implements: Parcelable.self)
 open class BluetoothDevice: JavaObject {
@@ -13,6 +14,9 @@ open class BluetoothDevice: JavaObject {
   @JavaMethod
   open func writeToParcel(_ arg0: Parcel?, _ arg1: Int32)
 
+  /**
+   Returns the address type of this BluetoothDevice, one of ADDRESS_TYPE_PUBLIC, ADDRESS_TYPE_RANDOM, ADDRESS_TYPE_ANONYMOUS, or ADDRESS_TYPE_UNKNOWN.
+   */
   @JavaMethod
   open func getAddressType() -> Int32
 
@@ -129,6 +133,14 @@ open class BluetoothDevice: JavaObject {
   @JavaMethod
   open func createInsecureRfcommSocketToServiceRecord(_ arg0: UUID?) throws -> BluetoothSocket!
 
+  /**
+   Get the friendly Bluetooth name of the remote device.
+
+   The local adapter will automatically retrieve remote names when performing a device scan, and will cache them. This method just returns the name for this device from the cache.
+   For apps targeting Build.VERSION_CODES.R or lower, this requires the Manifest.permission.BLUETOOTH permission which can be gained with a simple <uses-permission> manifest tag.
+   For apps targeting Build.VERSION_CODES.S or or higher, this requires the Manifest.permission.BLUETOOTH_CONNECT permission which can be gained with Activity.requestPermissions(String[], int).
+   Requires Manifest.permission.BLUETOOTH_CONNECT
+   */
   @JavaMethod
   open func getName() -> String
 
@@ -141,12 +153,32 @@ open class BluetoothDevice: JavaObject {
   @JavaMethod
   open override func hashCode() -> Int32
 
+  /**
+   Get the Bluetooth device type of the remote device.
+   For apps targeting Build.VERSION_CODES.R or lower, this requires the Manifest.permission.BLUETOOTH permission which can be gained with a simple <uses-permission> manifest tag.
+   For apps targeting Build.VERSION_CODES.S or or higher, this requires the Manifest.permission.BLUETOOTH_CONNECT permission which can be gained with Activity.requestPermissions(String[], int).
+   Requires Manifest.permission.BLUETOOTH_CONNECT
+   
+    - Returns: The device type `DEVICE_TYPE_CLASSIC`, `DEVICE_TYPE_LE`, `DEVICE_TYPE_DUAL`, `DEVICE_TYPE_UNKNOWN` if it's not available
+   */
   @JavaMethod
   open func getType() -> Int32
 
+  /// Returns the hardware address of this BluetoothDevice.
   @JavaMethod
-  open func getAddress() -> String
+  internal func getAddress() -> String
+    
+  public var address: BluetoothAddress {
+      let string = getAddress()
+      guard let address = BluetoothAddress(string) else {
+          fatalError("Invalid address: \(string)")
+      }
+      return address
+  }
 }
+
+
+
 extension JavaClass<BluetoothDevice> {
   @JavaStaticField(isFinal: true)
   public var ACTION_ACL_CONNECTED: String
