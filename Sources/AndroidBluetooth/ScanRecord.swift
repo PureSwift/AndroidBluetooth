@@ -42,7 +42,11 @@ open class ScanRecord: JavaObject {
   open override func toString() -> String
 
   @JavaMethod
-  open func getBytes() -> [Int8]
+  internal func getBytes() -> [Int8]
+
+  public var bytes: [UInt8] {
+      unsafeBitCast(getBytes(), to: [UInt8].self)
+  }
 }
 extension JavaClass<ScanRecord> {
   @JavaStaticField(isFinal: true)
