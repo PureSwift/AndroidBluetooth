@@ -3,9 +3,10 @@ import JavaKit
 import JavaRuntime
 
 @JavaClass("android.bluetooth.BluetoothStatusCodes")
-open class BluetoothStatusCodes: JavaObject {
+internal class BluetoothStatusCodes: JavaObject {
 
 }
+
 extension JavaClass<BluetoothStatusCodes> {
   @JavaStaticField(isFinal: true)
   public var ERROR_BLUETOOTH_NOT_ALLOWED: Int32
@@ -42,4 +43,38 @@ extension JavaClass<BluetoothStatusCodes> {
 
   @JavaStaticField(isFinal: true)
   public var SUCCESS: Int32
+}
+
+public struct BluetoothStatusCode: RawRepresentable, Equatable, Hashable, Sendable {
+    
+    public let rawValue: Int32
+    
+    public init(rawValue: Int32) {
+        self.rawValue = rawValue
+    }
+    
+    private init(_ raw: Int32) {
+        self.init(rawValue: raw)
+    }
+}
+
+internal extension BluetoothStatusCode {
+        
+    static let javaClass = try! JavaClass<BluetoothStatusCodes>()
+}
+
+public extension BluetoothStatusCode {
+    
+    static var success: Self { .init(javaClass.SUCCESS) }
+    static var bluetoothNotAllowed: Self { .init(javaClass.ERROR_BLUETOOTH_NOT_ALLOWED) }
+    static var bluetoothNotEnabled: Self { .init(javaClass.ERROR_BLUETOOTH_NOT_ENABLED) }
+    static var deviceNotBonded: Self { .init(javaClass.ERROR_DEVICE_NOT_BONDED) }
+    static var gattWriteNotAllowed: Self { .init(javaClass.ERROR_GATT_WRITE_NOT_ALLOWED) }
+    static var gattWriteRequestBusy: Self { .init(javaClass.ERROR_GATT_WRITE_REQUEST_BUSY) }
+    static var missingBluetoothConnectPermission: Self { .init(javaClass.ERROR_MISSING_BLUETOOTH_CONNECT_PERMISSION) }
+    static var profileServiceNotBound: Self { .init(javaClass.ERROR_PROFILE_SERVICE_NOT_BOUND) }
+    static var unknown: Self { .init(javaClass.ERROR_UNKNOWN) }
+    static var featureNotConfigured: Self { .init(javaClass.FEATURE_NOT_CONFIGURED) }
+    static var featureNotSupported: Self { .init(javaClass.FEATURE_NOT_SUPPORTED) }
+    static var featureSupported: Self { .init(javaClass.FEATURE_SUPPORTED) }
 }
