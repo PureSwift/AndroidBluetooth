@@ -100,7 +100,7 @@ public final class AndroidCentral: CentralManager {
         guard hostController.isEnabled()
             else { throw AndroidCentralError.bluetoothDisabled }
         
-        guard let scanDevice = storage.state.scan.peripherals[peripheral]
+        guard let scanDevice = await storage.state.scan.peripherals[peripheral]
             else { throw CentralError.unknownPeripheral }
         
         // wait for connection continuation
@@ -502,13 +502,13 @@ public final class AndroidCentral: CentralManager {
         guard hostController.isEnabled()
             else { return }
         
-        guard let scanner = hostController.lowEnergyScanner
+        guard let scanner = hostController.getBluetoothLeScanner()
             else { return }
         
         guard let scanCallBack = await self.storage.state.scan.callback
             else { return }
         
-        scanner.stopScan(callback: scanCallBack)
+        scanner.stopScan(scanCallBack)
     }
     
     @discardableResult
