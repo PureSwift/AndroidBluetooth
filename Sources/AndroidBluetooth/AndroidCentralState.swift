@@ -66,7 +66,7 @@ internal extension AndroidCentral {
         
         let gatt: BluetoothGatt
         
-        fileprivate(set) var maximumTransmissionUnit: MaximumTransmissionUnit = .default
+        var maximumTransmissionUnit: MaximumTransmissionUnit = .default
         
         var services = Services()
         

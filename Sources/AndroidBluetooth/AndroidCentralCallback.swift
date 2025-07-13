@@ -22,58 +22,83 @@ extension AndroidCentral {
         
         weak var central: AndroidCentral?
         
-        /*
-        public override func onScanResult(
-            callbackType: Android.Bluetooth.LE.ScanCallbackType,
-            result: Android.Bluetooth.LE.ScanResult
-        ) {
-            
-            central?.log?("\(type(of: self)) \(#function) name: \(result.device.getName() ?? "") address: \(result.device.address)")
-            
-            let scanData = ScanData(result)
-            
+        init(central: AndroidCentral, environment: JNIEnvironment?) {
+            self.central = central
+        }
+    }
+}
+
+@JavaImplementation("org.pureswift.bluetooth.le.ScanCallback")
+extension AndroidCentral.LowEnergyScanCallback {
+    
+    @JavaMethod
+    func onScanResultSwift(_ error: Int32, _ result: AndroidBluetooth.ScanResult?) {
+        guard let central else {
+            return
+        }
+        central.log?("\(type(of: self)): \(#function) name: \(result.getDevice().getName() ?? "") address: \(result.getDevice().getAddress())")
+        guard let result, let scanData = try? ScanData(result) else {
+            assertionFailure()
+            return
+        }
+        Task {
+            await central.storage.update { state in
+                state.scan.continuation?.yield(scanData)
+                state.scan.peripherals[scanData.peripheral] = InternalState.Scan.Device(
+                    scanData: scanData,
+                    scanResult: result
+                )
+            }
+        }
+    }
+    
+    @JavaMethod
+    func onBatchScanResultsSwift(results: [AndroidBluetooth.ScanResult?]) {
+        guard let central else {
+            return
+        }
+        central.log?("\(type(of: self)): \(#function)")
+        for result in results {
+            guard let result, let scanData = try? ScanData(result) else {
+                assertionFailure()
+                return
+            }
             Task {
-                await central?.storage.update { state in
+                await central.storage.update { state in
                     state.scan.continuation?.yield(scanData)
-                    state.scan.peripherals[scanData.peripheral] = InternalState.Scan.Device(
+                    state.scan.peripherals[scanData.peripheral] = AndroidCentral.InternalState.Scan.Device(
                         scanData: scanData,
                         scanResult: result
                     )
                 }
             }
         }
+    }
+    
+    @JavaMethod
+    func onScanFailedSwift(error: Int32) {
         
-        public override func onBatchScanResults(results: [Android.Bluetooth.LE.ScanResult]) {
-            
-            central?.log?("\(type(of: self)): \(#function)")
-            
-            for result in results {
-                
-                let scanData = ScanData(result)
-                
-                Task {
-                    await central?.storage.update { state in
-                        state.scan.continuation?.yield(scanData)
-                        state.scan.peripherals[scanData.peripheral] = InternalState.Scan.Device(
-                            scanData: scanData,
-                            scanResult: result
-                        )
-                    }
-                }
+        central?.log?("\(type(of: self)): \(#function)")
+        
+        // TODO: Map error codes
+        let error = AndroidCentralError.scanFailed(error)
+        
+        /*
+         static var SCAN_FAILED_ALREADY_STARTED
+         static var SCAN_FAILED_APPLICATION_REGISTRATION_FAILED
+         static var SCAN_FAILED_FEATURE_UNSUPPORTED
+         static var SCAN_FAILED_INTERNAL_ERROR
+         */
+        
+        Task {
+            await central?.storage.update { state in
+                state.scan.continuation?.finish(throwing: error)
             }
         }
-        
-        public override func onScanFailed(error: AndroidBluetoothLowEnergyScanCallback.Error) {
-            
-            central?.log?("\(type(of: self)): \(#function)")
-            
-            Task {
-                await central?.storage.update { state in
-                    state.scan.continuation?.finish(throwing: error)
-                }
-            }
-        }*/
     }
+}
+
+extension AndroidCentral {
     
     @JavaClass("org.pureswift.bluetooth.BluetoothGattCallback")
     internal class GattCallback: AndroidBluetooth.BluetoothGattCallback {
