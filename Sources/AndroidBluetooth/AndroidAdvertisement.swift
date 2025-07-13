@@ -5,7 +5,11 @@
 //  Created by Alsey Coleman Miller on 11/7/18.
 //
 
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#elseif canImport(Foundation)
 import Foundation
+#endif
 import Bluetooth
 import BluetoothGAP
 import GATT
@@ -19,7 +23,7 @@ public struct AndroidLowEnergyAdvertisementData: Equatable {
         self.data = data
     }
 }
-
+/*
 extension AndroidLowEnergyAdvertisementData: AdvertisementData {
     
     /// Decode GAP data types.
@@ -157,3 +161,4 @@ extension AndroidLowEnergyAdvertisementData: AdvertisementData {
         return uuids
     }
 }
+*/

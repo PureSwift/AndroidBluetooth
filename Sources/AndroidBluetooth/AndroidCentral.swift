@@ -8,10 +8,14 @@
 import Foundation
 import GATT
 import Bluetooth
-import Android
-import java_swift
-import java_util
-
+import JavaKit
+import JavaLang
+import JavaUtil
+import AndroidOS
+import AndroidContent
+import AndroidLooper
+/*
+@AndroidMainActor
 public final class AndroidCentral: CentralManager {
     
     public typealias Advertisement = AndroidLowEnergyAdvertisementData
@@ -20,11 +24,11 @@ public final class AndroidCentral: CentralManager {
     
     // MARK: - Properties
     
-    public var log: ((String) -> ())?
+    public nonisolated(unsafe) var log: (@Sendable (String) -> ())?
     
-    public let hostController: Android.Bluetooth.Adapter
+    public let hostController: BluetoothAdapter
     
-    public let context: Android.Content.Context
+    public let context: AndroidContent.Context
     
     public var peripherals: [GATT.Peripheral : Bool] {
         get async {
@@ -38,9 +42,10 @@ public final class AndroidCentral: CentralManager {
     
     // MARK: - Intialization
     
-    public init(hostController: Android.Bluetooth.Adapter,
-                context: Android.Content.Context,
-                options: AndroidCentral.Options = Options()) {
+    public init(
+        hostController: BluetoothAdapter,
+        context: AndroidContent.Context,
+        options: AndroidCentral.Options = Options()) {
         
         self.hostController = hostController
         self.context = context
@@ -58,8 +63,8 @@ public final class AndroidCentral: CentralManager {
         guard hostController.isEnabled()
             else { throw AndroidCentralError.bluetoothDisabled }
         
-        guard let scanner = hostController.lowEnergyScanner
-            else { throw AndroidCentralError.nullValue(\Android.Bluetooth.Adapter.lowEnergyScanner) }
+        guard let scanner = hostController.getBluetoothLeScanner()
+            else { throw AndroidCentralError.bluetoothDisabled }
         
         return .init(onTermination: {
             Task {
@@ -73,7 +78,7 @@ public final class AndroidCentral: CentralManager {
                 }
                 let scanCallBack = ScanCallback()
                 scanCallBack.central = self
-                scanner.startScan(callback: scanCallBack)
+                scanner.startScan(scanCallBack)
             }
         })
     }
@@ -87,7 +92,7 @@ public final class AndroidCentral: CentralManager {
     public func connect(
         to peripheral: Peripheral,
         autoConnect: Bool,
-        transport: Android.Bluetooth.Device.Transport
+        transport: BluetoothDevice
     ) async throws {
         
         log?("\(type(of: self)) \(#function)")
@@ -95,7 +100,7 @@ public final class AndroidCentral: CentralManager {
         guard hostController.isEnabled()
             else { throw AndroidCentralError.bluetoothDisabled }
         
-        guard let scanDevice = await storage.state.scan.peripherals[peripheral]
+        guard let scanDevice = storage.state.scan.peripherals[peripheral]
             else { throw CentralError.unknownPeripheral }
         
         // wait for connection continuation
@@ -107,10 +112,12 @@ public final class AndroidCentral: CentralManager {
                         
                         // store continuation
                         let callback = GattCallback(central: self)
-                        let gatt: AndroidBluetoothGatt
+                        let gatt: BluetoothGatt
                         
                         // call the correct method for connecting
-                        if Android.OS.Build.Version.Sdk.sdkInt.rawValue <= Android.OS.Build.VersionCodes.lollipopMr1 {
+                        let sdkInt = try JavaClass<AndroidOS.Build.VERSION>().SDK_INT
+                        let lollipopMr1 = try JavaClass<AndroidOS.Build.VERSION_CODES>().LOLLIPOP_MR1
+                        if sdkInt <= lollipopMr1 {
                             gatt = scanDevice.scanResult.device.connectGatt(
                                 context: self.context,
                                 autoConnect: autoConnect,
@@ -623,7 +630,7 @@ public extension AndroidCentral {
 
 internal extension AndroidCentral {
     
-    final class ScanCallback: Android.Bluetooth.LE.ScanCallback {
+    final class ScanCallback: AndroidBluetooth.ScanCallback {
         
         weak var central: AndroidCentral?
         
@@ -1154,7 +1161,7 @@ internal extension AndroidCentral {
     
     struct Services {
         
-        fileprivate(set) var values: [AndroidCentral.AttributeID: Android.Bluetooth.GattService] = [:]
+        fileprivate(set) var values: [AndroidCentral.AttributeID: BluetoothGattService] = [:]
     }
     
     struct Characteristics {
@@ -1165,7 +1172,7 @@ internal extension AndroidCentral {
     
     struct Descriptors {
        
-        fileprivate(set) var values: [AndroidCentral.AttributeID: Android.Bluetooth.GattDescriptor] = [:]
+        fileprivate(set) var values: [AndroidCentral.AttributeID: BluetoothGattDescriptor] = [:]
     }
     
     struct CharacteristicCache {
@@ -1210,7 +1217,7 @@ fileprivate extension Peripheral {
 
 internal extension BluetoothUUID {
     
-    init(android javaUUID: java_util.UUID) {
+    init(android javaUUID: JavaUtil.UUID) {
         
         let uuid = UUID(uuidString: javaUUID.toString())!
         if let value = UInt16(bluetooth: uuid) {
@@ -1243,3 +1250,4 @@ internal extension ScanData where Peripheral == AndroidCentral.Peripheral, Adver
         )
     }
 }
+*/

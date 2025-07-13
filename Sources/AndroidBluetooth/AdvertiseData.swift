@@ -6,6 +6,11 @@ import JavaKitCollection
 import JavaRuntime
 import JavaUtil
 
+/**
+ Advertise data packet container for Bluetooth LE advertising. This represents the data to be advertised as well as the scan response data for active scans.
+ 
+ Use ``AdvertiseData.Builder`` to create an instance of ``AdvertiseData`` to be advertised.
+ */
 @JavaClass("android.bluetooth.le.AdvertiseData", implements: Parcelable.self)
 open class AdvertiseData: JavaObject {
   @JavaMethod
@@ -36,7 +41,7 @@ open class AdvertiseData: JavaObject {
   open func getIncludeDeviceName() -> Bool
 
   @JavaMethod
-  open override func equals(_ arg0: AdvertiseData?) -> Bool
+  open func equals(_ arg0: AdvertiseData?) -> Bool
 
   @JavaMethod
   open override func toString() -> String
