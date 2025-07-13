@@ -17,9 +17,7 @@ import JavaLang
 import JavaUtil
 import AndroidOS
 import AndroidContent
-import AndroidLooper
 
-@AndroidMainActor
 public final class AndroidCentral: CentralManager {
     
     public typealias Advertisement = AndroidLowEnergyAdvertisementData
@@ -42,7 +40,7 @@ public final class AndroidCentral: CentralManager {
     
     public let options: Options
     
-    private let storage = Storage()
+    internal let storage = Storage()
     
     // MARK: - Intialization
     
