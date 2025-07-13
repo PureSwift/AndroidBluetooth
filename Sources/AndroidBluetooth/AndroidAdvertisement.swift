@@ -23,58 +23,53 @@ public struct AndroidLowEnergyAdvertisementData: Equatable {
         self.data = data
     }
 }
-/*
+
 extension AndroidLowEnergyAdvertisementData: AdvertisementData {
     
-    /// Decode GAP data types.
-    private func decode() -> [GAPData] {
-        
-        var decoder = GAPDataDecoder()
-        decoder.ignoreUnknownType = true
-        return (try? decoder.decode(data)) ?? []
-    }
+    #if canImport(FoundationEssentials)
+    public typealias Data = FoundationEssentials.Data
+    #elseif canImport(Foundation)
+    public typealias Data = Foundation.Data
+    #endif
     
     /// The local name of a peripheral.
     public var localName: String? {
         
-        let decoded = decode()
-        
-        guard let name = decoded.compactMap({ $0 as? GAPCompleteLocalName }).first?.name
-            ?? decoded.compactMap({ $0 as? GAPShortLocalName }).first?.name
-            else { return nil }
-        
-        return name
+        if let decoded = try? GAPDataDecoder.decode(GAPCompleteLocalName.self, from: data) {
+            return decoded.name
+        } else if let decoded = try? GAPDataDecoder.decode(GAPShortLocalName.self, from: data) {
+            return decoded.name
+        } else {
+            return nil
+        }
     }
     
     /// The Manufacturer data of a peripheral.
-    public var manufacturerData: ManufacturerSpecificData? {
+    public var manufacturerData: GAPManufacturerSpecificData<Data>? {
         
-        let decoded = decode()
-        
-        guard let value = decoded.compactMap({ $0 as? GAPManufacturerSpecificData }).first
+        guard let value = try? GAPDataDecoder.decode(GAPManufacturerSpecificData<Data>.self, from: data)
             else { return nil }
         
-        return value
+        return ManufacturerSpecificData(
+            companyIdentifier: value.companyIdentifier,
+            additionalData: value.additionalData
+        )
     }
     
     /// Service-specific advertisement data.
     public var serviceData: [BluetoothUUID: Data]? {
         
-        let decoded = decode()
+        var serviceData = [BluetoothUUID: Data](minimumCapacity: 3)
         
-        guard decoded.isEmpty == false
-            else { return nil }
-        
-        var serviceData = [BluetoothUUID: Data](minimumCapacity: decoded.count)
-        
-        decoded.compactMap { $0 as? GAPServiceData16BitUUID }
-            .forEach { serviceData[.bit16($0.uuid)] = $0.serviceData }
-        
-        decoded.compactMap { $0 as? GAPServiceData32BitUUID }
-            .forEach { serviceData[.bit32($0.uuid)] = $0.serviceData }
-        
-        decoded.compactMap { $0 as? GAPServiceData128BitUUID }
-            .forEach { serviceData[.bit128(UInt128(uuid: $0.uuid))] = $0.serviceData }
+        if let value = try? GAPDataDecoder.decode(GAPServiceData16BitUUID<Data>.self, from: data) {
+            serviceData[.bit16(value.uuid)] = value.serviceData
+        }
+        if let value = try? GAPDataDecoder.decode(GAPServiceData32BitUUID<Data>.self, from: data) {
+            serviceData[.bit32(value.uuid)] = value.serviceData
+        }
+        if let value = try? GAPDataDecoder.decode(GAPServiceData128BitUUID<Data>.self, from: data) {
+            serviceData[.bit128(UInt128(uuid: value.uuid))] = value.serviceData
+        }
         
         guard serviceData.isEmpty == false
             else { return nil }
@@ -85,37 +80,27 @@ extension AndroidLowEnergyAdvertisementData: AdvertisementData {
     /// An array of service UUIDs
     public var serviceUUIDs: [BluetoothUUID]? {
         
-        let decoded = decode()
-        
-        guard decoded.isEmpty == false
-            else { return nil }
-        
         var uuids = [BluetoothUUID]()
-        uuids.reserveCapacity(decoded.count)
+        uuids.reserveCapacity(2)
         
-        uuids += decoded
-            .compactMap { $0 as? GAPCompleteListOf16BitServiceClassUUIDs }
-            .reduce([BluetoothUUID](), { $0 + $1.uuids.map { BluetoothUUID.bit16($0) } })
-        
-        uuids += decoded
-            .compactMap { $0 as? GAPIncompleteListOf16BitServiceClassUUIDs }
-            .reduce([BluetoothUUID](), { $0 + $1.uuids.map { BluetoothUUID.bit16($0) } })
-        
-        uuids += decoded
-            .compactMap { $0 as? GAPCompleteListOf32BitServiceClassUUIDs }
-            .reduce([BluetoothUUID](), { $0 + $1.uuids.map { BluetoothUUID.bit32($0) } })
-        
-        uuids += decoded
-            .compactMap { $0 as? GAPIncompleteListOf32BitServiceClassUUIDs }
-            .reduce([BluetoothUUID](), { $0 + $1.uuids.map { BluetoothUUID.bit32($0) } })
-        
-        uuids += decoded
-            .compactMap { $0 as? GAPCompleteListOf128BitServiceClassUUIDs }
-            .reduce([BluetoothUUID](), { $0 + $1.uuids.map { BluetoothUUID(uuid: $0) } })
-        
-        uuids += decoded
-            .compactMap { $0 as? GAPIncompleteListOf128BitServiceClassUUIDs }
-            .reduce([BluetoothUUID](), { $0 + $1.uuids.map { BluetoothUUID(uuid: $0) } })
+        if let value = try? GAPDataDecoder.decode(GAPCompleteListOf16BitServiceClassUUIDs.self, from: data) {
+            uuids += value.uuids.map { .bit16($0) }
+        }
+        if let value = try? GAPDataDecoder.decode(GAPIncompleteListOf16BitServiceClassUUIDs.self, from: data) {
+            uuids += value.uuids.map { .bit16($0) }
+        }
+        if let value = try? GAPDataDecoder.decode(GAPIncompleteListOf32BitServiceClassUUIDs.self, from: data) {
+            uuids += value.uuids.map { .bit32($0) }
+        }
+        if let value = try? GAPDataDecoder.decode(GAPIncompleteListOf32BitServiceClassUUIDs.self, from: data) {
+            uuids += value.uuids.map { .bit32($0) }
+        }
+        if let value = try? GAPDataDecoder.decode(GAPCompleteListOf128BitServiceClassUUIDs.self, from: data) {
+            uuids += value.uuids.map { .init(uuid: $0) }
+        }
+        if let value = try? GAPDataDecoder.decode(GAPIncompleteListOf128BitServiceClassUUIDs.self, from: data) {
+            uuids += value.uuids.map { .init(uuid: $0) }
+        }
         
         guard uuids.isEmpty == false
             else { return nil }
@@ -127,33 +112,27 @@ extension AndroidLowEnergyAdvertisementData: AdvertisementData {
     /// Using the RSSI value and the Tx power level, it is possible to calculate path loss.
     public var txPowerLevel: Double? {
         
-        let decoded = decode()
-        
-        guard let gapData = decoded.compactMap({ $0 as? GAPTxPowerLevel }).first
+        guard let value = try? GAPDataDecoder.decode(GAPTxPowerLevel.self, from: data)
             else { return nil }
         
-        return Double(gapData.powerLevel)
+        return Double(value.powerLevel)
     }
     
     /// An array of one or more `BluetoothUUID`, representing Service UUIDs.
     public var solicitedServiceUUIDs: [BluetoothUUID]? {
         
-        let decoded = decode()
-        
-        guard decoded.isEmpty == false
-            else { return nil }
-        
         var uuids = [BluetoothUUID]()
-        uuids.reserveCapacity(decoded.count)
+        uuids.reserveCapacity(2)
         
-        decoded.compactMap { $0 as? GAPListOf16BitServiceSolicitationUUIDs }
-            .forEach { $0.uuids.forEach { uuids.append(.bit16($0)) } }
-        
-        decoded.compactMap { $0 as? GAPListOf32BitServiceSolicitationUUIDs }
-            .forEach { $0.uuids.forEach { uuids.append(.bit32($0)) } }
-        
-        decoded.compactMap { $0 as? GAPListOf128BitServiceSolicitationUUIDs }
-            .forEach { $0.uuids.forEach { uuids.append(.bit128(UInt128(uuid: $0))) } }
+        if let value = try? GAPDataDecoder.decode(GAPListOf16BitServiceSolicitationUUIDs.self, from: data) {
+            uuids += value.uuids.map { .bit16($0) }
+        }
+        if let value = try? GAPDataDecoder.decode(GAPListOf32BitServiceSolicitationUUIDs.self, from: data) {
+            uuids += value.uuids.map { .bit32($0) }
+        }
+        if let value = try? GAPDataDecoder.decode(GAPListOf128BitServiceSolicitationUUIDs.self, from: data) {
+            uuids += value.uuids.map { .init(uuid: $0) }
+        }
         
         guard uuids.isEmpty == false
             else { return nil }
@@ -161,4 +140,3 @@ extension AndroidLowEnergyAdvertisementData: AdvertisementData {
         return uuids
     }
 }
-*/
