@@ -40,18 +40,80 @@ open class BluetoothDevice: JavaObject {
   @JavaMethod
   open func setPin(_ arg0: [Int8]) -> Bool
 
+  /**
+   Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations. The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client operations.
+   For apps targeting Build.VERSION_CODES.S or or higher, this requires the Manifest.permission.BLUETOOTH_CONNECT permission which can be gained with Activity.requestPermissions(String[], int).
+   
+   Requires `Manifest.permission.BLUETOOTH_CONNECT`
+   */
   @JavaMethod
-  open func connectGatt(_ arg0: Context?, _ arg1: Bool, _ arg2: BluetoothGattCallback?) -> BluetoothGatt!
+  public func connectGatt(
+    context: AndroidContent.Context?,
+    autoConnect: Bool,
+    callback: BluetoothGattCallback?
+  ) -> BluetoothGatt!
+
+  /**
+   Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations. The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client operations.
+   For apps targeting `Build.VERSION_CODES.S` or or higher, this requires the `Manifest.permission.BLUETOOTH_CONNECT` permission which can be gained with Activity.requestPermissions(String[], int).
+   
+   Requires `Manifest.permission.BLUETOOTH_CONNECT`
+   */
+  @JavaMethod
+  internal func connectGatt(
+    _ context: AndroidContent.Context?,
+    _ autoConnect: Bool,
+    _ callback: BluetoothGattCallback?,
+    _ transport: Int32
+  ) -> BluetoothGatt!
+    
+  /// Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations.
+  ///
+  /// - Parameter context: The running app's context.
+  ///
+  /// - Parameter autoConnect: Whether to directly connect to the remote device (false) or to automatically connect as soon as the remote device becomes available (true).
+  ///
+  /// - Parameter callback: GATT callback handler that will receive asynchronous callbacks.
+  ///
+  /// - Parameter transport: Preferred transport for GATT connections to remote dual-mode devices
+  ///
+  /// - Returns: The method returns a ``BluetoothGatt`` instance.
+  ///
+  /// - Note: Requires `Manifest.permission.BLUETOOTH_CONNECT`
+  public func connectGatt(
+      context: AndroidContent.Context,
+      autoConnect: Bool = false,
+      callback: BluetoothGattCallback,
+      transport: BluetoothTransport = .auto
+  ) -> BluetoothGatt! {
+      connectGatt(context, autoConnect, callback, transport.rawValue)
+  }
+
+  /**
+   Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations. The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client operations.
+   For apps targeting Build.VERSION_CODES.S or or higher, this requires the Manifest.permission.BLUETOOTH_CONNECT permission which can be gained with Activity.requestPermissions(String[], int).
+   
+   Requires Manifest.permission.BLUETOOTH_CONNECT
+   */
+  @JavaMethod
+  public func connectGatt(
+    _ context: AndroidContent.Context?,
+    _ autoConnect: Bool,
+    _ callback: BluetoothGattCallback?,
+    _ transport: BluetoothTransport,
+    _ phy: Int32
+  ) -> BluetoothGatt!
 
   @JavaMethod
-  open func connectGatt(_ arg0: Context?, _ arg1: Bool, _ arg2: BluetoothGattCallback?, _ arg3: Int32) -> BluetoothGatt!
-
-  @JavaMethod
-  open func connectGatt(_ arg0: Context?, _ arg1: Bool, _ arg2: BluetoothGattCallback?, _ arg3: Int32, _ arg4: Int32) -> BluetoothGatt!
-
-  @JavaMethod
-  open func connectGatt(_ arg0: Context?, _ arg1: Bool, _ arg2: BluetoothGattCallback?, _ arg3: Int32, _ arg4: Int32, _ arg5: Handler?) -> BluetoothGatt!
-
+  public func connectGatt(
+    _ context: AndroidContent.Context?,
+    _ autoConnect: Bool,
+    _ callback: BluetoothGattCallback?,
+    _ transport: Int,
+    _ phy: Int32,
+    _ handler: Handler?
+  ) -> BluetoothGatt!
+  
   @JavaMethod
   open func createL2capChannel(_ arg0: Int32) throws -> BluetoothSocket!
 
