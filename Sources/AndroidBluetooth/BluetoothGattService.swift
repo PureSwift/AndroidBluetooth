@@ -38,7 +38,11 @@ open class BluetoothGattService: JavaObject {
   open func getIncludedServices() -> List<BluetoothGattService>!
 
   @JavaMethod
-  open func getType() -> Int32
+  internal func getType() -> Int32
+
+    public var type: ServiceType {
+        .init(rawValue: getType())!
+    }
 }
 extension JavaClass<BluetoothGattService> {
   @JavaStaticField(isFinal: true)
