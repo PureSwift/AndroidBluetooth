@@ -1,13 +1,23 @@
-// swift-tools-version:5.7
+// swift-tools-version:6.1
 import PackageDescription
+import CompilerPluginSupport
+
+import class Foundation.FileManager
+import class Foundation.ProcessInfo
+
+// Get NDK version from command line
+let environment = ProcessInfo.processInfo.environment
+let ndkVersion = environment["ANDROID_NDK_VERSION"].flatMap { UInt($0) } ?? 27
+let ndkVersionDefine = SwiftSetting.define("ANDROID_NDK_VERSION_" + ndkVersion.description)
+
+// Get Android API version
+let sdkVersion = environment["ANDROID_SDK_VERSION"].flatMap { UInt($0) } ?? 29
+let sdkVersionDefine = SwiftSetting.define("ANDROID_SDK_VERSION_" + ndkVersion.description)
 
 let package = Package(
     name: "AndroidBluetooth",
     platforms: [
-        .macOS(.v10_15),
-        .iOS(.v13),
-        .watchOS(.v6),
-        .tvOS(.v13),
+        .macOS(.v15)
     ],
     products: [
         .library(
@@ -25,24 +35,39 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/PureSwift/Bluetooth.git",
-            .upToNextMajor(from: "6.0.0")
+            from: "7.2.0"
         )
     ],
     targets: [
         .target(
             name: "AndroidBluetooth",
             dependencies: [
-                "Android",
-                "Bluetooth",
-                "GATT",
+                .product(
+                    name: "Bluetooth",
+                    package: "Bluetooth"
+                ),
                 .product(
                     name: "BluetoothGAP",
                     package: "Bluetooth"
+                ),
+                .product(
+                    name: "GATT",
+                    package: "GATT"
+                ),
+                .product(
+                    name: "AndroidKit",
+                    package: "Android"
                 )
-            ]),
-        .testTarget(
-            name: "AndroidBluetoothTests",
-            dependencies: ["AndroidBluetooth"]
+            ],
+            exclude: ["swift-java.config"],
+            swiftSettings: [
+              .swiftLanguageMode(.v5),
+              ndkVersionDefine,
+              sdkVersionDefine
+            ],
+            plugins: [
+                //.plugin(name: "SwiftJavaPlugin", package: "swift-java")
+            ]
         )
     ]
 )
