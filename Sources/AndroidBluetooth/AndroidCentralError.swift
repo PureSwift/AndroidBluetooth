@@ -19,5 +19,5 @@ public enum AndroidCentralError: Swift.Error {
     
     case scanFailed(Int32)
     
-    
+    case gattStatus(Int32)
 }
