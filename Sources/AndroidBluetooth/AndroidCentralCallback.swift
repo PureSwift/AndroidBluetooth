@@ -22,7 +22,11 @@ extension AndroidCentral {
         
         weak var central: AndroidCentral?
         
-        init(central: AndroidCentral, environment: JNIEnvironment?) {
+        @JavaMethod
+        @_nonoverride convenience init(environment: JNIEnvironment? = nil)
+        
+        convenience init(central: AndroidCentral, environment: JNIEnvironment? = nil) {
+            self.init(environment: environment)
             self.central = central
         }
     }
@@ -36,15 +40,15 @@ extension AndroidCentral.LowEnergyScanCallback {
         guard let central else {
             return
         }
-        central.log?("\(type(of: self)): \(#function) name: \(result.getDevice().getName() ?? "") address: \(result.getDevice().getAddress())")
         guard let result, let scanData = try? ScanData(result) else {
             assertionFailure()
             return
         }
+        central.log?("\(type(of: self)): \(#function) name: \(result.getDevice().getName() ?? "") address: \(result.getDevice().getAddress())")
         Task {
             await central.storage.update { state in
                 state.scan.continuation?.yield(scanData)
-                state.scan.peripherals[scanData.peripheral] = InternalState.Scan.Device(
+                state.scan.peripherals[scanData.peripheral] = AndroidCentral.InternalState.Scan.Device(
                     scanData: scanData,
                     scanResult: result
                 )
