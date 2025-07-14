@@ -102,22 +102,25 @@ extension AndroidCentral.LowEnergyScanCallback {
     }
 }
 
-@JavaClass("org.pureswift.bluetooth.BluetoothGattCallback")
-class GattCallback: AndroidBluetooth.BluetoothGattCallback {
+extension AndroidCentral {
     
-    weak var central: AndroidCentral?
-    
-    @JavaMethod
-    @_nonoverride convenience init(environment: JNIEnvironment? = nil)
-    
-    convenience init(central: AndroidCentral, environment: JNIEnvironment? = nil) {
-        self.init(environment: environment)
-        self.central = central
+    @JavaClass("org.pureswift.bluetooth.BluetoothGattCallback")
+    class GattCallback: AndroidBluetooth.BluetoothGattCallback {
+        
+        weak var central: AndroidCentral?
+        
+        @JavaMethod
+        @_nonoverride convenience init(environment: JNIEnvironment? = nil)
+        
+        convenience init(central: AndroidCentral, environment: JNIEnvironment? = nil) {
+            self.init(environment: environment)
+            self.central = central
+        }
     }
 }
 
 @JavaImplementation("org.pureswift.bluetooth.BluetoothGattCallback")
-extension GattCallback {
+extension AndroidCentral.GattCallback {
     
     /**
      Callback indicating when GATT client has connected/disconnected to/from a remote GATT server.
@@ -164,22 +167,28 @@ extension GattCallback {
             }
         }
     }
-    /*
+    
     @JavaMethod
     public func onServicesDiscovered(
         gatt: BluetoothGatt?,
         status: Int32
     ) {
-        let log = central?.log
+        guard let central, let gatt else {
+            assertionFailure()
+            return
+        }
+        let log = central.log
         let peripheral = Peripheral(gatt)
+        let status = BluetoothGatt.Status(rawValue: status)
         log?("\(type(of: self)): \(#function) Status: \(status)")
         
         Task {
-            await central?.storage.update { state in
+            await central.storage.update { state in
                 // success discovering
                 switch status {
                 case .success:
-                    guard let services = state.cache[peripheral]?.update(gatt.services) else {
+                    guard let javaServices = gatt.getServices()?.toArray().map({ $0!.as(BluetoothGattService.self)! }),
+                        let services = state.cache[peripheral]?.update(javaServices) else {
                         assertionFailure()
                         return
                     }
@@ -191,7 +200,7 @@ extension GattCallback {
             }
         }
     }
-    
+    /*
     @JavaMethod
     public func onCharacteristicChanged(
         gatt: BluetoothGatt?,
