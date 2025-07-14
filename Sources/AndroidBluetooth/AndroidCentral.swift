@@ -78,9 +78,7 @@ public final class AndroidCentral: CentralManager {
                     $0.scan.peripherals.removeAll()
                     $0.scan.continuation = continuation
                 }
-                let scanCallBack = ScanCallback()
-                // TODO: Implement callbacks
-                //scanCallBack.central = self
+                let scanCallBack = LowEnergyScanCallback(central: self)
                 scanner.startScan(scanCallBack)
             }
         })
