@@ -169,7 +169,7 @@ extension AndroidCentral.GattCallback {
     }
     
     @JavaMethod
-    public func onServicesDiscovered(
+     func onServicesDiscovered(
         gatt: BluetoothGatt?,
         status: Int32
     ) {
@@ -200,21 +200,25 @@ extension AndroidCentral.GattCallback {
             }
         }
     }
-    /*
+    
     @JavaMethod
-    public func onCharacteristicChanged(
+    func onCharacteristicChanged(
         gatt: BluetoothGatt?,
         characteristic: BluetoothGattCharacteristic?
     ) {
-        let log = central?.log
+        guard let central, let gatt, let characteristic else {
+            assertionFailure()
+            return
+        }
+        let log = central.log
         log?("\(type(of: self)): \(#function)")
         
         let peripheral = Peripheral(gatt)
                     
         Task {
-            await central?.storage.update { state in
+            await central.storage.update { state in
                 
-                guard let uuid = characteristic.getUuid().toString() else {
+                guard let uuid = characteristic.getUuid()?.toString() else {
                     assertionFailure()
                     return
                 }
@@ -226,8 +230,10 @@ extension AndroidCentral.GattCallback {
                 
                 let id = cache.identifier(for: characteristic)
                 
-                let data = characteristic.getValue()
-                    .map { Data(unsafeBitCast($0, to: [UInt8].self)) } ?? .init()
+                let bytes = characteristic.getValue()
+                
+                // TODO: Replace usage of Foundation.Data with byte array to prevent copying
+                let data = Data(unsafeBitCast(bytes, to: [UInt8].self))
                 
                 guard let characteristicCache = cache.characteristics.values[id] else {
                     assertionFailure("Invalid identifier for \(uuid)")
@@ -245,22 +251,27 @@ extension AndroidCentral.GattCallback {
     }
     
     @JavaMethod
-    public func onCharacteristicRead(
-        gatt: BluetoothGatt!,
-        characteristic: BluetoothGattCharacteristic!,
+    func onCharacteristicRead(
+        gatt: BluetoothGatt?,
+        characteristic: BluetoothGattCharacteristic?,
         status: Int32
     ) {
-        let log = central?.log
+        guard let central, let gatt, let characteristic else {
+            assertionFailure()
+            return
+        }
+        let log = central.log
         let peripheral = Peripheral(gatt)
+        let status = BluetoothGatt.Status(rawValue: status)
         log?("\(type(of: self)): \(#function) \(peripheral) Status: \(status)")
         
         Task {
-            await central?.storage.update { state in
+            await central.storage.update { state in
                                     
                 switch status {
                 case .success:
-                    let data = characteristic.getValue()
-                        .map { Data(unsafeBitCast($0, to: [UInt8].self)) } ?? Data()
+                    let bytes = characteristic.getValue()
+                    let data = Data(unsafeBitCast(bytes, to: [UInt8].self))
                     state.cache[peripheral]?.continuation.readCharacteristic?.resume(returning: data)
                 default:
                     state.cache[peripheral]?.continuation.readCharacteristic?.resume(throwing: AndroidCentralError.gattStatus(status))
@@ -271,17 +282,21 @@ extension AndroidCentral.GattCallback {
     }
     
     @JavaMethod
-    public func onCharacteristicWrite(
-        gatt: BluetoothGatt!,
-        characteristic: BluetoothGattCharacteristic!,
+    func onCharacteristicWrite(
+        gatt: BluetoothGatt?,
+        characteristic: BluetoothGattCharacteristic?,
         status: Int32
     ) {
-        central?.log?("\(type(of: self)): \(#function)")
-        
+        guard let central, let gatt else {
+            assertionFailure()
+            return
+        }
+        let status = BluetoothGatt.Status(rawValue: status)
+        central.log?("\(type(of: self)): \(#function)")
         let peripheral = Peripheral(gatt)
         
         Task {
-            await central?.storage.update { state in
+            await central.storage.update { state in
                 switch status {
                 case .success:
                     state.cache[peripheral]?.continuation.writeCharacteristic?.resume()
@@ -294,27 +309,32 @@ extension AndroidCentral.GattCallback {
     }
     
     @JavaMethod
-    public func onDescriptorRead(
-        gatt: BluetoothGatt,
-        descriptor: BluetoothGattDescriptor,
+    func onDescriptorRead(
+        gatt: BluetoothGatt?,
+        descriptor: BluetoothGattDescriptor?,
         status: Int32
     ) {
+        guard let central, let gatt, let descriptor else {
+            assertionFailure()
+            return
+        }
+        let status = BluetoothGatt.Status(rawValue: status)
         let peripheral = Peripheral(gatt)
         
-        guard let uuid = descriptor.getUuid().toString() else {
+        guard let uuid = descriptor.getUuid()?.toString() else {
             assertionFailure()
             return
         }
         
-        central?.log?(" \(type(of: self)): \(#function) \(uuid)")
+        central.log?(" \(type(of: self)): \(#function) \(uuid)")
         
         Task {
-            await central?.storage.update { state in
+            await central.storage.update { state in
                                     
                 switch status {
                 case .success:
-                    let data = descriptor.getValue()
-                        .map { Data(unsafeBitCast($0, to: [UInt8].self)) } ?? Data()
+                    let bytes = descriptor.getValue()
+                    let data = Data(unsafeBitCast(bytes, to: [UInt8].self))
                     state.cache[peripheral]?.continuation.readDescriptor?.resume(returning: data)
                 default:
                     state.cache[peripheral]?.continuation.readDescriptor?.resume(throwing: AndroidCentralError.gattStatus(status))
@@ -325,23 +345,27 @@ extension AndroidCentral.GattCallback {
     }
     
     @JavaMethod
-    public func onDescriptorWrite(
-        gatt: BluetoothGatt,
-        descriptor: BluetoothGattDescriptor,
+     func onDescriptorWrite(
+        gatt: BluetoothGatt?,
+        descriptor: BluetoothGattDescriptor?,
         status: Int32
     ) {
-        
+        guard let central, let gatt, let descriptor else {
+            assertionFailure()
+            return
+        }
+        let status = BluetoothGatt.Status(rawValue: status)
         let peripheral = Peripheral(gatt)
         
-        guard let uuid = descriptor.getUuid().toString() else {
+        guard let uuid = descriptor.getUuid()?.toString() else {
             assertionFailure()
             return
         }
         
-        central?.log?(" \(type(of: self)): \(#function) \(uuid)")
+        central.log?(" \(type(of: self)): \(#function) \(uuid)")
         
         Task {
-            await central?.storage.update { state in
+            await central.storage.update { state in
                 switch status {
                 case .success:
                     state.cache[peripheral]?.continuation.writeDescriptor?.resume()
@@ -354,19 +378,19 @@ extension AndroidCentral.GattCallback {
     }
     
     @JavaMethod
-    public func onMtuChanged(
-        gatt: BluetoothGatt,
-        mtu: Int,
+     func onMtuChanged(
+        gatt: BluetoothGatt?,
+        mtu: Int32,
         status: Int32
     ) {
-        central?.log?("\(type(of: self)): \(#function) Peripheral \(Peripheral(gatt)) MTU \(mtu) Status \(status)")
-        
-        let peripheral = Peripheral(gatt)
-        
-        guard let central = self.central else {
+        guard let central, let gatt else {
             assertionFailure()
             return
         }
+        let status = BluetoothGatt.Status(rawValue: status)
+        central.log?("\(type(of: self)): \(#function) Peripheral \(Peripheral(gatt)) MTU \(mtu) Status \(status)")
+        
+        let peripheral = Peripheral(gatt)
         
         let oldMTU = central.options.maximumTransmissionUnit
         
@@ -394,29 +418,33 @@ extension AndroidCentral.GattCallback {
     }
     
     @JavaMethod
-    public func onPhyRead(gatt: BluetoothGatt, txPhy: Int32, rxPhy: Int32, status: Int32) {
-        
-        central?.log?("\(type(of: self)): \(#function)")
+     func onPhyRead(gatt: BluetoothGatt?, txPhy: Int32, rxPhy: Int32, status: Int32) {
+         let status = BluetoothGatt.Status(rawValue: status)
+        central?.log?("\(type(of: self)): \(#function) \(status)")
     }
     
     @JavaMethod
-    public func onPhyUpdate(gatt: BluetoothGatt, txPhy: Int32, rxPhy: Int32, status: Int32) {
-        
-        central?.log?("\(type(of: self)): \(#function)")
+     func onPhyUpdate(gatt: BluetoothGatt?, txPhy: Int32, rxPhy: Int32, status: Int32) {
+         let status = BluetoothGatt.Status(rawValue: status)
+        central?.log?("\(type(of: self)): \(#function) \(status)")
     }
     
     @JavaMethod
-    public func onReadRemoteRssi(gatt: BluetoothGatt, rssi: Int32, status: Int32) {
-        
-        central?.log?("\(type(of: self)): \(#function) \(rssi) \(status)")
+     func onReadRemoteRssi(gatt: BluetoothGatt?, rssi: Int32, status: Int32) {
+         guard let central, let gatt else {
+             assertionFailure()
+             return
+         }
+         let status = BluetoothGatt.Status(rawValue: status)
+        central.log?("\(type(of: self)): \(#function) \(rssi) \(status)")
         
         let peripheral = Peripheral(gatt)
         
         Task {
-            await central?.storage.update { state in
+            await central.storage.update { state in
                 switch status {
                 case .success:
-                    state.cache[peripheral]?.continuation.readRemoteRSSI?.resume(returning: rssi)
+                    state.cache[peripheral]?.continuation.readRemoteRSSI?.resume(returning: Int(rssi))
                 default:
                     state.cache[peripheral]?.continuation.readRemoteRSSI?.resume(throwing: AndroidCentralError.gattStatus(status))
                 }
@@ -426,8 +454,8 @@ extension AndroidCentral.GattCallback {
     }
     
     @JavaMethod
-    public override func onReliableWriteCompleted(gatt: BluetoothGatt, status: Int32) {
-        
-        central?.log?("\(type(of: self)): \(#function)")
-    }*/
+    func onReliableWriteCompleted(gatt: BluetoothGatt?, status: Int32) {
+         let status = BluetoothGatt.Status(rawValue: status)
+        central?.log?("\(type(of: self)): \(#function) \(status)")
+    }
 }
