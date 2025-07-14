@@ -36,7 +36,7 @@ extension AndroidCentral {
 extension AndroidCentral.LowEnergyScanCallback {
     
     @JavaMethod
-    func onScanResultSwift(_ error: Int32, _ result: AndroidBluetooth.ScanResult?) {
+    func onScanResult(error: Int32, result: AndroidBluetooth.ScanResult?) {
         guard let central else {
             return
         }
@@ -57,7 +57,7 @@ extension AndroidCentral.LowEnergyScanCallback {
     }
     
     @JavaMethod
-    func onBatchScanResultsSwift(results: [AndroidBluetooth.ScanResult?]) {
+    func onBatchScanResults(results: [AndroidBluetooth.ScanResult?]) {
         guard let central else {
             return
         }
@@ -107,24 +107,26 @@ extension AndroidCentral {
     @JavaClass("org.pureswift.bluetooth.BluetoothGattCallback")
     internal class GattCallback: AndroidBluetooth.BluetoothGattCallback {
         
-        private weak var central: AndroidCentral?
+        weak var central: AndroidCentral?
         
-        /*
-        convenience init(central: AndroidCentral) {
-            self.init(javaObject: nil)
-            bindNewJavaObject()
-            
+        @JavaMethod
+        @_nonoverride convenience init(environment: JNIEnvironment? = nil)
+        
+        convenience init(central: AndroidCentral, environment: JNIEnvironment? = nil) {
+            self.init(environment: environment)
             self.central = central
         }
         
-        public required init(javaObject: jobject?) {
-            super.init(javaObject: javaObject)
-        }
-        
-        public override func onConnectionStateChange(
-            gatt: Android.Bluetooth.Gatt,
-            status: Android.Bluetooth.Gatt.Status,
-            newState: Android.Bluetooth.Device.State
+    }
+}
+@JavaImplementation("org.pureswift.bluetooth.BluetoothGattCallback")
+extension AndroidCentral.GattCallback {
+    
+        @JavaMethod
+        public func onConnectionStateChange(
+            gatt: BluetoothGatt?,
+            status: Int32,
+            newState: Int32 //Android.Bluetooth.Device.State
         ) {
             let log = central?.log
             log?("\(type(of: self)): \(#function)")
@@ -147,16 +149,17 @@ extension AndroidCentral {
                         state.cache[peripheral] = nil
                     default:
                         log?("\(peripheral) Status Error")
-                        state.cache[peripheral]?.continuation.connect?.resume(throwing: status) // throw `status` error
+                        state.cache[peripheral]?.continuation.connect?.resume(throwing: AndroidCentralError.gattStatus(status))
                         state.cache[peripheral]?.continuation.connect = nil
                     }
                 }
             }
         }
         
-        public override func onServicesDiscovered(
-            gatt: Android.Bluetooth.Gatt,
-            status: Android.Bluetooth.Gatt.Status
+        @JavaMethod
+        public func onServicesDiscovered(
+            gatt: BluetoothGatt?,
+            status: Int32
         ) {
             let log = central?.log
             let peripheral = Peripheral(gatt)
@@ -173,16 +176,17 @@ extension AndroidCentral {
                         }
                         state.cache[peripheral]?.continuation.discoverServices?.resume(returning: services)
                     default:
-                        state.cache[peripheral]?.continuation.discoverServices?.resume(throwing: status)
+                        state.cache[peripheral]?.continuation.discoverServices?.resume(throwing: AndroidCentralError.gattStatus(status))
                     }
                     state.cache[peripheral]?.continuation.discoverServices = nil
                 }
             }
         }
         
-        public override func onCharacteristicChanged(
-            gatt: Android.Bluetooth.Gatt,
-            characteristic: Android.Bluetooth.GattCharacteristic
+        @JavaMethod
+        public func onCharacteristicChanged(
+            gatt: BluetoothGatt?,
+            characteristic: BluetoothGattCharacteristic?
         ) {
             let log = central?.log
             log?("\(type(of: self)): \(#function)")
@@ -192,7 +196,7 @@ extension AndroidCentral {
             Task {
                 await central?.storage.update { state in
                     
-                    guard let uuid = characteristic.getUUID().toString() else {
+                    guard let uuid = characteristic.getUuid().toString() else {
                         assertionFailure()
                         return
                     }
@@ -205,7 +209,7 @@ extension AndroidCentral {
                     let id = cache.identifier(for: characteristic)
                     
                     let data = characteristic.getValue()
-                        .map { Data(unsafeBitCast($0, to: [UInt8].self)) } ?? Data()
+                        .map { Data(unsafeBitCast($0, to: [UInt8].self)) } ?? .init()
                     
                     guard let characteristicCache = cache.characteristics.values[id] else {
                         assertionFailure("Invalid identifier for \(uuid)")
@@ -222,10 +226,11 @@ extension AndroidCentral {
             }
         }
         
-        public override func onCharacteristicRead(
-            gatt: Android.Bluetooth.Gatt,
-            characteristic: Android.Bluetooth.GattCharacteristic,
-            status: Android.Bluetooth.Gatt.Status
+        @JavaMethod
+        public func onCharacteristicRead(
+            gatt: BluetoothGatt!,
+            characteristic: BluetoothGattCharacteristic!,
+            status: Int32
         ) {
             let log = central?.log
             let peripheral = Peripheral(gatt)
@@ -240,17 +245,18 @@ extension AndroidCentral {
                             .map { Data(unsafeBitCast($0, to: [UInt8].self)) } ?? Data()
                         state.cache[peripheral]?.continuation.readCharacteristic?.resume(returning: data)
                     default:
-                        state.cache[peripheral]?.continuation.readCharacteristic?.resume(throwing: status)
+                        state.cache[peripheral]?.continuation.readCharacteristic?.resume(throwing: AndroidCentralError.gattStatus(status))
                     }
                     state.cache[peripheral]?.continuation.readCharacteristic = nil
                 }
             }
         }
         
-        public override func onCharacteristicWrite(
-            gatt: Android.Bluetooth.Gatt,
-            characteristic: Android.Bluetooth.GattCharacteristic,
-            status: Android.Bluetooth.Gatt.Status
+        @JavaMethod
+        public func onCharacteristicWrite(
+            gatt: BluetoothGatt!,
+            characteristic: BluetoothGattCharacteristic!,
+            status: Int32
         ) {
             central?.log?("\(type(of: self)): \(#function)")
             
@@ -262,21 +268,22 @@ extension AndroidCentral {
                     case .success:
                         state.cache[peripheral]?.continuation.writeCharacteristic?.resume()
                     default:
-                        state.cache[peripheral]?.continuation.writeCharacteristic?.resume(throwing: status)
+                        state.cache[peripheral]?.continuation.writeCharacteristic?.resume(throwing: AndroidCentralError.gattStatus(status))
                     }
                     state.cache[peripheral]?.continuation.writeCharacteristic = nil
                 }
             }
         }
         
-        public override func onDescriptorRead(
-            gatt: Android.Bluetooth.Gatt,
-            descriptor: Android.Bluetooth.GattDescriptor,
-            status: Android.Bluetooth.Gatt.Status
+        @JavaMethod
+        public func onDescriptorRead(
+            gatt: BluetoothGatt,
+            descriptor: BluetoothGattDescriptor,
+            status: Int32
         ) {
             let peripheral = Peripheral(gatt)
             
-            guard let uuid = descriptor.getUUID().toString() else {
+            guard let uuid = descriptor.getUuid().toString() else {
                 assertionFailure()
                 return
             }
@@ -292,22 +299,23 @@ extension AndroidCentral {
                             .map { Data(unsafeBitCast($0, to: [UInt8].self)) } ?? Data()
                         state.cache[peripheral]?.continuation.readDescriptor?.resume(returning: data)
                     default:
-                        state.cache[peripheral]?.continuation.readDescriptor?.resume(throwing: status)
+                        state.cache[peripheral]?.continuation.readDescriptor?.resume(throwing: AndroidCentralError.gattStatus(status))
                     }
                     state.cache[peripheral]?.continuation.readDescriptor = nil
                 }
             }
         }
         
-        public override func onDescriptorWrite(
-            gatt: Android.Bluetooth.Gatt,
-            descriptor: Android.Bluetooth.GattDescriptor,
-            status: AndroidBluetoothGatt.Status
+        @JavaMethod
+        public func onDescriptorWrite(
+            gatt: BluetoothGatt,
+            descriptor: BluetoothGattDescriptor,
+            status: Int32
         ) {
             
             let peripheral = Peripheral(gatt)
             
-            guard let uuid = descriptor.getUUID().toString() else {
+            guard let uuid = descriptor.getUuid().toString() else {
                 assertionFailure()
                 return
             }
@@ -320,17 +328,18 @@ extension AndroidCentral {
                     case .success:
                         state.cache[peripheral]?.continuation.writeDescriptor?.resume()
                     default:
-                        state.cache[peripheral]?.continuation.writeDescriptor?.resume(throwing: status)
+                        state.cache[peripheral]?.continuation.writeDescriptor?.resume(throwing: AndroidCentralError.gattStatus(status))
                     }
                     state.cache[peripheral]?.continuation.writeDescriptor = nil
                 }
             }
         }
         
-        public override func onMtuChanged(
-            gatt: Android.Bluetooth.Gatt,
+        @JavaMethod
+        public func onMtuChanged(
+            gatt: BluetoothGatt,
             mtu: Int,
-            status: Android.Bluetooth.Gatt.Status
+            status: Int32
         ) {
             central?.log?("\(type(of: self)): \(#function) Peripheral \(Peripheral(gatt)) MTU \(mtu) Status \(status)")
             
@@ -366,17 +375,20 @@ extension AndroidCentral {
             }
         }
         
-        public override func onPhyRead(gatt: Android.Bluetooth.Gatt, txPhy: Android.Bluetooth.Gatt.TxPhy, rxPhy: Android.Bluetooth.Gatt.RxPhy, status: AndroidBluetoothGatt.Status) {
+        @JavaMethod
+        public func onPhyRead(gatt: BluetoothGatt, txPhy: Int32, rxPhy: Int32, status: Int32) {
             
             central?.log?("\(type(of: self)): \(#function)")
         }
         
-        public override func onPhyUpdate(gatt: Android.Bluetooth.Gatt, txPhy: Android.Bluetooth.Gatt.TxPhy, rxPhy: Android.Bluetooth.Gatt.RxPhy, status: AndroidBluetoothGatt.Status) {
+        @JavaMethod
+        public func onPhyUpdate(gatt: BluetoothGatt, txPhy: Int32, rxPhy: Int32, status: Int32) {
             
             central?.log?("\(type(of: self)): \(#function)")
         }
         
-        public override func onReadRemoteRssi(gatt: Android.Bluetooth.Gatt, rssi: Int, status: Android.Bluetooth.Gatt.Status) {
+        @JavaMethod
+        public func onReadRemoteRssi(gatt: BluetoothGatt, rssi: Int32, status: Int32) {
             
             central?.log?("\(type(of: self)): \(#function) \(rssi) \(status)")
             
@@ -388,16 +400,16 @@ extension AndroidCentral {
                     case .success:
                         state.cache[peripheral]?.continuation.readRemoteRSSI?.resume(returning: rssi)
                     default:
-                        state.cache[peripheral]?.continuation.readRemoteRSSI?.resume(throwing: status)
+                        state.cache[peripheral]?.continuation.readRemoteRSSI?.resume(throwing: AndroidCentralError.gattStatus(status))
                     }
                     state.cache[peripheral]?.continuation.readRemoteRSSI = nil
                 }
             }
         }
         
-        public override func onReliableWriteCompleted(gatt: Android.Bluetooth.Gatt, status: AndroidBluetoothGatt.Status) {
+        @JavaMethod
+        public override func onReliableWriteCompleted(gatt: BluetoothGatt, status: Int32) {
             
             central?.log?("\(type(of: self)): \(#function)")
-        }*/
-    }
+        }
 }
