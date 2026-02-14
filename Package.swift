@@ -55,7 +55,15 @@ let package = Package(
                     package: "GATT"
                 ),
                 .product(
-                    name: "AndroidKit",
+                    name: "AndroidOS",
+                    package: "Android"
+                ),
+                .product(
+                    name: "AndroidContent",
+                    package: "Android"
+                ),
+                .product(
+                    name: "AndroidUtil",
                     package: "Android"
                 )
             ],
