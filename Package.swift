@@ -11,8 +11,8 @@ let ndkVersion = environment["ANDROID_NDK_VERSION"].flatMap { UInt($0) } ?? 27
 let ndkVersionDefine = SwiftSetting.define("ANDROID_NDK_VERSION_" + ndkVersion.description)
 
 // Get Android API version
-let sdkVersion = environment["ANDROID_SDK_VERSION"].flatMap { UInt($0) } ?? 29
-let sdkVersionDefine = SwiftSetting.define("ANDROID_SDK_VERSION_" + ndkVersion.description)
+let sdkVersion = environment["ANDROID_SDK_VERSION"].flatMap { UInt($0) } ?? 28
+let sdkVersionDefine = SwiftSetting.define("ANDROID_SDK_VERSION_" + sdkVersion.description)
 
 let package = Package(
     name: "AndroidBluetooth",
