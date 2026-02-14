@@ -38,6 +38,13 @@ public final class AndroidCentral: CentralManager {
         }
     }
     
+    public var isEnabled: Bool {
+        get async {
+            return hostController.isEnabled()
+                && hostController.getBluetoothLeScanner() != nil
+        }
+    }
+    
     public let options: Options
     
     internal let storage = Storage()
