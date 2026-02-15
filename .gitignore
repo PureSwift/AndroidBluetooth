@@ -68,3 +68,6 @@ fastlane/test_output
 # SPM Generated
 AndroidBluetooth.xcodeproj/*
 Package.resolved
+
+# VS Code
+.vscode
