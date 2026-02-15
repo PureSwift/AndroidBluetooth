@@ -12,12 +12,14 @@ import Foundation
 #endif
 import GATT
 import Bluetooth
-import JavaKit
+import SwiftJava
 import JavaLang
 import JavaUtil
+import JavaLangUtil
 import AndroidOS
 import AndroidContent
 
+/// Android GATT Central
 public final class AndroidCentral: CentralManager {
     
     public typealias Advertisement = AndroidLowEnergyAdvertisementData

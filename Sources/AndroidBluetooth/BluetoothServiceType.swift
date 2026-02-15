@@ -5,7 +5,7 @@
 //  Created by Alsey Coleman Miller on 7/13/25.
 //
 
-import JavaKit
+import SwiftJava
 
 /// Bluetooth Service Type
 public enum AndroidBluetoothServiceType: Equatable, Hashable, Sendable, CaseIterable {

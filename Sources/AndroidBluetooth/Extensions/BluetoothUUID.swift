@@ -11,11 +11,12 @@ import FoundationEssentials
 import Foundation
 #endif
 import JavaUtil
+import JavaLangUtil
 import Bluetooth
 
 internal extension BluetoothUUID {
     
-    init(android javaUUID: JavaUtil.UUID) {
+    init(android javaUUID: JavaLangUtil.UUID) {
         
         let uuid = UUID(uuidString: javaUUID.toString())!
         if let value = UInt16(bluetooth: uuid) {

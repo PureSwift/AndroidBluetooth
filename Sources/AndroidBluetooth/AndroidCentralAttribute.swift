@@ -10,8 +10,9 @@ import FoundationEssentials
 #elseif canImport(Foundation)
 import Foundation
 #endif
-import JavaKit
+import SwiftJava
 import JavaUtil
+import JavaLangUtil
 import Bluetooth
 import GATT
 
@@ -21,7 +22,7 @@ internal protocol AndroidCentralAttribute {
     
     func getInstanceId() -> Int32
     
-    func getUuid() -> JavaUtil.UUID!
+    func getUuid() -> JavaLangUtil.UUID!
 }
 
 enum AndroidCentralAttributeType: String, Sendable, CaseIterable {

@@ -10,8 +10,9 @@ import FoundationEssentials
 #elseif canImport(Foundation)
 import Foundation
 #endif
-import JavaKit
+import SwiftJava
 import JavaUtil
+import JavaLangUtil
 import Bluetooth
 import GATT
 
