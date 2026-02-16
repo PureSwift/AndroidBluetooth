@@ -88,7 +88,16 @@ public final class AndroidCentral: CentralManager {
                     $0.scan.continuation = continuation
                 }
                 let scanCallBack = LowEnergyScanCallback(central: self)
-                scanner.startScan(scanCallBack)
+                do {
+                    try scanner.startScan(scanCallBack)
+                }
+                catch {
+                    continuation.finish(throwing: error)
+                    await storage.update {
+                        $0.scan.peripherals.removeAll()
+                        $0.scan.continuation = nil
+                    }
+                }
             }
         })
     }
