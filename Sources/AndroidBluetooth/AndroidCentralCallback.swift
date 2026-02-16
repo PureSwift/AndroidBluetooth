@@ -68,13 +68,13 @@ extension AndroidCentral.LowEnergyScanCallback {
         setSwiftPeer(0)
     }
     
-    @JavaMethod("Swift_onScanResult")
-    func onScanResult(_ swiftPeer: Int64, error: Int32, result: AndroidBluetooth.ScanResult?) {
+    @JavaMethod
+    func Swift_onScanResult(_ swiftPeer: Int64, error: Int32, result: AndroidBluetooth.ScanResult?) {
         guard let central = central(swiftPeer), let result, let scanData = try? ScanData(result) else {
             assertionFailure()
             return
         }
-        central.log?("\(type(of: self)): \(#function) name: \(try? result.getDevice().getName() ?? "") address: \(try? result.getDevice().getAddress())")
+        central.log?("\(type(of: self)): \(#function) name: \((try? result.getDevice().getName()) ?? "") address: \(result.getDevice().getAddress())")
         Task {
             await central.storage.update { state in
                 state.scan.continuation?.yield(scanData)
