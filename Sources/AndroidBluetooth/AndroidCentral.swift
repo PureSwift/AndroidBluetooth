@@ -44,7 +44,11 @@ public final class AndroidCentral: CentralManager {
     public var isEnabled: Bool {
         get async {
             do {
-                try checkPermission(Permission(rawValue: JavaClass<Manifest.Permission>().BLUETOOTH_SCAN))
+                if #available(Android 31, *) {
+                    try checkPermission(.bluetoothScan)
+                } else {
+                    try checkPermission(.bluetooth)
+                }
             }
             catch {
                 return false
@@ -78,6 +82,12 @@ public final class AndroidCentral: CentralManager {
     ) async throws -> AsyncCentralScan<AndroidCentral> {
         
         log?("\(type(of: self)) \(#function)")
+        
+        if #available(Android 31, *) {
+            try checkPermission(.bluetoothScan)
+        } else {
+            try checkPermission(.bluetooth)
+        }
         
         guard hostController.isEnabled()
             else { throw AndroidCentralError.bluetoothDisabled }
@@ -535,9 +545,9 @@ public final class AndroidCentral: CentralManager {
     // MARK: - Private Methods
     
     private func checkPermission(_ permission: AndroidManifest.Permission) throws {
-        let granted = try JavaClass<PackageManager>().PERMISSION_GRANTED
+        let permissionGranted = try JavaClass<AndroidContent.PackageManager>().PERMISSION_GRANTED
         let status = context.checkSelfPermission(permission.rawValue)
-        guard status == granted else {
+        guard status == permissionGranted else {
             throw AndroidCentralError.bluetoothDisabled
         }
     }
