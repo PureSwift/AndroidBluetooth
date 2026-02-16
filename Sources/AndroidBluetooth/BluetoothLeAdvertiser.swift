@@ -18,14 +18,14 @@ open class BluetoothLeAdvertiser: JavaObject {
   open func stopAdvertisingSet(_ arg0: AdvertisingSetCallback?)
 
   @JavaMethod
-  open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: Int32, _ arg6: Int32, _ arg7: AdvertisingSetCallback?, _ arg8: Handler?)
+  open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: Int32, _ arg6: Int32, _ arg7: AdvertisingSetCallback?, _ arg8: Handler?) throws
 
   @JavaMethod
-  open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: Int32, _ arg6: Int32, _ arg7: AdvertisingSetCallback?)
+  open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: Int32, _ arg6: Int32, _ arg7: AdvertisingSetCallback?) throws
 
   @JavaMethod
-  open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: AdvertisingSetCallback?, _ arg6: Handler?)
+  open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: AdvertisingSetCallback?, _ arg6: Handler?) throws
 
   @JavaMethod
-  open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: AdvertisingSetCallback?)
+  open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: AdvertisingSetCallback?) throws
 }

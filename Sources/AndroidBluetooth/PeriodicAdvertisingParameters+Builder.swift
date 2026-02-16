@@ -12,7 +12,7 @@ extension PeriodicAdvertisingParameters {
   open func setIncludeTxPower(_ arg0: Bool) -> PeriodicAdvertisingParameters.Builder!
 
   @JavaMethod
-  open func setInterval(_ arg0: Int32) -> PeriodicAdvertisingParameters.Builder!
+  open func setInterval(_ arg0: Int32) throws -> PeriodicAdvertisingParameters.Builder!
 
   @JavaMethod
   open func build() -> PeriodicAdvertisingParameters!

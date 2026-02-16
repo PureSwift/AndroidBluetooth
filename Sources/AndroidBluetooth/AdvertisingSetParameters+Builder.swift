@@ -9,7 +9,7 @@ extension AdvertisingSetParameters {
   @_nonoverride public convenience init(environment: JNIEnvironment? = nil)
 
   @JavaMethod
-  open func setTxPowerLevel(_ arg0: Int32) -> AdvertisingSetParameters.Builder!
+  open func setTxPowerLevel(_ arg0: Int32) throws -> AdvertisingSetParameters.Builder!
 
   @JavaMethod
   open func setConnectable(_ arg0: Bool) -> AdvertisingSetParameters.Builder!
@@ -30,15 +30,15 @@ extension AdvertisingSetParameters {
   open func setIncludeTxPower(_ arg0: Bool) -> AdvertisingSetParameters.Builder!
 
   @JavaMethod
-  open func setPrimaryPhy(_ arg0: Int32) -> AdvertisingSetParameters.Builder!
+  open func setPrimaryPhy(_ arg0: Int32) throws -> AdvertisingSetParameters.Builder!
 
   @JavaMethod
-  open func setSecondaryPhy(_ arg0: Int32) -> AdvertisingSetParameters.Builder!
+  open func setSecondaryPhy(_ arg0: Int32) throws -> AdvertisingSetParameters.Builder!
 
   @JavaMethod
-  open func setInterval(_ arg0: Int32) -> AdvertisingSetParameters.Builder!
+  open func setInterval(_ arg0: Int32) throws -> AdvertisingSetParameters.Builder!
 
   @JavaMethod
-  open func build() -> AdvertisingSetParameters!
+  open func build() throws -> AdvertisingSetParameters!
   }
 }

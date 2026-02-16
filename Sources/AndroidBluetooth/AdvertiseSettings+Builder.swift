@@ -9,10 +9,10 @@ extension AdvertiseSettings {
   @_nonoverride public convenience init(environment: JNIEnvironment? = nil)
 
   @JavaMethod
-  open func setAdvertiseMode(_ arg0: Int32) -> AdvertiseSettings.Builder!
+  open func setAdvertiseMode(_ arg0: Int32) throws -> AdvertiseSettings.Builder!
 
   @JavaMethod
-  open func setTxPowerLevel(_ arg0: Int32) -> AdvertiseSettings.Builder!
+  open func setTxPowerLevel(_ arg0: Int32) throws -> AdvertiseSettings.Builder!
 
   @JavaMethod
   open func setConnectable(_ arg0: Bool) -> AdvertiseSettings.Builder!
@@ -21,7 +21,7 @@ extension AdvertiseSettings {
   open func setDiscoverable(_ arg0: Bool) -> AdvertiseSettings.Builder!
 
   @JavaMethod
-  open func setTimeout(_ arg0: Int32) -> AdvertiseSettings.Builder!
+  open func setTimeout(_ arg0: Int32) throws -> AdvertiseSettings.Builder!
 
   @JavaMethod
   open func build() -> AdvertiseSettings!

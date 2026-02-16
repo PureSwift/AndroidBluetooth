@@ -9,25 +9,25 @@ extension ScanSettings {
   @_nonoverride public convenience init(environment: JNIEnvironment? = nil)
 
   @JavaMethod
-  open func setScanMode(_ arg0: Int32) -> ScanSettings.Builder!
+  open func setScanMode(_ arg0: Int32) throws -> ScanSettings.Builder!
 
   @JavaMethod
-  open func setCallbackType(_ arg0: Int32) -> ScanSettings.Builder!
+  open func setCallbackType(_ arg0: Int32) throws -> ScanSettings.Builder!
 
   @JavaMethod
-  open func setReportDelay(_ arg0: Int64) -> ScanSettings.Builder!
+  open func setReportDelay(_ arg0: Int64) throws -> ScanSettings.Builder!
 
   @JavaMethod
-  open func setNumOfMatches(_ arg0: Int32) -> ScanSettings.Builder!
+  open func setNumOfMatches(_ arg0: Int32) throws -> ScanSettings.Builder!
 
   @JavaMethod
-  open func setMatchMode(_ arg0: Int32) -> ScanSettings.Builder!
+  open func setMatchMode(_ arg0: Int32) throws -> ScanSettings.Builder!
 
   @JavaMethod
   open func setLegacy(_ arg0: Bool) -> ScanSettings.Builder!
 
   @JavaMethod
-  open func setPhy(_ arg0: Int32) -> ScanSettings.Builder!
+  open func setPhy(_ arg0: Int32) throws -> ScanSettings.Builder!
 
   @JavaMethod
   open func build() -> ScanSettings!

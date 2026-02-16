@@ -10,19 +10,19 @@ extension AdvertiseData {
   @_nonoverride public convenience init(environment: JNIEnvironment? = nil)
 
   @JavaMethod
-  open func addServiceUuid(_ arg0: ParcelUuid?) -> AdvertiseData.Builder!
+  open func addServiceUuid(_ arg0: ParcelUuid?) throws -> AdvertiseData.Builder!
 
   @JavaMethod
-  open func addServiceData(_ arg0: ParcelUuid?, _ arg1: [Int8]) -> AdvertiseData.Builder!
+  open func addServiceData(_ arg0: ParcelUuid?, _ arg1: [Int8]) throws -> AdvertiseData.Builder!
 
   @JavaMethod
-  open func addServiceSolicitationUuid(_ arg0: ParcelUuid?) -> AdvertiseData.Builder!
+  open func addServiceSolicitationUuid(_ arg0: ParcelUuid?) throws -> AdvertiseData.Builder!
 
   @JavaMethod
-  open func addTransportDiscoveryData(_ arg0: TransportDiscoveryData?) -> AdvertiseData.Builder!
+  open func addTransportDiscoveryData(_ arg0: TransportDiscoveryData?) throws -> AdvertiseData.Builder!
 
   @JavaMethod
-  open func addManufacturerData(_ arg0: Int32, _ arg1: [Int8]) -> AdvertiseData.Builder!
+  open func addManufacturerData(_ arg0: Int32, _ arg1: [Int8]) throws -> AdvertiseData.Builder!
 
   @JavaMethod
   open func setIncludeTxPowerLevel(_ arg0: Bool) -> AdvertiseData.Builder!

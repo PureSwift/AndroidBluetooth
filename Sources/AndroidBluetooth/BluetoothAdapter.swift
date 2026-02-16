@@ -9,13 +9,13 @@ import JavaLangUtil
 @JavaClass("android.bluetooth.BluetoothAdapter")
 open class BluetoothAdapter: JavaObject {
   @JavaMethod
-  open func getRemoteDevice(_ arg0: [Int8]) -> BluetoothDevice!
+  open func getRemoteDevice(_ arg0: [Int8]) throws -> BluetoothDevice!
 
   @JavaMethod
-  open func getRemoteDevice(_ arg0: String) -> BluetoothDevice!
+  open func getRemoteDevice(_ arg0: String) throws -> BluetoothDevice!
 
   @JavaMethod
-  open func getRemoteLeDevice(_ arg0: String, _ arg1: Int32) -> BluetoothDevice!
+  open func getRemoteLeDevice(_ arg0: String, _ arg1: Int32) throws -> BluetoothDevice!
 
   @JavaMethod
   open func disable() -> Bool
