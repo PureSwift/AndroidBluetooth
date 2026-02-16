@@ -112,6 +112,9 @@ public final class AndroidCentral: CentralManager {
                 let scanCallBack = LowEnergyScanCallback(central: self)
                 do {
                     try scanner.startScan(scanCallBack)
+                    await storage.update {
+                        $0.scan.callback = scanCallBack
+                    }
                 }
                 catch {
                     continuation.finish(throwing: error)

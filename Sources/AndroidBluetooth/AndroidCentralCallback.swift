@@ -21,15 +21,42 @@ extension AndroidCentral {
     @JavaClass("org.pureswift.bluetooth.le.ScanCallback")
     internal class LowEnergyScanCallback: AndroidBluetooth.ScanCallback {
         
-        weak var central: AndroidCentral?
-        
         @JavaMethod
-        @_nonoverride convenience init(environment: JNIEnvironment? = nil)
+        @_nonoverride convenience init(swiftPeer: Int64, environment: JNIEnvironment? = nil)
         
         convenience init(central: AndroidCentral, environment: JNIEnvironment? = nil) {
-            self.init(environment: environment)
-            self.central = central
+            // Get Swift pointer to AndroidCentral
+            let swiftPeer = Int64(bitPattern: UInt64(UInt(bitPattern: Unmanaged.passUnretained(central).toOpaque())))
+            self.init(swiftPeer: swiftPeer, environment: environment)
+            assert(getSwiftPeer() == swiftPeer)
         }
+        
+        @JavaMethod
+        func setSwiftPeer(_ swiftPeer: Int64)
+        
+        @JavaMethod
+        func getSwiftPeer() -> Int64
+        
+        @JavaMethod
+        override func finalize()
+        
+        
+    }
+}
+
+private extension AndroidCentral.LowEnergyScanCallback {
+    
+    func central(_ swiftPeer: Int64) -> AndroidCentral? {
+        // Get the Swift peer pointer from Java/Kotlin side
+        guard swiftPeer != 0 else {
+            return nil
+        }
+        // Convert back to AndroidCentral reference
+        let pointer = UnsafeRawPointer(bitPattern: Int(truncatingIfNeeded: swiftPeer))
+        guard let pointer else {
+            return nil
+        }
+        return Unmanaged<AndroidCentral>.fromOpaque(pointer).takeUnretainedValue()
     }
 }
 
@@ -37,11 +64,13 @@ extension AndroidCentral {
 extension AndroidCentral.LowEnergyScanCallback {
     
     @JavaMethod
-    func onScanResult(error: Int32, result: AndroidBluetooth.ScanResult?) {
-        guard let central else {
-            return
-        }
-        guard let result, let scanData = try? ScanData(result) else {
+    func Swift_release(_ swiftPeer: Int64) {
+        setSwiftPeer(0)
+    }
+    
+    @JavaMethod("Swift_onScanResult")
+    func onScanResult(_ swiftPeer: Int64, error: Int32, result: AndroidBluetooth.ScanResult?) {
+        guard let central = central(swiftPeer), let result, let scanData = try? ScanData(result) else {
             assertionFailure()
             return
         }
@@ -58,8 +87,8 @@ extension AndroidCentral.LowEnergyScanCallback {
     }
     
     @JavaMethod
-    func onBatchScanResults(results: [AndroidBluetooth.ScanResult?]) {
-        guard let central else {
+    func onBatchScanResults(_ swiftPeer: Int64, results: [AndroidBluetooth.ScanResult?]) {
+        guard let central = central(swiftPeer) else {
             return
         }
         central.log?("\(type(of: self)): \(#function)")
@@ -81,8 +110,8 @@ extension AndroidCentral.LowEnergyScanCallback {
     }
     
     @JavaMethod
-    func onScanFailedSwift(error: Int32) {
-        
+    func onScanFailedSwift(_ swiftPeer: Int64, error: Int32) {
+        let central = central(swiftPeer)
         central?.log?("\(type(of: self)): \(#function)")
         
         // TODO: Map error codes
