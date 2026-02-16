@@ -45,7 +45,7 @@ extension AndroidCentral.LowEnergyScanCallback {
             assertionFailure()
             return
         }
-        central.log?("\(type(of: self)): \(#function) name: \(result.getDevice().getName() ?? "") address: \(result.getDevice().getAddress())")
+        central.log?("\(type(of: self)): \(#function) name: \(try? result.getDevice().getName() ?? "") address: \(try? result.getDevice().getAddress())")
         Task {
             await central.storage.update { state in
                 state.scan.continuation?.yield(scanData)
