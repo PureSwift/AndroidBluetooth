@@ -6,22 +6,22 @@ import CSwiftJavaJNI
 @JavaClass("android.bluetooth.le.BluetoothLeScanner")
 open class BluetoothLeScanner: JavaObject {
   @JavaMethod
-  open func startScan(_ arg0: List<ScanFilter>?, _ arg1: ScanSettings?, _ arg2: ScanCallback?)
+  open func startScan(_ arg0: List<ScanFilter>?, _ arg1: ScanSettings?, _ arg2: ScanCallback?) throws
 
   @JavaMethod
-  open func startScan(_ arg0: ScanCallback?)
+  open func startScan(_ arg0: ScanCallback?) throws
 
   @JavaMethod
-  open func startScan(_ arg0: List<ScanFilter>?, _ arg1: ScanSettings?, _ arg2: PendingIntent?) -> Int32
+  open func startScan(_ arg0: List<ScanFilter>?, _ arg1: ScanSettings?, _ arg2: PendingIntent?) throws -> Int32
 
   @JavaMethod
-  open func stopScan(_ arg0: PendingIntent?)
+  open func stopScan(_ arg0: PendingIntent?) throws
 
   @JavaMethod
-  open func stopScan(_ arg0: ScanCallback?)
+  open func stopScan(_ arg0: ScanCallback?) throws
 
   @JavaMethod
-  open func flushPendingScanResults(_ arg0: ScanCallback?)
+  open func flushPendingScanResults(_ arg0: ScanCallback?) throws
 }
 extension JavaClass<BluetoothLeScanner> {
   @JavaStaticField(isFinal: true)
