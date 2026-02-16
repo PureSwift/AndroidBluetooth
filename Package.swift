@@ -69,6 +69,10 @@ let package = Package(
                 .product(
                     name: "AndroidApp",
                     package: "Android"
+                ),
+                .product(
+                    name: "AndroidManifest",
+                    package: "Android"
                 )
             ],
             exclude: ["swift-java.config"],
