@@ -18,6 +18,7 @@ import JavaUtil
 import JavaLangUtil
 import AndroidOS
 import AndroidContent
+import AndroidManifest
 
 /// Android GATT Central
 public final class AndroidCentral: CentralManager {
@@ -42,6 +43,13 @@ public final class AndroidCentral: CentralManager {
     
     public var isEnabled: Bool {
         get async {
+            do {
+                try checkPermission(Permission(rawValue: JavaClass<Manifest.Permission>().BLUETOOTH_SCAN))
+            }
+            catch {
+                return false
+            }
+            // Make sure hardware is on
             return hostController.isEnabled()
                 && hostController.getBluetoothLeScanner() != nil
         }
@@ -76,6 +84,10 @@ public final class AndroidCentral: CentralManager {
         
         guard let scanner = hostController.getBluetoothLeScanner()
             else { throw AndroidCentralError.bluetoothDisabled }
+        
+        // check permission
+        let permission = try Permission(rawValue: JavaClass<Manifest.Permission>().BLUETOOTH_SCAN)
+        try checkPermission(permission)
         
         return .init(onTermination: {
             Task {
@@ -137,13 +149,13 @@ public final class AndroidCentral: CentralManager {
                         let sdkInt = try! JavaClass<AndroidOS.Build.VERSION>().SDK_INT
                         let lollipopMr1 = try! JavaClass<AndroidOS.Build.VERSION_CODES>().LOLLIPOP_MR1
                         if sdkInt <= lollipopMr1 {
-                            gatt = scanDevice.scanResult.getDevice().connectGatt(
+                            gatt = try! scanDevice.scanResult.getDevice().connectGatt(
                                 context: self.context,
                                 autoConnect: autoConnect,
                                 callback: callback
                             )
                         } else {
-                            gatt = scanDevice.scanResult.getDevice().connectGatt(
+                            gatt = try! scanDevice.scanResult.getDevice().connectGatt(
                                 context: self.context,
                                 autoConnect: autoConnect,
                                 callback: callback,
@@ -521,6 +533,14 @@ public final class AndroidCentral: CentralManager {
     }
     
     // MARK: - Private Methods
+    
+    private func checkPermission(_ permission: AndroidManifest.Permission) throws {
+        let granted = try JavaClass<PackageManager>().PERMISSION_GRANTED
+        let status = context.checkSelfPermission(permission.rawValue)
+        guard status == granted else {
+            throw AndroidCentralError.bluetoothDisabled
+        }
+    }
     
     private func stopScan() async {
         
