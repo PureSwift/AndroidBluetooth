@@ -56,7 +56,7 @@ open class BluetoothDevice: JavaObject {
     context: AndroidContent.Context?,
     autoConnect: Bool,
     callback: BluetoothGattCallback?
-  ) -> BluetoothGatt!
+  ) throws -> BluetoothGatt!
 
   /**
    Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations. The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client operations.
@@ -70,7 +70,7 @@ open class BluetoothDevice: JavaObject {
     _ autoConnect: Bool,
     _ callback: BluetoothGattCallback?,
     _ transport: Int32
-  ) -> BluetoothGatt!
+  ) throws -> BluetoothGatt!
     
   /// Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations.
   ///
@@ -90,8 +90,8 @@ open class BluetoothDevice: JavaObject {
       autoConnect: Bool = false,
       callback: BluetoothGattCallback,
       transport: BluetoothTransport = .auto
-  ) -> BluetoothGatt! {
-      connectGatt(context, autoConnect, callback, transport.rawValue)
+  ) throws-> BluetoothGatt! {
+      try connectGatt(context, autoConnect, callback, transport.rawValue)
   }
 
   /**
@@ -107,7 +107,7 @@ open class BluetoothDevice: JavaObject {
     _ callback: BluetoothGattCallback?,
     _ transport: Int32,
     _ phy: Int32
-  ) -> BluetoothGatt!
+  ) throws -> BluetoothGatt!
 /*
   @JavaMethod
   public func connectGatt(
@@ -143,7 +143,7 @@ open class BluetoothDevice: JavaObject {
    Requires Manifest.permission.BLUETOOTH_CONNECT
    */
   @JavaMethod
-  open func getName() -> String
+  open func getName() throws -> String
 
   @JavaMethod
   open override func equals(_ arg0: JavaObject?) -> Bool
@@ -163,7 +163,7 @@ open class BluetoothDevice: JavaObject {
     - Returns: The device type `DEVICE_TYPE_CLASSIC`, `DEVICE_TYPE_LE`, `DEVICE_TYPE_DUAL`, `DEVICE_TYPE_UNKNOWN` if it's not available
    */
   @JavaMethod
-  open func getType() -> Int32
+  open func getType() throws -> Int32
 
   /// Returns the hardware address of this BluetoothDevice.
   @JavaMethod
