@@ -12,16 +12,16 @@ open class BluetoothLeScanner: JavaObject {
   open func startScan(_ arg0: ScanCallback?) throws
 
   @JavaMethod
-  open func startScan(_ arg0: List<ScanFilter>?, _ arg1: ScanSettings?, _ arg2: PendingIntent?) throws -> Int32
+  open func startScan(_ arg0: List<ScanFilter>?, _ arg1: ScanSettings?, _ arg2: PendingIntent?) -> Int32
 
   @JavaMethod
-  open func stopScan(_ arg0: PendingIntent?) throws
+  open func stopScan(_ arg0: PendingIntent?)
 
   @JavaMethod
-  open func stopScan(_ arg0: ScanCallback?) throws
+  open func stopScan(_ arg0: ScanCallback?)
 
   @JavaMethod
-  open func flushPendingScanResults(_ arg0: ScanCallback?) throws
+  open func flushPendingScanResults(_ arg0: ScanCallback?)
 }
 extension JavaClass<BluetoothLeScanner> {
   @JavaStaticField(isFinal: true)
