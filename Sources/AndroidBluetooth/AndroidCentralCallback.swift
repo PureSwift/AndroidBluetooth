@@ -64,17 +64,25 @@ private extension AndroidCentral.LowEnergyScanCallback {
 extension AndroidCentral.LowEnergyScanCallback {
     
     @JavaMethod
-    func Swift_release(_ swiftPeer: Int64) {
+    func swiftRelease(_ swiftPeer: Int64) {
         setSwiftPeer(0)
     }
     
-    @JavaMethod("Swift_onScanResult")
-    func onScanResult(_ swiftPeer: Int64, error: Int32, result: AndroidBluetooth.ScanResult?) {
-        guard let central = central(swiftPeer), let result, let scanData = try? ScanData(result) else {
+    @JavaMethod
+    func swiftOnScanResult(
+        _ swiftPeer: Int64,
+        error: Int32,
+        result: AndroidBluetooth.ScanResult?
+    ) {
+        guard let central = central(swiftPeer),
+            let result,
+            let scanData = try? ScanData(result) else {
             assertionFailure()
             return
         }
-        central.log?("\(type(of: self)): \(#function) name: \(try? result.getDevice().getName() ?? "") address: \(try? result.getDevice().getAddress())")
+        //
+        central.log?("\(type(of: self)): \(#function) name: \((try? result.getDevice().getName()) ?? "") address: \(result.getDevice().getAddress())")
+        
         Task {
             await central.storage.update { state in
                 state.scan.continuation?.yield(scanData)
@@ -87,7 +95,7 @@ extension AndroidCentral.LowEnergyScanCallback {
     }
     
     @JavaMethod
-    func onBatchScanResults(_ swiftPeer: Int64, results: [AndroidBluetooth.ScanResult?]) {
+    func swiftOnBatchScanResults(_ swiftPeer: Int64, results: [AndroidBluetooth.ScanResult?]) {
         guard let central = central(swiftPeer) else {
             return
         }
@@ -110,7 +118,7 @@ extension AndroidCentral.LowEnergyScanCallback {
     }
     
     @JavaMethod
-    func onScanFailedSwift(_ swiftPeer: Int64, error: Int32) {
+    func swiftOnScanFailed(_ swiftPeer: Int64, error: Int32) {
         let central = central(swiftPeer)
         central?.log?("\(type(of: self)): \(#function)")
         
