@@ -89,8 +89,6 @@ private extension MainActivity {
                     log("Found: \(result)")
                     results[result.id] = result
                 }
-                // Update UI
-                await updateListView()
             }
             catch {
                 log("Error: \(error.localizedDescription)")
@@ -116,14 +114,13 @@ private extension MainActivity {
         #endif
     }
     
-    @MainActor
     func updateListView() {
         let results = results.keys.sorted().map { $0.description }
         setListView(results)
     }
     
     func setRootView() {
-        setListView([])
+        setTextView()
     }
     
     func setTextView() {
@@ -131,8 +128,6 @@ private extension MainActivity {
         linearLayout.orientation = .vertical
         linearLayout.gravity = .center
         linearLayout.addView(textView)
-        configureButton()
-        linearLayout.addView(button)
         setRootView(linearLayout)
         // update view on timer
         Task { [weak self] in
@@ -305,7 +300,12 @@ private extension MainActivity {
     @MainActor
     func updateTextView() {
         log("\(self).\(#function)")
-        textView.text = "Hello Swift!\n\(Date().formatted(date: .numeric, time: .complete))"
+        let results = results.keys.sorted().map { $0.description }
+        var text = "Hello Swift!\n\(Date().formatted(date: .numeric, time: .complete))"
+        for result in results {
+            text += "\n\(result)"
+        }
+        textView.text = text
     }
     
     func setTabBar() {
