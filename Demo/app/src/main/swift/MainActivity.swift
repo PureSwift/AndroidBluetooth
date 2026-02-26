@@ -79,9 +79,11 @@ private extension MainActivity {
             hostController: hostController,
             context: context
         )
+        self.central = central
         
         Task {
             do {
+                log("Start Scan")
                 let scanStream = try await central.scan()
                 for try await result in scanStream {
                     log("Found: \(result)")
