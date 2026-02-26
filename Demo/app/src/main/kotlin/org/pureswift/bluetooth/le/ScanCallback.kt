@@ -25,11 +25,11 @@ open class ScanCallback(
     }
 
     fun finalize() {
-        Swift_release(swiftPeer)
+        swiftRelease(swiftPeer)
         swiftPeer = 0L
     }
-    
-    private external fun Swift_release(swiftPeer: Long)
+
+    private external fun swiftRelease(swiftPeer: Long)
 
     companion object {
         private const val TAG = "PureSwift.ScanCallback"
@@ -43,10 +43,10 @@ open class ScanCallback(
      */
     override fun onScanResult(callbackType: Int, result: ScanResult?) {
         super.onScanResult(callbackType, result)
-        Swift_onScanResult(swiftPeer, callbackType, result)
+        swiftOnScanResult(swiftPeer, callbackType, result)
     }
-    
-    private external fun Swift_onScanResult(
+
+    external fun swiftOnScanResult(
         swiftPeer: Long,
         callbackType: Int,
         result: ScanResult?
@@ -60,12 +60,12 @@ open class ScanCallback(
     override fun onBatchScanResults(results: MutableList<ScanResult>?) {
         super.onBatchScanResults(results)
         if (swiftPeer != 0L) {
-            Swift_onBatchScanResults(swiftPeer, results)
+            swiftOnBatchScanResults(swiftPeer, results)
         } else {
             Log.d(TAG, "onBatchScanResults: ${results?.size ?: 0} results")
         }
     }
-    private external fun Swift_onBatchScanResults(
+    private external fun swiftOnBatchScanResults(
         swiftPeer: Long,
         results: MutableList<ScanResult>?
     )
@@ -78,10 +78,10 @@ open class ScanCallback(
     override fun onScanFailed(errorCode: Int) {
         super.onScanFailed(errorCode)
         if (swiftPeer != 0L) {
-            Swift_onScanFailed(swiftPeer, errorCode)
+            swiftOnScanFailed(swiftPeer, errorCode)
         } else {
             Log.e(TAG, "onScanFailed: errorCode=$errorCode")
         }
     }
-    private external fun Swift_onScanFailed(swiftPeer: Long, errorCode: Int)
+    private external fun swiftOnScanFailed(swiftPeer: Long, errorCode: Int)
 }
