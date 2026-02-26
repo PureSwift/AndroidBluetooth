@@ -21,6 +21,7 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+*.DS_Store
 
 ## Obj-C/Swift specific
 *.hmap
@@ -71,3 +72,6 @@ Package.resolved
 
 # VS Code
 .vscode
+
+# Android
+*.so
