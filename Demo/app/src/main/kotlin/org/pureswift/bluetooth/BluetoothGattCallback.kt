@@ -27,11 +27,11 @@ open class BluetoothGattCallback(
     }
 
     fun finalize() {
-        swiftRelease(swiftPeer)
+        swiftGattRelease(swiftPeer)
         swiftPeer = 0L
     }
 
-    private external fun swiftRelease(swiftPeer: Long)
+    private external fun swiftGattRelease(swiftPeer: Long)
 
     companion object {
         private const val TAG = "PureSwift.GattCallback"

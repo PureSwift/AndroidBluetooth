@@ -64,10 +64,10 @@ private extension AndroidCentral.LowEnergyScanCallback {
 extension AndroidCentral.LowEnergyScanCallback {
     
     @JavaMethod
-    func swiftRelease(_ swiftPeer: Int64) {
+    func swiftScanRelease(_ swiftPeer: Int64) {
         setSwiftPeer(0)
     }
-    
+
     @JavaMethod
     func swiftOnScanResult(
         _ swiftPeer: Int64,
@@ -183,7 +183,7 @@ private extension AndroidCentral.GattCallback {
 extension AndroidCentral.GattCallback {
 
     @JavaMethod
-    func swiftRelease(_ swiftPeer: Int64) {
+    func swiftGattRelease(_ swiftPeer: Int64) {
         setSwiftPeer(0)
     }
 
