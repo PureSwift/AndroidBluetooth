@@ -96,8 +96,7 @@ public final class AndroidCentral: CentralManager {
             else { throw AndroidCentralError.bluetoothDisabled }
         
         // check permission
-        let permission = try Permission(rawValue: JavaClass<Manifest.Permission>().BLUETOOTH_SCAN)
-        try checkPermission(permission)
+        try checkPermission(.bluetoothScan)
         
         return .init(onTermination: {
             Task {
