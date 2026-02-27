@@ -95,9 +95,6 @@ public final class AndroidCentral: CentralManager {
         guard let scanner = hostController.getBluetoothLeScanner()
             else { throw AndroidCentralError.bluetoothDisabled }
         
-        // check permission
-        try checkPermission(.bluetoothScan)
-        
         return .init(onTermination: {
             Task {
                 await self.stopScan()
