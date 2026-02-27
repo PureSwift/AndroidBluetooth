@@ -37,7 +37,14 @@ public final class AndroidCentral: CentralManager {
     
     public var peripherals: [GATT.Peripheral : Bool] {
         get async {
-            [:] // FIXME:
+            await storage.update { state in
+                var peripherals = [GATT.Peripheral: Bool]()
+                peripherals.reserveCapacity(state.scan.peripherals.count)
+                for peripheral in state.scan.peripherals.keys {
+                    peripherals[peripheral] = state.cache[peripheral] != nil
+                }
+                return peripherals
+            }
         }
     }
     
@@ -94,10 +101,6 @@ public final class AndroidCentral: CentralManager {
         
         guard let scanner = hostController.getBluetoothLeScanner()
             else { throw AndroidCentralError.bluetoothDisabled }
-        
-        // check permission
-        let permission = try Permission(rawValue: JavaClass<Manifest.Permission>().BLUETOOTH_SCAN)
-        try checkPermission(permission)
         
         return .init(onTermination: {
             Task {
