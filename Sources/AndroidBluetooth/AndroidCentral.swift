@@ -158,7 +158,7 @@ public final class AndroidCentral: CentralManager {
                     await storage.update { [unowned self] state in
                         
                         // store continuation
-                        let callback = GattCallback() //GattCallback(self)
+                        let callback = GattCallback(self)
                         let gatt: BluetoothGatt
                         
                         // call the correct method for connecting
