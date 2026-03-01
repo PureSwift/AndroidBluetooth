@@ -7,6 +7,21 @@ import JavaUtil
 import JavaLangUtil
 import Bluetooth
 
+/// Represents a remote Bluetooth device.
+///
+/// A `BluetoothDevice` lets you create a connection with the respective device or query
+/// information about it, such as the name, address, class, and bonding state.
+///
+/// This class is really just a thin wrapper for a Bluetooth hardware address. Objects of
+/// this class are immutable. Operations on this class are performed on the remote Bluetooth
+/// hardware address, using the `BluetoothAdapter` that was used to create this `BluetoothDevice`.
+///
+/// To get a `BluetoothDevice`, use `BluetoothAdapter.getRemoteDevice(String)` to create one
+/// representing a device of a known MAC address (which you can get through device discovery with `BluetoothAdapter`)
+/// or get one from the set of bonded devices returned by `BluetoothAdapter.getBondedDevices()`.
+///
+/// - Since: API Level 5
+@available(Android 5, *)
 @JavaClass("android.bluetooth.BluetoothDevice", implements: Parcelable.self)
 open class BluetoothDevice: JavaObject {
   @JavaMethod
@@ -15,15 +30,28 @@ open class BluetoothDevice: JavaObject {
   @JavaMethod
   open func writeToParcel(_ arg0: Parcel?, _ arg1: Int32)
 
-  /**
-   Returns the address type of this BluetoothDevice, one of ADDRESS_TYPE_PUBLIC, ADDRESS_TYPE_RANDOM, ADDRESS_TYPE_ANONYMOUS, or ADDRESS_TYPE_UNKNOWN.
-   */
+  /// Returns the address type of this BluetoothDevice.
+  ///
+  /// - Returns: One of `ADDRESS_TYPE_PUBLIC`, `ADDRESS_TYPE_RANDOM`, `ADDRESS_TYPE_ANONYMOUS`, or `ADDRESS_TYPE_UNKNOWN`.
+  /// - Since: API Level 31
+  @available(Android 31, *)
   @JavaMethod
   open func getAddressType() -> Int32
 
+  /// Get the locally modifiable name (alias) of the remote device.
+  ///
+  /// - Returns: the locally modifiable name (alias) of the remote device, or `null` if not set.
+  /// - Since: API Level 31
+  @available(Android 31, *)
   @JavaMethod
   open func getAlias() -> String
 
+  /// Sets the locally modifiable name (alias) of the remote device.
+  ///
+  /// - Parameter arg0: the alias to set, or `null` to remove the alias.
+  /// - Returns: status code indicating whether the operation succeeded.
+  /// - Since: API Level 31
+  @available(Android 31, *)
   @JavaMethod
   open func setAlias(_ arg0: String) -> Int32
 
@@ -45,12 +73,17 @@ open class BluetoothDevice: JavaObject {
   @JavaMethod
   open func setPin(_ arg0: [Int8]) -> Bool
 
-  /**
-   Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations. The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client operations.
-   For apps targeting Build.VERSION_CODES.S or or higher, this requires the Manifest.permission.BLUETOOTH_CONNECT permission which can be gained with Activity.requestPermissions(String[], int).
-   
-   Requires `Manifest.permission.BLUETOOTH_CONNECT`
-   */
+  /// Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations. The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client operations.
+  /// For apps targeting Build.VERSION_CODES.S or or higher, this requires the Manifest.permission.BLUETOOTH_CONNECT permission which can be gained with Activity.requestPermissions(String[], int).
+  ///
+  /// - Parameter context: The running app's context.
+  /// - Parameter autoConnect: Whether to directly connect to the remote device (false) or to automatically connect as soon as the remote device becomes available (true).
+  /// - Parameter callback: GATT callback handler that will receive asynchronous callbacks.
+  /// - Returns: The `BluetoothGatt` instance.
+  /// - Throws: IllegalArgumentException if callback is null.
+  /// - Note: Requires `Manifest.permission.BLUETOOTH_CONNECT`
+  /// - Since: API Level 18
+  @available(Android 18, *)
   @JavaMethod
   public func connectGatt(
     context: AndroidContent.Context?,
@@ -58,12 +91,18 @@ open class BluetoothDevice: JavaObject {
     callback: BluetoothGattCallback?
   ) throws -> BluetoothGatt!
 
-  /**
-   Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations. The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client operations.
-   For apps targeting `Build.VERSION_CODES.S` or or higher, this requires the `Manifest.permission.BLUETOOTH_CONNECT` permission which can be gained with Activity.requestPermissions(String[], int).
-   
-   Requires `Manifest.permission.BLUETOOTH_CONNECT`
-   */
+  /// Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations. The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client operations.
+  /// For apps targeting `Build.VERSION_CODES.S` or or higher, this requires the `Manifest.permission.BLUETOOTH_CONNECT` permission which can be gained with Activity.requestPermissions(String[], int).
+  ///
+  /// - Parameter context: The running app's context.
+  /// - Parameter autoConnect: Whether to directly connect to the remote device (false) or to automatically connect as soon as the remote device becomes available (true).
+  /// - Parameter callback: GATT callback handler that will receive asynchronous callbacks.
+  /// - Parameter transport: Preferred transport for GATT connections to remote dual-mode devices.
+  /// - Returns: The `BluetoothGatt` instance.
+  /// - Throws: IllegalArgumentException if callback is null.
+  /// - Note: Requires `Manifest.permission.BLUETOOTH_CONNECT`
+  /// - Since: API Level 23
+  @available(Android 23, *)
   @JavaMethod
   internal func connectGatt(
     _ context: AndroidContent.Context?,
@@ -75,31 +114,36 @@ open class BluetoothDevice: JavaObject {
   /// Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations.
   ///
   /// - Parameter context: The running app's context.
-  ///
   /// - Parameter autoConnect: Whether to directly connect to the remote device (false) or to automatically connect as soon as the remote device becomes available (true).
-  ///
   /// - Parameter callback: GATT callback handler that will receive asynchronous callbacks.
-  ///
   /// - Parameter transport: Preferred transport for GATT connections to remote dual-mode devices
-  ///
   /// - Returns: The method returns a ``BluetoothGatt`` instance.
-  ///
+  /// - Throws: IllegalArgumentException if callback is null.
   /// - Note: Requires `Manifest.permission.BLUETOOTH_CONNECT`
+  /// - Since: API Level 23
+  @available(Android 23, *)
   public func connectGatt(
       context: AndroidContent.Context,
       autoConnect: Bool = false,
       callback: BluetoothGattCallback,
       transport: BluetoothTransport = .auto
-  ) throws-> BluetoothGatt! {
+  ) throws -> BluetoothGatt! {
       try connectGatt(context, autoConnect, callback, transport.rawValue)
   }
 
-  /**
-   Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations. The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client operations.
-   For apps targeting Build.VERSION_CODES.S or or higher, this requires the Manifest.permission.BLUETOOTH_CONNECT permission which can be gained with Activity.requestPermissions(String[], int).
-   
-   Requires Manifest.permission.BLUETOOTH_CONNECT
-   */
+  /// Connect to GATT Server hosted by this device. Caller acts as GATT client. The callback is used to deliver results to Caller, such as connection status as well as any further GATT client operations. The method returns a BluetoothGatt instance. You can use BluetoothGatt to conduct GATT client operations.
+  /// For apps targeting Build.VERSION_CODES.S or or higher, this requires the Manifest.permission.BLUETOOTH_CONNECT permission which can be gained with Activity.requestPermissions(String[], int).
+  ///
+  /// - Parameter context: The running app's context.
+  /// - Parameter autoConnect: Whether to directly connect to the remote device (false) or to automatically connect as soon as the remote device becomes available (true).
+  /// - Parameter callback: GATT callback handler that will receive asynchronous callbacks.
+  /// - Parameter transport: Preferred transport for GATT connections to remote dual-mode devices.
+  /// - Parameter phy: preferred PHY for connections to remote LE device.
+  /// - Returns: The `BluetoothGatt` instance.
+  /// - Throws: IllegalArgumentException if callback is null.
+  /// - Note: Requires `Manifest.permission.BLUETOOTH_CONNECT`
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   public func connectGatt(
     _ context: AndroidContent.Context?,
@@ -119,15 +163,35 @@ open class BluetoothDevice: JavaObject {
     _ handler: Handler?
   ) -> BluetoothGatt!
   */
+  /// Create an L2CAP Connection-oriented Channel (CoC) `BluetoothSocket` that can be used to start a secure outgoing connection to the remote device with the same dynamic protocol/service multiplexer (PSM) value.
+  ///
+  /// - Parameter arg0: dynamic PSM value from remote device.
+  /// - Returns: a Bluetooth L2CAP CoC socket ready for outgoing connection.
+  /// - Throws: IOException on error, for example Bluetooth not available, or insufficient permissions.
+  /// - Since: API Level 29
+  @available(Android 29, *)
   @JavaMethod
   open func createL2capChannel(_ arg0: Int32) throws -> BluetoothSocket!
 
+  /// Confirm passkey for BLUETOOTH_ADMIN_PERM.
+  ///
+  /// - Parameter arg0: `true` to confirm the passkey, `false` to decline.
+  /// - Returns: `true` confirmation has been sent out, `false` for error.
+  /// - Since: API Level 19
+  @available(Android 19, *)
   @JavaMethod
   open func setPairingConfirmation(_ arg0: Bool) -> Bool
 
   @JavaMethod
   open func createRfcommSocketToServiceRecord(_ arg0: UUID?) throws -> BluetoothSocket!
 
+  /// Create an L2CAP Connection-oriented Channel (CoC) `BluetoothSocket` that can be used to start an insecure outgoing connection to the remote device with the same dynamic protocol/service multiplexer (PSM) value.
+  ///
+  /// - Parameter arg0: dynamic PSM value from remote device.
+  /// - Returns: a Bluetooth L2CAP CoC socket ready for outgoing connection.
+  /// - Throws: IOException on error, for example Bluetooth not available, or insufficient permissions.
+  /// - Since: API Level 29
+  @available(Android 29, *)
   @JavaMethod
   open func createInsecureL2capChannel(_ arg0: Int32) throws -> BluetoothSocket!
 

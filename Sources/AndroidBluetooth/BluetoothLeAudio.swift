@@ -3,6 +3,13 @@ import SwiftJava
 import JavaLang
 import CSwiftJavaJNI
 
+/// This class provides the public APIs to control the Bluetooth LE Audio profile.
+///
+/// BluetoothLeAudio is a proxy object for controlling the Bluetooth LE Audio Service via IPC.
+/// Use `BluetoothAdapter.getProfileProxy()` to get the BluetoothLeAudio proxy object.
+///
+/// - Since: API Level 33
+@available(Android 33, *)
 @JavaClass("android.bluetooth.BluetoothLeAudio", implements: BluetoothProfile.self, AutoCloseable.self)
 open class BluetoothLeAudio: JavaObject {
   @JavaMethod

@@ -3,6 +3,12 @@ import AndroidOS
 import SwiftJava
 import CSwiftJavaJNI
 
+/// Criteria for filtering result from Bluetooth LE scans.
+///
+/// A `ScanFilter` allows clients to restrict scan results to only those that are of interest to them.
+///
+/// - Since: API Level 21
+@available(Android 21, *)
 @JavaClass("android.bluetooth.le.ScanFilter", implements: Parcelable.self)
 open class ScanFilter: JavaObject {
   @JavaMethod

@@ -3,6 +3,12 @@ import AndroidContent
 import SwiftJava
 import CSwiftJavaJNI
 
+/// High level manager used to obtain an instance of a `BluetoothAdapter` and to conduct overall Bluetooth Management.
+///
+/// Use `Context.getSystemService(Context.BLUETOOTH_SERVICE)` to create a `BluetoothManager`, then call `getAdapter()` to obtain the `BluetoothAdapter`.
+///
+/// - Since: API Level 18
+@available(Android 18, *)
 @JavaClass("android.bluetooth.BluetoothManager")
 open class BluetoothManager: JavaObject {
   @JavaMethod

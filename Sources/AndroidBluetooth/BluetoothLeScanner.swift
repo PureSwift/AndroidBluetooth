@@ -3,6 +3,15 @@ import AndroidApp
 import SwiftJava
 import CSwiftJavaJNI
 
+/// This class provides methods to perform scan related operations for Bluetooth LE devices.
+///
+/// An application can scan for a particular type of Bluetooth LE devices using `ScanFilter`.
+/// It can also request different types of callbacks for delivering the result.
+///
+/// Use `BluetoothAdapter.getBluetoothLeScanner()` to get an instance of `BluetoothLeScanner`.
+///
+/// - Since: API Level 21
+@available(Android 21, *)
 @JavaClass("android.bluetooth.le.BluetoothLeScanner")
 open class BluetoothLeScanner: JavaObject {
   @JavaMethod

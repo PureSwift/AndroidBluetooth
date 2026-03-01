@@ -6,6 +6,17 @@ import JavaTime
 import JavaUtil
 import JavaLangUtil
 
+/// Represents the local device Bluetooth adapter.
+///
+/// The `BluetoothAdapter` lets you perform fundamental Bluetooth tasks, such as initiate
+/// device discovery, query a list of bonded (paired) devices, instantiate a `BluetoothDevice` using a known MAC address,
+/// and create a `BluetoothServerSocket` to listen for connection requests from other devices, and start a scan for Bluetooth LE devices.
+///
+/// To get a `BluetoothAdapter` representing the local Bluetooth adapter, call the `BluetoothManager.getAdapter()` method on `BluetoothManager`.
+/// On API level 17 and lower, use the static `getDefaultAdapter()` method.
+///
+/// - Since: API Level 5
+@available(Android 5, *)
 @JavaClass("android.bluetooth.BluetoothAdapter")
 open class BluetoothAdapter: JavaObject {
   @JavaMethod
@@ -32,9 +43,20 @@ open class BluetoothAdapter: JavaObject {
   @JavaMethod
   open func isDiscovering() -> Bool
 
+  /// Returns whether LE 2M PHY feature is supported.
+  ///
+  /// - Returns: `true` if chipset supports LE 2M PHY feature, `false` otherwise.
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func isLe2MPhySupported() -> Bool
 
+  /// Returns whether LE Audio is supported.
+  ///
+  /// - Returns: `FEATURE_SUPPORTED` if LE Audio is supported, `FEATURE_NOT_SUPPORTED` if not supported,
+  ///   or an error code.
+  /// - Since: API Level 33
+  @available(Android 33, *)
   @JavaMethod
   open func isLeAudioSupported() -> Int32
 
@@ -47,21 +69,51 @@ open class BluetoothAdapter: JavaObject {
   @JavaMethod
   open func closeProfileProxy(_ arg0: Int32, _ arg1: BluetoothProfile?)
 
+  /// Starts a scan for Bluetooth LE devices, looking for devices that advertise given services.
+  ///
+  /// - Since: API Level 18
+  /// - Deprecated: Use `BluetoothLeScanner.startScan()` instead (API 21+)
+  @available(Android 18, deprecated: 21, message: "Use BluetoothLeScanner.startScan() instead")
   @JavaMethod
   open func startLeScan(_ arg0: [UUID?], _ arg1: BluetoothAdapter.LeScanCallback?) -> Bool
 
+  /// Starts a scan for Bluetooth LE devices.
+  ///
+  /// - Since: API Level 18
+  /// - Deprecated: Use `BluetoothLeScanner.startScan()` instead (API 21+)
+  @available(Android 18, deprecated: 21, message: "Use BluetoothLeScanner.startScan() instead")
   @JavaMethod
   open func startLeScan(_ arg0: BluetoothAdapter.LeScanCallback?) -> Bool
 
+  /// Stops an ongoing Bluetooth LE device scan.
+  ///
+  /// - Since: API Level 18
+  /// - Deprecated: Use `BluetoothLeScanner.stopScan()` instead (API 21+)
+  @available(Android 18, deprecated: 21, message: "Use BluetoothLeScanner.stopScan() instead")
   @JavaMethod
   open func stopLeScan(_ arg0: BluetoothAdapter.LeScanCallback?)
 
+  /// Returns a `BluetoothLeAdvertiser` object for Bluetooth LE Advertising operations, or `nil` if Bluetooth LE Advertising is not supported on this adapter.
+  ///
+  /// - Returns: `BluetoothLeAdvertiser` instance, or `nil` if not supported.
+  /// - Since: API Level 21
+  @available(Android 21, *)
   @JavaMethod
   open func getBluetoothLeAdvertiser() -> BluetoothLeAdvertiser!
 
+  /// Returns a `BluetoothLeScanner` object for Bluetooth LE scan operations.
+  ///
+  /// - Returns: `BluetoothLeScanner` instance.
+  /// - Since: API Level 21
+  @available(Android 21, *)
   @JavaMethod
   open func getBluetoothLeScanner() -> BluetoothLeScanner!
 
+  /// Get the current discoverable timeout value.
+  ///
+  /// - Returns: the discoverable timeout value in seconds.
+  /// - Since: API Level 33
+  @available(Android 33, *)
   @JavaMethod
   open func getDiscoverableTimeout() -> Duration!
 
@@ -74,21 +126,52 @@ open class BluetoothAdapter: JavaObject {
   @JavaMethod
   open func isOffloadedScanBatchingSupported() -> Bool
 
+  /// Returns whether LE Coded PHY feature is supported.
+  ///
+  /// - Returns: `true` if chipset supports LE Coded PHY feature, `false` otherwise.
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func isLeCodedPhySupported() -> Bool
 
+  /// Returns whether LE Extended Advertising feature is supported.
+  ///
+  /// - Returns: `true` if chipset supports LE Extended Advertising feature, `false` otherwise.
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func isLeExtendedAdvertisingSupported() -> Bool
 
+  /// Returns whether LE Periodic Advertising feature is supported.
+  ///
+  /// - Returns: `true` if chipset supports LE Periodic Advertising feature, `false` otherwise.
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func isLePeriodicAdvertisingSupported() -> Bool
 
+  /// Returns whether LE Audio Broadcast Source is supported.
+  ///
+  /// - Returns: `FEATURE_SUPPORTED` if supported, `FEATURE_NOT_SUPPORTED` if not supported,
+  ///   or an error code.
+  /// - Since: API Level 33
+  @available(Android 33, *)
   @JavaMethod
   open func isLeAudioBroadcastSourceSupported() -> Int32
 
+  /// Returns the maximum LE advertising data length in bytes, if LE Extended Advertising feature is supported.
+  ///
+  /// - Returns: the maximum LE advertising data length.
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func getLeMaximumAdvertisingDataLength() -> Int32
 
+  /// Returns the maximum number of connected audio devices.
+  ///
+  /// - Returns: the maximum number of connected audio devices.
+  /// - Since: API Level 30
+  @available(Android 30, *)
   @JavaMethod
   open func getMaxConnectedAudioDevices() -> Int32
 
@@ -98,12 +181,30 @@ open class BluetoothAdapter: JavaObject {
   @JavaMethod
   open func listenUsingRfcommWithServiceRecord(_ arg0: String, _ arg1: UUID?) throws -> BluetoothServerSocket!
 
+  /// Create a listening, secure L2CAP Connection-oriented Channel (CoC) `BluetoothServerSocket`.
+  ///
+  /// - Returns: a listening L2CAP CoC `BluetoothServerSocket`.
+  /// - Throws: IOException on error, for example Bluetooth not available, or insufficient permissions.
+  /// - Since: API Level 29
+  @available(Android 29, *)
   @JavaMethod
   open func listenUsingL2capChannel() throws -> BluetoothServerSocket!
 
+  /// Create a listening, insecure L2CAP Connection-oriented Channel (CoC) `BluetoothServerSocket`.
+  ///
+  /// - Returns: a listening L2CAP CoC `BluetoothServerSocket`.
+  /// - Throws: IOException on error, for example Bluetooth not available, or insufficient permissions.
+  /// - Since: API Level 29
+  @available(Android 29, *)
   @JavaMethod
   open func listenUsingInsecureL2capChannel() throws -> BluetoothServerSocket!
 
+  /// Returns whether LE Audio Broadcast Assistant is supported.
+  ///
+  /// - Returns: `FEATURE_SUPPORTED` if supported, `FEATURE_NOT_SUPPORTED` if not supported,
+  ///   or an error code.
+  /// - Since: API Level 33
+  @available(Android 33, *)
   @JavaMethod
   open func isLeAudioBroadcastAssistantSupported() -> Int32
 

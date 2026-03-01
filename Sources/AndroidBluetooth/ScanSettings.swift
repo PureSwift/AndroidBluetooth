@@ -3,6 +3,10 @@ import AndroidOS
 import SwiftJava
 import CSwiftJavaJNI
 
+/// Bluetooth LE scan settings are passed to `BluetoothLeScanner.startScan()` to define the parameters for the scan.
+///
+/// - Since: API Level 21
+@available(Android 21, *)
 @JavaClass("android.bluetooth.le.ScanSettings", implements: Parcelable.self)
 open class ScanSettings: JavaObject {
   @JavaMethod

@@ -4,6 +4,17 @@ import CSwiftJavaJNI
 import JavaUtil
 import JavaLangUtil
 
+/// Public API for the Bluetooth GATT Profile.
+///
+/// This class provides Bluetooth GATT functionality to enable communication
+/// with Bluetooth Smart or Smart Ready devices.
+///
+/// To connect to a remote peripheral device, create a `BluetoothGattCallback` and call
+/// `BluetoothDevice.connectGatt()` to get an instance of this class. GATT capable devices can be
+/// discovered using the Bluetooth device discovery or BLE scan process.
+///
+/// - Since: API Level 18
+@available(Android 18, *)
 @JavaClass("android.bluetooth.BluetoothGatt", implements: BluetoothProfile.self)
 open class BluetoothGatt: JavaObject {
   @JavaMethod
@@ -15,9 +26,20 @@ open class BluetoothGatt: JavaObject {
   @JavaMethod
   open func connect() -> Bool
 
+  /// Set the preferred connection PHY for this app.
+  ///
+  /// - Parameter arg0: preferred transmitter PHY.
+  /// - Parameter arg1: preferred receiver PHY.
+  /// - Parameter arg2: preferred coding to use when transmitting on the LE Coded PHY.
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func setPreferredPhy(_ arg0: Int32, _ arg1: Int32, _ arg2: Int32)
 
+  /// Read the current transmitter PHY and receiver PHY of the connection.
+  ///
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func readPhy()
 
@@ -39,6 +61,13 @@ open class BluetoothGatt: JavaObject {
   @JavaMethod
   open func readDescriptor(_ arg0: BluetoothGattDescriptor?) -> Bool
 
+  /// Write the value of a given descriptor to the associated remote device.
+  ///
+  /// - Parameter arg0: Descriptor to write to the associated remote device.
+  /// - Parameter arg1: Value to write to the descriptor.
+  /// - Returns: status code.
+  /// - Since: API Level 33
+  @available(Android 33, *)
   @JavaMethod
   open func writeDescriptor(_ arg0: BluetoothGattDescriptor?, _ arg1: [Int8]) -> Int32
 
@@ -66,6 +95,14 @@ open class BluetoothGatt: JavaObject {
   @JavaMethod
   open func getDevicesMatchingConnectionStates(_ arg0: [Int32]) -> List<BluetoothDevice>!
 
+  /// Writes a given characteristic and its value to the associated remote device.
+  ///
+  /// - Parameter arg0: Characteristic to write on the remote device.
+  /// - Parameter arg1: Value to write to the characteristic.
+  /// - Parameter arg2: Write type to use for this write.
+  /// - Returns: status code.
+  /// - Since: API Level 33
+  @available(Android 33, *)
   @JavaMethod
   open func writeCharacteristic(_ arg0: BluetoothGattCharacteristic?, _ arg1: [Int8], _ arg2: Int32) -> Int32
 

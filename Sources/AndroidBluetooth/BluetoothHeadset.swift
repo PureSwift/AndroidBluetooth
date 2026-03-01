@@ -2,6 +2,13 @@
 import SwiftJava
 import CSwiftJavaJNI
 
+/// This class provides the public APIs to control the Bluetooth Headset profile.
+///
+/// BluetoothHeadset is a proxy object for controlling the Bluetooth Headset Service via IPC.
+/// Use `BluetoothAdapter.getProfileProxy()` to get the BluetoothHeadset proxy object.
+///
+/// - Since: API Level 11
+@available(Android 11, *)
 @JavaClass("android.bluetooth.BluetoothHeadset", implements: BluetoothProfile.self)
 open class BluetoothHeadset: JavaObject {
   @JavaMethod

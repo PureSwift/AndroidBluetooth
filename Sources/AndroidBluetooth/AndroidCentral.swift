@@ -20,7 +20,19 @@ import AndroidOS
 import AndroidContent
 import AndroidManifest
 
-/// Android GATT Central
+/// Android GATT Central Manager implementation.
+///
+/// This class provides a GATT Central Manager implementation for Android using the Android Bluetooth APIs.
+/// It enables BLE scanning, device connection, service discovery, and characteristic operations.
+///
+/// The implementation requires Android API Level 18 or higher for basic BLE functionality.
+/// Some features require higher API levels:
+/// - API 21+: `BluetoothLeScanner` for improved scanning
+/// - API 23+: Transport selection for `connectGatt()`
+/// - API 31+: New permission model (`BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT`)
+///
+/// - Since: API Level 18
+@available(Android 18, *)
 public final class AndroidCentral: CentralManager {
     
     public typealias Advertisement = AndroidLowEnergyAdvertisementData

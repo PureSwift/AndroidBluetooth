@@ -2,6 +2,15 @@
 import SwiftJava
 import CSwiftJavaJNI
 
+/// This class provides the public APIs to control the Bluetooth A2DP profile.
+///
+/// BluetoothA2dp is a proxy object for controlling the Bluetooth A2DP Service via IPC.
+/// Use `BluetoothAdapter.getProfileProxy()` to get the BluetoothA2dp proxy object.
+///
+/// Each method is protected with its appropriate permission.
+///
+/// - Since: API Level 11
+@available(Android 11, *)
 @JavaClass("android.bluetooth.BluetoothA2dp", implements: BluetoothProfile.self)
 open class BluetoothA2dp: JavaObject {
   @JavaMethod

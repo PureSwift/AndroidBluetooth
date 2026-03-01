@@ -5,6 +5,13 @@ import CSwiftJavaJNI
 import JavaUtil
 import JavaLangUtil
 
+/// Represents a Bluetooth GATT Characteristic.
+///
+/// A GATT characteristic is a basic data element used to construct a GATT service, `BluetoothGattService`.
+/// The characteristic contains a value as well as additional information and optional GATT descriptors, `BluetoothGattDescriptor`.
+///
+/// - Since: API Level 18
+@available(Android 18, *)
 @JavaClass("android.bluetooth.BluetoothGattCharacteristic", implements: Parcelable.self)
 open class BluetoothGattCharacteristic: JavaObject {
   @JavaMethod

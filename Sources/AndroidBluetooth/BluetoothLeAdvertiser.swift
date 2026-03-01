@@ -3,6 +3,14 @@ import AndroidOS
 import SwiftJava
 import CSwiftJavaJNI
 
+/// This class provides a way to perform Bluetooth LE advertise operations, such as starting and stopping advertising.
+///
+/// An advertiser can broadcast up to 31 bytes of advertisement data represented by `AdvertiseData`.
+///
+/// To get an instance of `BluetoothLeAdvertiser`, call the `BluetoothAdapter.getBluetoothLeAdvertiser()` method.
+///
+/// - Since: API Level 21
+@available(Android 21, *)
 @JavaClass("android.bluetooth.le.BluetoothLeAdvertiser")
 open class BluetoothLeAdvertiser: JavaObject {
   @JavaMethod
@@ -17,15 +25,31 @@ open class BluetoothLeAdvertiser: JavaObject {
   @JavaMethod
   open func stopAdvertisingSet(_ arg0: AdvertisingSetCallback?)
 
+  /// Creates a new advertising set.
+  ///
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: Int32, _ arg6: Int32, _ arg7: AdvertisingSetCallback?, _ arg8: Handler?) throws
 
+  /// Creates a new advertising set.
+  ///
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: Int32, _ arg6: Int32, _ arg7: AdvertisingSetCallback?) throws
 
+  /// Creates a new advertising set.
+  ///
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: AdvertisingSetCallback?, _ arg6: Handler?) throws
 
+  /// Creates a new advertising set.
+  ///
+  /// - Since: API Level 26
+  @available(Android 26, *)
   @JavaMethod
   open func startAdvertisingSet(_ arg0: AdvertisingSetParameters?, _ arg1: AdvertiseData?, _ arg2: AdvertiseData?, _ arg3: PeriodicAdvertisingParameters?, _ arg4: AdvertiseData?, _ arg5: AdvertisingSetCallback?) throws
 }
