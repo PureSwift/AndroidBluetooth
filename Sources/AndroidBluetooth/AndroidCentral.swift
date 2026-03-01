@@ -164,13 +164,13 @@ public final class AndroidCentral: CentralManager {
         
         // wait for connection continuation
         do {
-            try await withCheckedThrowingContinuation { continuation in
+            try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, any Error>) in
                 Task {
                     // attempt to connect (does not timeout)
                     await storage.update { [unowned self] state in
-                        
+
                         // store continuation
-                        let callback = GattCallback(self)
+                        let callback = GattCallback(central: self)
                         let gatt: BluetoothGatt
                         
                         // call the correct method for connecting
