@@ -33,6 +33,7 @@ open class BluetoothLeAudio: JavaObject {
   @JavaMethod
   open func close()
 }
+@available(Android 33, *)
 extension JavaClass<BluetoothLeAudio> {
   @JavaStaticField(isFinal: true)
   public var ACTION_LE_AUDIO_CONNECTION_STATE_CHANGED: String

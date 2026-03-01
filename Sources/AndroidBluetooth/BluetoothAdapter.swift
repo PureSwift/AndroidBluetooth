@@ -73,7 +73,7 @@ open class BluetoothAdapter: JavaObject {
   ///
   /// - Since: API Level 18
   /// - Deprecated: Use `BluetoothLeScanner.startScan()` instead (API 21+)
-  @available(Android 18, deprecated: 21, message: "Use BluetoothLeScanner.startScan() instead")
+  @available(Android, introduced: 18, deprecated: 21, message: "Use BluetoothLeScanner.startScan() instead")
   @JavaMethod
   open func startLeScan(_ arg0: [UUID?], _ arg1: BluetoothAdapter.LeScanCallback?) -> Bool
 
@@ -81,7 +81,7 @@ open class BluetoothAdapter: JavaObject {
   ///
   /// - Since: API Level 18
   /// - Deprecated: Use `BluetoothLeScanner.startScan()` instead (API 21+)
-  @available(Android 18, deprecated: 21, message: "Use BluetoothLeScanner.startScan() instead")
+  @available(Android, introduced: 18, deprecated: 21, message: "Use BluetoothLeScanner.startScan() instead")
   @JavaMethod
   open func startLeScan(_ arg0: BluetoothAdapter.LeScanCallback?) -> Bool
 
@@ -89,7 +89,7 @@ open class BluetoothAdapter: JavaObject {
   ///
   /// - Since: API Level 18
   /// - Deprecated: Use `BluetoothLeScanner.stopScan()` instead (API 21+)
-  @available(Android 18, deprecated: 21, message: "Use BluetoothLeScanner.stopScan() instead")
+  @available(Android, introduced: 18, deprecated: 21, message: "Use BluetoothLeScanner.stopScan() instead")
   @JavaMethod
   open func stopLeScan(_ arg0: BluetoothAdapter.LeScanCallback?)
 
