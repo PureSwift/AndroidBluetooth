@@ -17,7 +17,14 @@ let sdkVersionDefine = SwiftSetting.define("ANDROID_SDK_VERSION_" + sdkVersion.d
 let package = Package(
     name: "AndroidBluetooth",
     platforms: [
-        .macOS(.v15)
+        .macOS(.v15),
+        // Declared to match the Bluetooth/GATT/Socket dependencies. This package only ever builds
+        // for Android, but SwiftPM validates platform requirements across the whole graph, and
+        // leaving these unspecified defaults them to iOS 12 — which conflicts with dependencies
+        // that require iOS 13 and breaks any Apple-platform resolve of a package that includes it.
+        .iOS(.v13),
+        .watchOS(.v6),
+        .tvOS(.v13)
     ],
     products: [
         .library(
