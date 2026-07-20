@@ -43,6 +43,13 @@ let package = Package(
         .package(
             url: "https://github.com/PureSwift/Bluetooth.git",
             from: "7.2.0"
+        ),
+        // `AndroidManifest` moved out of PureSwift/Android into swift-android-native (Android PR
+        // #40); it must now be depended on directly. The URL and branch must match the ones
+        // PureSwift/Android and skip-android-bridge use, or the identity conflicts.
+        .package(
+            url: "https://github.com/MillerTechnologyPeru/swift-android-native.git",
+            branch: "feature/pureswift"
         )
     ],
     targets: [
@@ -79,7 +86,7 @@ let package = Package(
                 ),
                 .product(
                     name: "AndroidManifest",
-                    package: "Android"
+                    package: "swift-android-native"
                 )
             ],
             exclude: ["swift-java.config"],
