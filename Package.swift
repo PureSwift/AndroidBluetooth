@@ -17,7 +17,14 @@ let sdkVersionDefine = SwiftSetting.define("ANDROID_SDK_VERSION_" + sdkVersion.d
 let package = Package(
     name: "AndroidBluetooth",
     platforms: [
-        .macOS(.v15)
+        .macOS(.v15),
+        // Declared to match the Bluetooth/GATT/Socket dependencies. This package only ever builds
+        // for Android, but SwiftPM validates platform requirements across the whole graph, and
+        // leaving these unspecified defaults them to iOS 12 — which conflicts with dependencies
+        // that require iOS 13 and breaks any Apple-platform resolve of a package that includes it.
+        .iOS(.v13),
+        .watchOS(.v6),
+        .tvOS(.v13)
     ],
     products: [
         .library(
@@ -36,6 +43,13 @@ let package = Package(
         .package(
             url: "https://github.com/PureSwift/Bluetooth.git",
             from: "7.2.0"
+        ),
+        // `AndroidManifest` moved out of PureSwift/Android into swift-android-native (Android PR
+        // #40); it must now be depended on directly. The URL and branch must match the ones
+        // PureSwift/Android and skip-android-bridge use, or the identity conflicts.
+        .package(
+            url: "https://github.com/MillerTechnologyPeru/swift-android-native.git",
+            branch: "feature/pureswift"
         )
     ],
     targets: [
@@ -72,7 +86,7 @@ let package = Package(
                 ),
                 .product(
                     name: "AndroidManifest",
-                    package: "Android"
+                    package: "swift-android-native"
                 )
             ],
             exclude: ["swift-java.config"],
