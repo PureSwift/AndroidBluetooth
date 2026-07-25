@@ -79,16 +79,16 @@ public final class AndroidCentral: CentralManager {
     }
     
     public let options: Options
-    
+
     internal let storage = Storage()
-    
+
     // MARK: - Intialization
-    
+
     public init(
         hostController: BluetoothAdapter,
         context: AndroidContent.Context,
         options: AndroidCentral.Options = Options()) {
-        
+
         self.hostController = hostController
         self.context = context
         self.options = options
@@ -124,7 +124,7 @@ public final class AndroidCentral: CentralManager {
                     $0.scan.peripherals.removeAll()
                     $0.scan.continuation = continuation
                 }
-                let scanCallBack = LowEnergyScanCallback(central: self)
+                let scanCallBack = LowEnergyScanCallback.create(central: self)
                 do {
                     try scanner.startScan(scanCallBack)
                     await storage.update {
@@ -159,9 +159,9 @@ public final class AndroidCentral: CentralManager {
         guard hostController.isEnabled()
             else { throw AndroidCentralError.bluetoothDisabled }
         
-        guard let scanDevice = await storage.state.scan.peripherals[peripheral]
+        guard await storage.state.scan.peripherals[peripheral] != nil
             else { throw CentralError.unknownPeripheral }
-        
+
         // wait for connection continuation
         do {
             try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, any Error>) in
@@ -170,20 +170,21 @@ public final class AndroidCentral: CentralManager {
                     await storage.update { [unowned self] state in
 
                         // store continuation
-                        let callback = GattCallback(central: self)
+                        let callback = GattCallback.create(central: self, peripheral: peripheral)
+                        let device = try! self.hostController.getRemoteDevice(peripheral.address)!
                         let gatt: BluetoothGatt
-                        
+
                         // call the correct method for connecting
                         let sdkInt = try! JavaClass<AndroidOS.Build.VERSION>().SDK_INT
                         let lollipopMr1 = try! JavaClass<AndroidOS.Build.VERSION_CODES>().LOLLIPOP_MR1
                         if sdkInt <= lollipopMr1 {
-                            gatt = try! scanDevice.scanResult.getDevice().connectGatt(
+                            gatt = try! device.connectGatt(
                                 context: self.context,
                                 autoConnect: autoConnect,
                                 callback: callback
                             )
                         } else {
-                            gatt = try! scanDevice.scanResult.getDevice().connectGatt(
+                            gatt = try! device.connectGatt(
                                 context: self.context,
                                 autoConnect: autoConnect,
                                 callback: callback,
