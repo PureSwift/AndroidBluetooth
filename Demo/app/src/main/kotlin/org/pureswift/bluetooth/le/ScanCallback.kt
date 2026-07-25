@@ -2,34 +2,23 @@ package org.pureswift.bluetooth.le
 
 import android.bluetooth.le.ScanCallback as AndroidScanCallback
 import android.bluetooth.le.ScanResult
+import android.bluetooth.le.ScanSettings
+import android.os.Build
 import android.util.Log
+import org.pureswift.bluetooth.bridge.AndroidBluetoothBridge
 
 /**
- * Bluetooth LE Scan Callback for AndroidBluetooth Swift package.
+ * Bluetooth LE Scan Callback for the AndroidBluetooth Swift package.
  *
- * This class is referenced by AndroidBluetooth's LowEnergyScanCallback
- * via the @JavaClass("org.pureswift.bluetooth.le.ScanCallback") annotation.
- * It extends Android's ScanCallback and provides the bridge between
- * Android's Bluetooth LE scanning and the Swift AndroidBluetooth package.
+ * This class is instantiated by AndroidBluetooth's `LowEnergyScanCallback`
+ * via the `@JavaClass("org.pureswift.bluetooth.le.ScanCallback")` annotation.
+ * It extends Android's `ScanCallback` and forwards each event as primitive values
+ * to the jextract-generated [AndroidBluetoothBridge], keyed by the Swift central's
+ * registry identifier.
  */
 open class ScanCallback(
-    private var swiftPeer: Long = 0L
+    private val centralId: Long
 ) : AndroidScanCallback() {
-
-    fun setSwiftPeer(swiftPeer: Long) {
-        this.swiftPeer = swiftPeer
-    }
-    
-    fun getSwiftPeer(): Long {
-        return swiftPeer
-    }
-
-    fun finalize() {
-        swiftScanRelease(swiftPeer)
-        swiftPeer = 0L
-    }
-
-    private external fun swiftScanRelease(swiftPeer: Long)
 
     companion object {
         private const val TAG = "PureSwift.ScanCallback"
@@ -43,14 +32,8 @@ open class ScanCallback(
      */
     override fun onScanResult(callbackType: Int, result: ScanResult?) {
         super.onScanResult(callbackType, result)
-        swiftOnScanResult(swiftPeer, callbackType, result)
+        result?.let { forward(callbackType, it) }
     }
-
-    external fun swiftOnScanResult(
-        swiftPeer: Long,
-        callbackType: Int,
-        result: ScanResult?
-    )
 
     /**
      * Callback when batch results are delivered.
@@ -59,16 +42,8 @@ open class ScanCallback(
      */
     override fun onBatchScanResults(results: MutableList<ScanResult>?) {
         super.onBatchScanResults(results)
-        if (swiftPeer != 0L) {
-            swiftOnBatchScanResults(swiftPeer, results)
-        } else {
-            Log.d(TAG, "onBatchScanResults: ${results?.size ?: 0} results")
-        }
+        results?.forEach { forward(ScanSettings.CALLBACK_TYPE_ALL_MATCHES, it) }
     }
-    private external fun swiftOnBatchScanResults(
-        swiftPeer: Long,
-        results: MutableList<ScanResult>?
-    )
 
     /**
      * Callback when scan could not be started.
@@ -77,11 +52,23 @@ open class ScanCallback(
      */
     override fun onScanFailed(errorCode: Int) {
         super.onScanFailed(errorCode)
-        if (swiftPeer != 0L) {
-            swiftOnScanFailed(swiftPeer, errorCode)
-        } else {
-            Log.e(TAG, "onScanFailed: errorCode=$errorCode")
-        }
+        Log.e(TAG, "onScanFailed: errorCode=$errorCode")
+        AndroidBluetoothBridge.scanCallbackOnScanFailed(centralId, errorCode)
     }
-    private external fun swiftOnScanFailed(swiftPeer: Long, errorCode: Int)
+
+    private fun forward(callbackType: Int, result: ScanResult) {
+        val isConnectable = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            result.isConnectable
+        } else {
+            true
+        }
+        AndroidBluetoothBridge.scanCallbackOnScanResult(
+            centralId,
+            callbackType,
+            result.device.address,
+            result.rssi,
+            isConnectable,
+            result.scanRecord?.bytes ?: ByteArray(0)
+        )
+    }
 }
