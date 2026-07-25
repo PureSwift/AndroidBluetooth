@@ -8,7 +8,7 @@
 import Bluetooth
 import GATT
 
-internal extension Peripheral {
+package extension Peripheral {
 
     init(_ device: AndroidBluetooth.BluetoothDevice) {
         self.init(id: device.address)

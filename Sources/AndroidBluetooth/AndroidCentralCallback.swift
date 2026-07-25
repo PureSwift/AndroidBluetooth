@@ -19,10 +19,11 @@ import GATT
 // MARK: - Callback Adapters
 //
 // The Kotlin adapter classes extend the Android framework callback classes and forward
-// each event as primitive values to the jextract-generated `AndroidBluetoothBridge`
-// Java class, which resolves the central by its registry identifier and calls the
-// `handle*` event methods in `AndroidCentralEvents.swift`. These wrappers exist only
-// so Swift can construct the adapter instances to hand to the Android APIs.
+// each event to a Swift-implemented event handler (`BluetoothScanEventHandler` /
+// `BluetoothGattEventHandler`, jextract-generated Java interfaces from the
+// AndroidBluetoothBridge target). The adapters obtain their handler in their
+// no-argument constructor, which runs inside `AndroidCentralHandoff.withPending`,
+// so construction must go through the `create` factories below.
 
 extension AndroidCentral {
 
@@ -30,10 +31,15 @@ extension AndroidCentral {
     internal class LowEnergyScanCallback: AndroidBluetooth.ScanCallback {
 
         @JavaMethod
-        @_nonoverride convenience init(centralId: Int64, environment: JNIEnvironment? = nil)
+        @_nonoverride convenience init(environment: JNIEnvironment? = nil)
+    }
+}
 
-        convenience init(central: AndroidCentral, environment: JNIEnvironment? = nil) {
-            self.init(centralId: central.identifier, environment: environment)
+extension AndroidCentral.LowEnergyScanCallback {
+
+    static func create(central: AndroidCentral) -> AndroidCentral.LowEnergyScanCallback {
+        AndroidCentralHandoff.withPending(central: central) {
+            AndroidCentral.LowEnergyScanCallback()
         }
     }
 }
@@ -44,10 +50,15 @@ extension AndroidCentral {
     class GattCallback: AndroidBluetooth.BluetoothGattCallback {
 
         @JavaMethod
-        @_nonoverride convenience init(centralId: Int64, peripheralAddress: String, environment: JNIEnvironment? = nil)
+        @_nonoverride convenience init(environment: JNIEnvironment? = nil)
+    }
+}
 
-        convenience init(central: AndroidCentral, peripheral: Peripheral, environment: JNIEnvironment? = nil) {
-            self.init(centralId: central.identifier, peripheralAddress: peripheral.address, environment: environment)
+extension AndroidCentral.GattCallback {
+
+    static func create(central: AndroidCentral, peripheral: Peripheral) -> AndroidCentral.GattCallback {
+        AndroidCentralHandoff.withPending(central: central, peripheral: peripheral) {
+            AndroidCentral.GattCallback()
         }
     }
 }

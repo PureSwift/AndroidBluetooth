@@ -80,16 +80,9 @@ public final class AndroidCentral: CentralManager {
     
     public let options: Options
 
-    /// Identifier used by the Kotlin callback adapters to route events back to this instance.
-    package let identifier: Int64
-
     internal let storage = Storage()
 
     // MARK: - Intialization
-
-    deinit {
-        AndroidCentralRegistry.unregister(identifier)
-    }
 
     public init(
         hostController: BluetoothAdapter,
@@ -99,8 +92,6 @@ public final class AndroidCentral: CentralManager {
         self.hostController = hostController
         self.context = context
         self.options = options
-        self.identifier = AndroidCentralRegistry.reserveIdentifier()
-        AndroidCentralRegistry.register(self, for: identifier)
     }
     
     // MARK: - Methods
@@ -133,7 +124,7 @@ public final class AndroidCentral: CentralManager {
                     $0.scan.peripherals.removeAll()
                     $0.scan.continuation = continuation
                 }
-                let scanCallBack = LowEnergyScanCallback(central: self)
+                let scanCallBack = LowEnergyScanCallback.create(central: self)
                 do {
                     try scanner.startScan(scanCallBack)
                     await storage.update {
@@ -179,7 +170,7 @@ public final class AndroidCentral: CentralManager {
                     await storage.update { [unowned self] state in
 
                         // store continuation
-                        let callback = GattCallback(central: self, peripheral: peripheral)
+                        let callback = GattCallback.create(central: self, peripheral: peripheral)
                         let device = try! self.hostController.getRemoteDevice(peripheral.address)!
                         let gatt: BluetoothGatt
 
