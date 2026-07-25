@@ -1,4 +1,4 @@
-// swift-tools-version:6.2
+// swift-tools-version:6.3
 import PackageDescription
 import CompilerPluginSupport
 
@@ -38,18 +38,15 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/PureSwift/GATT.git",
-            branch: "master"
+            from: "4.0.0"
         ),
         .package(
             url: "https://github.com/PureSwift/Bluetooth.git",
-            from: "7.2.0"
+            from: "8.0.0"
         ),
-        // `AndroidManifest` moved out of PureSwift/Android into swift-android-native (Android PR
-        // #40); it must now be depended on directly. The URL and branch must match the ones
-        // PureSwift/Android and skip-android-bridge use, or the identity conflicts.
         .package(
-            url: "https://github.com/MillerTechnologyPeru/swift-android-native.git",
-            branch: "feature/pureswift"
+            url: "https://github.com/swift-android-sdk/swift-android-native.git",
+            from: "2.1.0"
         )
     ],
     targets: [
