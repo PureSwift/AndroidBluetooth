@@ -6,19 +6,24 @@ import android.bluetooth.le.ScanSettings
 import android.os.Build
 import android.util.Log
 import org.pureswift.bluetooth.bridge.AndroidBluetoothBridge
+import org.pureswift.bluetooth.bridge.BluetoothScanEventSink
+import org.swift.swiftkit.core.SwiftArena
 
 /**
  * Bluetooth LE Scan Callback for the AndroidBluetooth Swift package.
  *
  * This class is instantiated by AndroidBluetooth's `LowEnergyScanCallback`
  * via the `@JavaClass("org.pureswift.bluetooth.le.ScanCallback")` annotation.
- * It extends Android's `ScanCallback` and forwards each event as primitive values
- * to the jextract-generated [AndroidBluetoothBridge], keyed by the Swift central's
- * registry identifier.
+ * It extends Android's `ScanCallback` and forwards each event to a
+ * [BluetoothScanEventSink] — a Swift-implemented sink surfaced through the
+ * jextract-generated class. The no-argument constructor obtains the sink for
+ * the Swift central currently under construction.
  */
 open class ScanCallback(
-    private val centralId: Long
+    private val sink: BluetoothScanEventSink
 ) : AndroidScanCallback() {
+
+    constructor() : this(AndroidBluetoothBridge.takePendingScanEventSink(SwiftArena.ofAuto()))
 
     companion object {
         private const val TAG = "PureSwift.ScanCallback"
@@ -53,7 +58,7 @@ open class ScanCallback(
     override fun onScanFailed(errorCode: Int) {
         super.onScanFailed(errorCode)
         Log.e(TAG, "onScanFailed: errorCode=$errorCode")
-        AndroidBluetoothBridge.scanCallbackOnScanFailed(centralId, errorCode)
+        sink.onScanFailed(errorCode)
     }
 
     private fun forward(callbackType: Int, result: ScanResult) {
@@ -62,8 +67,7 @@ open class ScanCallback(
         } else {
             true
         }
-        AndroidBluetoothBridge.scanCallbackOnScanResult(
-            centralId,
+        sink.onScanResult(
             callbackType,
             result.device.address,
             result.rssi,
