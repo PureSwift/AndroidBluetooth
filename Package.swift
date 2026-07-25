@@ -30,6 +30,9 @@ let package = Package(
         .library(
             name: "AndroidBluetooth",
             targets: ["AndroidBluetooth"]),
+        .library(
+            name: "AndroidBluetoothBridge",
+            targets: ["AndroidBluetoothBridge"]),
     ],
     dependencies: [
         .package(
@@ -47,6 +50,10 @@ let package = Package(
         .package(
             url: "https://github.com/swift-android-sdk/swift-android-native.git",
             from: "2.1.0"
+        ),
+        .package(
+            url: "https://github.com/swiftlang/swift-java.git",
+            branch: "main"
         )
     ],
     targets: [
@@ -94,6 +101,23 @@ let package = Package(
             ],
             plugins: [
                 //.plugin(name: "SwiftJavaPlugin", package: "swift-java")
+            ]
+        ),
+        .target(
+            name: "AndroidBluetoothBridge",
+            dependencies: [
+                "AndroidBluetooth",
+                .product(
+                    name: "SwiftJava",
+                    package: "swift-java"
+                )
+            ],
+            exclude: ["swift-java.config"],
+            swiftSettings: [
+              .swiftLanguageMode(.v5)
+            ],
+            plugins: [
+                .plugin(name: "JExtractSwiftPlugin", package: "swift-java")
             ]
         )
     ]

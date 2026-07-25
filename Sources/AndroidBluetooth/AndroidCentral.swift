@@ -79,19 +79,28 @@ public final class AndroidCentral: CentralManager {
     }
     
     public let options: Options
-    
+
+    /// Identifier used by the Kotlin callback adapters to route events back to this instance.
+    package let identifier: Int64
+
     internal let storage = Storage()
-    
+
     // MARK: - Intialization
-    
+
+    deinit {
+        AndroidCentralRegistry.unregister(identifier)
+    }
+
     public init(
         hostController: BluetoothAdapter,
         context: AndroidContent.Context,
         options: AndroidCentral.Options = Options()) {
-        
+
         self.hostController = hostController
         self.context = context
         self.options = options
+        self.identifier = AndroidCentralRegistry.reserveIdentifier()
+        AndroidCentralRegistry.register(self, for: identifier)
     }
     
     // MARK: - Methods
@@ -159,9 +168,9 @@ public final class AndroidCentral: CentralManager {
         guard hostController.isEnabled()
             else { throw AndroidCentralError.bluetoothDisabled }
         
-        guard let scanDevice = await storage.state.scan.peripherals[peripheral]
+        guard await storage.state.scan.peripherals[peripheral] != nil
             else { throw CentralError.unknownPeripheral }
-        
+
         // wait for connection continuation
         do {
             try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, any Error>) in
@@ -170,20 +179,21 @@ public final class AndroidCentral: CentralManager {
                     await storage.update { [unowned self] state in
 
                         // store continuation
-                        let callback = GattCallback(central: self)
+                        let callback = GattCallback(central: self, peripheral: peripheral)
+                        let device = try! self.hostController.getRemoteDevice(peripheral.address)!
                         let gatt: BluetoothGatt
-                        
+
                         // call the correct method for connecting
                         let sdkInt = try! JavaClass<AndroidOS.Build.VERSION>().SDK_INT
                         let lollipopMr1 = try! JavaClass<AndroidOS.Build.VERSION_CODES>().LOLLIPOP_MR1
                         if sdkInt <= lollipopMr1 {
-                            gatt = try! scanDevice.scanResult.getDevice().connectGatt(
+                            gatt = try! device.connectGatt(
                                 context: self.context,
                                 autoConnect: autoConnect,
                                 callback: callback
                             )
                         } else {
-                            gatt = try! scanDevice.scanResult.getDevice().connectGatt(
+                            gatt = try! device.connectGatt(
                                 context: self.context,
                                 autoConnect: autoConnect,
                                 callback: callback,

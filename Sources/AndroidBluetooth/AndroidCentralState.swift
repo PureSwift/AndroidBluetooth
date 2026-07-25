@@ -44,10 +44,8 @@ internal extension AndroidCentral {
             var callback: ScanCallback?
             
             struct Device {
-                
+
                 let scanData: ScanData<Peripheral, AndroidLowEnergyAdvertisementData>
-                
-                let scanResult: AndroidBluetooth.ScanResult
             }
         }
     }
@@ -77,6 +75,15 @@ internal extension AndroidCentral {
         
         var continuation = PeripheralContinuation()
         
+        static func identifier(
+            peripheral: Peripheral,
+            type: AndroidCentralAttributeType,
+            instanceID: Int32,
+            uuid: String
+        ) -> AndroidCentral.AttributeID {
+            return "\(peripheral.id)/\(type)/\(instanceID)/\(uuid)"
+        }
+
         func identifier<T>(for attribute: T) -> AndroidCentral.AttributeID where T: AndroidCentralAttribute {
             let peripheral = Peripheral(gatt)
             let instanceID = attribute.getInstanceId()
@@ -84,7 +91,7 @@ internal extension AndroidCentral {
                 assertionFailure()
                 return instanceID.description
             }
-            return "\(peripheral.id)/\(T.attributeType)/\(instanceID)/\(uuid)"
+            return Self.identifier(peripheral: peripheral, type: T.attributeType, instanceID: instanceID, uuid: uuid)
         }
         
         func identifier(
